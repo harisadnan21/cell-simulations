@@ -1,45 +1,72 @@
 # Rock Paper Scissors Lab Discussion
-#### Names and NetIDs
+#### Matt Knox (mjk63), Edison Ooi (ezo), Haris Adnan(ha109)
 
 
 ### High Level Design Goals
 
 
 
+
 ### CRC Card Classes
 
-This class's purpose or value is to represent a customer's order:
+This class's purpose or value is to represent a playable item in RPS:
+| RPSClass                             |   Item, Referee  |
+|--------------------------------------|------|
+| makeGraph(List<Item>)                |  |
+| updateGraph(Item)                    |  |
 
-|Order| |
-|---|---|
-|boolean isInStock(OrderLine)         |OrderLine|
-|double getTotalPrice(OrderLine)      |Customer|
-|boolean isValidPayment (Customer)    | |
-|void deliverTo (OrderLine, Customer) | |
+| Item                                 |      |
+|--------------------------------------|------|
+| boolean beats(Item)                  ||
+| void render(Group)                   ||
+
+| Player          |      |
+|-----------------|------|
+| Item makePlay() | Item |
+| void winTurn()  |      |
+| void loseTurn() |      |
+
+| Referee                              |        |
+|--------------------------------------|--------|
+| void playRound(List<player> players) | Player |
+| void startGame(int numPlayers)       ||
+| void stopGame()                      ||
 
 
-This class's purpose or value is to represent a customer's order:
+
+This class's purpose or value is to represent a playable item in RPS:
 ```java
-public class Order {
+public class Item {
      // returns whether or not the given items are available to order
-     public boolean isInStock (OrderLine items)
+     public boolean beats (Item opponent);
      // sums the price of all the given items
-     public double getTotalPrice (OrderLine items)
-     // returns whether or not the customer's payment is valid
-     public boolean isValidPayment (Customer customer)
-     // dispatches the items to be ordered to the customer's selected address
-     public void deliverTo (OrderLine items, Customer customer)
- }
+     public void render (Group root);
+}
  ```
 
-This class's purpose or value is to manage something:
+This class's purpose or value is to represent one player in the RPS game:
 ```java
-public class Something {
-     // sums the numbers in the given data
-     public int getTotal (Collection<Integer> data)
-	 // creates an order from the given data
-     public Order makeOrder (String structuredData)
+public class Player {
+     // Prompts user for an item choice and then plays that item for a turn
+     public void makePlay();
+	 // Provides functionality for if a player wins a turn
+     public void winTurn();
+      // Provides functionality for if a player loses a turn
+      public void loseTurn();
+       
  }
+```
+
+This class's purpose or value is to represent a referee in the RPS game
+```java
+public class Referee {
+    // Dictates every set of players to play an opponent
+    public void playRound();
+    // Begins the game
+    public void startGame(int numPlayers);
+    // Ends the game
+    public void stopGame();
+}
 ```
 
 
@@ -47,35 +74,38 @@ public class Something {
 
 * A new game is started with five players, their scores are reset to 0.
  ```java
- Something thing = new Something();
- Order o = thing.makeOrder("coffee,large,black");
- o.update(13);
+//what if we just did this?
+ref.startGame(5);
+
+ List<Player> players = new ArrayList<>();
+ for(int i = 0; i < numPlayers; i++) {
+   players.add(new Player()); //We assume the player constructor initializes their score to 0
+    }
  ```
 
 * A player chooses his RPS "weapon" with which he wants to play for this round.
  ```java
- Something thing = new Something();
- Order o = thing.makeOrder("coffee,large,black");
- o.update(13);
+ Player player = new Player();
+Item playerChoice = player.makePlay();
  ```
 
 * Given three players' choices, one player wins the round, and their scores are updated.
  ```java
- Something thing = new Something();
- Order o = thing.makeOrder("coffee,large,black");
- o.update(13);
+Referee.playRound();
+//winTurn updates score
+Player.winTurn();
+
  ```
 
 * A new choice is added to an existing game and its relationship to all the other choices is updated.
  ```java
- Something thing = new Something();
- Order o = thing.makeOrder("coffee,large,black");
- o.update(13);
+  List<Item> itemsThatThisItemBeats = new ArrayList<>();
+  itemsThatThisItemBeats.add(Item.SCISSORS);
+ Item item = new Item("Rock", itemsThatThisItemBeats);
  ```
 
 * A new game is added to the system, with its own relationships for its all its "weapons".
  ```java
- Something thing = new Something();
- Order o = thing.makeOrder("coffee,large,black");
- o.update(13);
+ updateGraph(Item newitem);
+
  ```
