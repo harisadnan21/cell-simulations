@@ -5,28 +5,52 @@
 ### Simulations
 
 * Commonalities
+  * Behavior of each cell is based on its neighbors
+  * All have a 2D grid format with a width and height in units
+  * Always at some discrete state
+  * Don't take input while simulation is running
 
 * Variations
-
+  * Some are probabilistic and some are deterministic
+  * Algorithm that determines perpetuation
+  * Dealing with edge cases
+  * Implementations can utilize different graphics
 
 
 ### Discussion Questions
 
 * How does a Cell know what rules to apply for its simulation?
+  * Based on the given algorithm, it looks at each neighbor and performs some function
+  on whether or not the neighbor is alive or dead
+  * Maintain a current state and use it to calculate next state
 
 * How does a Cell know about its neighbors?
+  * Cell can maintain pointers to its 8 neighbors and call functionality
+  on each. Cells will be stored in a 2D array.
 
 * How can a Cell update itself without affecting its neighbors update?
+  * Cells will update based on neighbor's current state, but its update
+  will be saved into next state.
 
 * What behaviors does the Grid itself have?
+  * It could tell each cell to update
+  * It could control its own simulation (speed, stop, play, etc)
 
 * How can a Grid update all the Cells it contains?
+  * Iterate its 2D array and call cell.update() on all of its cells
 
 * What information about a simulation needs to be in the configuration file?
+  * Number of rows and columns, which cells are alive at the beginning,
+  type of algorithm/simulation to be run
 
 * How is configuration information used to set up a simulation?
+  * We instantiate a certain class to perform an algorithm based on
+  an enumerated simulation option given in the configuration file, and
+  all the other information can be used to set up the initial state.
 
 * How is the graphical view of the simulation updated after all the cells have been updated?
+  * We can render a grid of JavaFX rectangles and update its opacity when
+  new state is calculated.
 
 
 
