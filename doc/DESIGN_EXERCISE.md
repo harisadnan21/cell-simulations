@@ -50,7 +50,7 @@
 
 * How is the graphical view of the simulation updated after all the cells have been updated?
   * We can render a grid of JavaFX rectangles and update its opacity when
-  new state is calculated.
+  new state is calculated
 
 
 
