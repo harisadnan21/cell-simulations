@@ -48,6 +48,10 @@ taken from [Brilliant Examples of Sketched UI Wireframes and Mock-Ups](https://o
 
 
 ## Configuration File Format
+See data folder for specific config file examples. One just lists all of
+the elements in one collection, while the second organizes the elements
+into many sub-collections, which makes it slightly more readable but will
+take more work to parse.
 
 
 ## Design Details
