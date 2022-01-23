@@ -63,11 +63,17 @@ When __save__ is pressed, the right side is replaced by a series of text fields 
 * Description
 * Button: Done
 
-The user presses the __done__ button when they are done. 
+The user presses __done__ when they are done. 
+
+Any runtime errors that occur will also be shown on the right side. 
+Errors include, but are not limited to:
+* Did not select XML file when loading file
+* XML file is formatted incorrectly
+* XML file has missing values
 
 A summary of the UI is shown here:
 
-![This is cool, too bad you can't see it](images/UserInterface.png "An alternate design")
+![Picure of UI](images/UserInterface.png "An initial UI")
 
 
 ## Configuration File Format
