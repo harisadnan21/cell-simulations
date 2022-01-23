@@ -30,21 +30,44 @@ models to be easily implemented. Users can interface with this program via XML c
 
 ## User Interface
 
-* see the simulation's descriptive information (or make it easily accessible, like in a dialog box created by pressing an "About" button):
-its type, name, author, description, state colors, (default or set for this run) and parameter values (if any)
-* animate a simulation from its initial state indefinitely until they choose to stop it, displaying the current states of the cells in the grid with different colors
-* pause and resume the simulation, as well as step forward through it
-* speed up or slow down the simulation's animation rate
-* load a new configuration file, which stops the current simulation and starts the new one
-NOTE, the app's size should not change based on the size of the grid to be displayed (i.e., the display size of an individual cell should be calculated to fit within the app's fixed screen size)
-* save the current state of the simulation as an XML configuration file that can be loaded in as a simulation starting configuration (i.e., in the same format as is read in)
-NOTE, this requires prompting the user with fields for entering or changing information such as the title, author, and description
+The screen of this program is split into two sections: one on the left and one on the right.
+The left side contains the 2D grid of cells that shows the simulation.
+The right side contains data about the running simulation and buttons for the user to press. 
+The data shown on the right side displays the following:
+* Type
+* Name
+* Author
+* Description
+* Colors
+* Parameters
 
-Here is our amazing UI:
+There are two rows of buttons the user can press. 
+The first row contains buttons and information about the speed of the simulation,
+and the second row contains buttons to save and load simulations. 
 
-![This is cool, too bad you can't see it](images/29-sketched-ui-wireframe.jpg "An alternate design")
+While playing, the first row contains:
+* Button: Pause
+* Button: Slow down
+* Information: current speed
+* Button: Speed up
 
-taken from [Brilliant Examples of Sketched UI Wireframes and Mock-Ups](https://onextrapixel.com/40-brilliant-examples-of-sketched-ui-wireframes-and-mock-ups/).
+While paused, the first row contains:
+* Button: Play
+* Button: Step (steps through the simulation by one cycle)
+
+When __load__ is pressed, a system dialogue comes up, where the user can select a new simulation file to load. 
+
+When __save__ is pressed, the right side is replaced by a series of text fields for the user to enter information about the file to save:
+* Name
+* Author
+* Description
+* Button: Done
+
+The user presses the __done__ button when they are done. 
+
+A summary of the UI is shown here:
+
+![This is cool, too bad you can't see it](images/UserInterface.png "An alternate design")
 
 
 ## Configuration File Format
