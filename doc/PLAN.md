@@ -14,13 +14,16 @@ models to be easily implemented. Users can interface with this program via XML c
 
 The program is split up into the following classes as shown in the CRC Cards below:
 
-// Insert CRC Cards. 
+![Picure of Simulation CRC](images/Simulation_CRC.jpg "Simulation CRC")
+![Picure of Configuration and Cell CRC](images/ConfigandcellCRC.jpg "Simulation CRC")
+![Picure of Grid and SimulationType CRC](images/GridandSimulationTypeCRC.jpg "Simulation CRC")
 
 The class Simulation is the class that sets up and controls the simulation(controls simulation progress)
 and allows the user to start/stop/load the animation and increase or decrease the speed that the simulation progresses
 with. This class uses the SimulationType and Grid Classes. Grid class sets up the Grid. The SimluationType class 
 determines which game is being run. This Class uses the configuration class. The Configuration class imports the XML 
-and uses the data inside to pass parameters to other classes.
+and uses the data inside to pass parameters to other classes. The cell class controls each cell and determines what happens 
+to each cell as the program progresses.
 
 
 ## User Interface
@@ -80,46 +83,48 @@ take more work to parse.
 
 ## Design Details
 
-TODO: Haris
+The program will have 5 classes that compose of the program and a main class. The five classes are 
+Simulation, Grid, SimulationType, Configuration, and Cell.
 
-Here is a graphical look at my design:
+* Simulation : this class setups the simulation and determines what will happen in each iteration of progression of the simulation. This class can be extended to make more levels of speeds
+    
+  * setupSimulation(): basic setup function that setups the stage and scene for the program. This will use the constant defined at the top of the Class and the Grid.setUpGrid() function to setup the initial view that is displayed.
+  * step(): uses SimulationType.runAlgorithm() to determine what the state of each cell in the grid should be in the iteration after this one.
+  * start(): starts the simulation that has been stopped by the user by pressing the start button. (Will inherit the Java Fx button class for this)
+  * stop(): Pauses a running simulation by the user pressing the stop button in the UI (will use Javafx button class)
+  * speedUp(): speeds up the simulation running. Speed and fps values are hardcoded and discrete.
+  * slowDown(): slows down the simulation running. Speed and fps values are hardcoded and discrete.
+  * save(): Uses the Grid class to save the current pattern of blocks (configuration) into an XML file.
+  * load(): Uses the Grid Class to load up a pattern into the simulation space from an XML file.
 
-![This is cool, too bad you can't see it](images/online-shopping-uml-example.png "An initial UI")
 
-made from [a tool that generates UML from existing code](http://staruml.io/).
+* Grid: this class uses user inputted parameters to determine the layout of the Grid to be dislplayed. This class can be extended by  changing the different types of configurations.
+
+  * setUpGrid(): this function displays the grid that the simulation rus off based of the width and height given by user.
+
+
+* SimulationType: lets the program know which simulation is to be played. Uses the Configuration class to obtain previous configuration. Can extend by implementing more algorithms for other simulations.
+    * runAlgorithm: Will have different algorithms for different games and will output the state of the cells based of their previous configuration.
+
+
+* Configuration
+    * importXML(): reads the configuration from an XML file.
+
+
+* Cell: Uses Simulation type and its update method to determine how to update itself. Can extend by having multiple states for each cell.
+    * calculate(): Grid calls Cell.calculate() on each cell. Each cell calls the appropriate SimulationType algorithm to determine whether it updates.
+    * update(): changes the state of the specific cell.
+    * getState(): gets the binary state of the cell
+
+
+[//]: # ()
+[//]: # (![This is cool, too bad you can't see it]&#40;images/online-shopping-uml-example.png "An initial UI"&#41;)
+
+[//]: # ()
+[//]: # (made from [a tool that generates UML from existing code]&#40;http://staruml.io/&#41;.)
 
 
 ## Use Cases
-
-# These are all the methods we have (put these on the CRC cards)
-* Grid.setupGrid()
-* Grid.calculate()
-* Grid.update()
-
-
-* Cell.calculate()
-* Cell.update()
-* Cell.getState()
-
-
-* Simulation.setupSimulation()
-* Simulation.step()
-* Simulation.getParameter()
-* Simulation.setParameter()
-* Simulation.start()
-* Simulation.stop()
-* Simulation.save()
-* Simulation.load()
-* Simulation.speedUp()
-* Simulation.slowDown()
-
-
-* Configuration.getValue()
-* Configuration.importXML()
-
-
-* SimulationType.runAlgorithm()
-
 
 #### Given use cases: 
 * Apply the rules to a middle cell: set the next state of a cell to dead by counting its 
