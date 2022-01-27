@@ -4,6 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class SimulationType {
+    public static final int GAME_OF_LIFE = 0;
+    public static final int PERCOLATION = 1;
+    public static final int SCHELLING_SEGREGATION = 2;
+    public static final int SPREADING_OF_FIRE = 3;
+    public static final int WATOR = 4;
+
     private Map<String, String> simulationParameters;
 
     public SimulationType() {
