@@ -1,10 +1,6 @@
 package cellsociety;
 
-import cellsociety.CellState.GameOfLifeState;
-import cellsociety.CellState.PercolationState;
-import cellsociety.CellState.SchellingSegregationState;
-import cellsociety.CellState.SpreadingOfFireState;
-import cellsociety.CellState.WaTorState;
+import cellsociety.CellState.*;
 import java.util.Collection;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -118,5 +114,5 @@ public class Cell {
     return currentState;
   }
 
-
+  public Rectangle getRect() { return rect; }
 }
