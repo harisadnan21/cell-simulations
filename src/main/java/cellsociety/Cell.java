@@ -1,10 +1,6 @@
 package cellsociety;
 
-import cellsociety.CellState.GameOfLifeState;
-import cellsociety.CellState.PercolationState;
-import cellsociety.CellState.SchellingSegregationState;
-import cellsociety.CellState.SpreadingOfFireState;
-import cellsociety.CellState.WaTorState;
+import cellsociety.CellState.*;
 import java.util.Collection;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -12,27 +8,30 @@ import javafx.scene.shape.Rectangle;
 
 public class Cell {
   private final Rectangle rect;
-  private final Simulation simtype;
+  private final SimulationType simtype;
   private CellState currentState;
   private CellState nextState;
   private Collection<Cell> neighbors;
 
-  public Cell(double x, double y, double width, double height, CellState initialState) {
+  public Cell(double x, double y, double width, double height, CellState initialState, double strokeWidth) {
     rect = new Rectangle();
     rect.setX(x);
     rect.setY(y);
     rect.setWidth(width);
     rect.setHeight(height);
-    rect.setFill(getColor(initialState));
+    rect.setFill(getFillColor(initialState));
+    rect.setStroke(getStrokeColor(initialState));
+    rect.setStrokeWidth(strokeWidth);
     currentState = initialState;
     simtype = getSimulationType(initialState);
   }
 
-  public Cell(double x, double y, double size, CellState initialState) {
-    this(x,y,size,size,initialState);
+  public Cell(double x, double y, double size, CellState initialState, double strokeWidth) {
+    this(x,y,size,size,initialState,strokeWidth);
   }
 
-  private Simulation getSimulationType(CellState initialState) {
+
+  private SimulationType getSimulationType(CellState initialState) {
     if (initialState instanceof GameOfLifeState)
       return new GameOfLife();
     if (initialState instanceof SpreadingOfFireState)
@@ -49,7 +48,8 @@ public class Cell {
 
   }
 
-  private Paint getColor(CellState initialState) {
+
+  private Paint getFillColor(CellState initialState) {
 
     if (initialState instanceof GameOfLifeState) {
       GameOfLifeState s = (GameOfLifeState)initialState;
@@ -100,12 +100,27 @@ public class Cell {
     return Color.GRAY;
   }
 
+  private Paint getStrokeColor(CellState initialState) {
+    if (initialState instanceof GameOfLifeState)
+      return Color.BLUE;
+    else if(initialState instanceof SpreadingOfFireState)
+      return Color.BLACK;
+    else if(initialState instanceof SchellingSegregationState)
+      return Color.BLACK;
+    else if(initialState instanceof WaTorState)
+      return Color.BLACK;
+    else if(initialState instanceof PercolationState)
+      return Color.BLACK;
+
+    return Color.TRANSPARENT;
+  }
+
   public void addNeighbors(Collection<Cell> neighbors) {
     this.neighbors = neighbors;
   }
 
   public void calculate() {
-    CellState next = simtype.getNext(this,neighbors);
+    CellState next = simtype.runAlgorithm(this,neighbors);
     nextState = next;
   }
 
@@ -118,5 +133,5 @@ public class Cell {
     return currentState;
   }
 
-
+  public Rectangle getRect() { return rect; }
 }
