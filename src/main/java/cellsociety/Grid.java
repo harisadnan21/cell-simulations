@@ -1,6 +1,5 @@
 package cellsociety;
 
-import cellsociety.CellState.*;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -10,7 +9,8 @@ public class Grid {
 
   private Cell[][] cells;
 
-  public Grid(double startingX, double startingY, int numRows, int numColumns, double width, double height, CellState[][] initialStates) {
+  public Grid(double startingX, double startingY, int numRows, int numColumns, double width, double height, CellState[][] initialStates, double strokeWidth) {
+
 
     //make sure arguments are of correct length
     if(initialStates[0].length != numColumns) {
@@ -20,14 +20,14 @@ public class Grid {
       throw new IllegalArgumentException("initialStates has an incorrect number of rows");
 
     //ensure all values of initialStates are of the same type
-    if(badStates(initialStates))
+    if(hasBadStates(initialStates))
       throw new IllegalArgumentException("initialStates is composed of multiple different kinds of states");
 
-    initializeCells(startingX, startingY, numRows, numColumns, width, height, initialStates);
+    initializeCells(startingX, startingY, numRows, numColumns, width, height, initialStates, strokeWidth);
     addNeighbors(numRows, numColumns);
   }
 
-  private void initializeCells(double startingX, double startingY, int numRows, int numColumns, double width, double height, CellState[][] initialStates) {
+  private void initializeCells(double startingX, double startingY, int numRows, int numColumns, double width, double height, CellState[][] initialStates, double strokeWidth) {
     cells = new Cell[numRows][numColumns];
     double widthPerCell = width / numRows;
     double heightPerCell = height / numColumns;
@@ -35,12 +35,24 @@ public class Grid {
       for(int j = 0; j < numColumns; j++) {
         double x = startingX + i*widthPerCell;
         double y = startingY + j*heightPerCell;
-        cells[i][j] = new Cell(x, y, widthPerCell, heightPerCell, initialStates[i][j]);
+        cells[i][j] = new Cell(x, y, widthPerCell, heightPerCell, initialStates[i][j], strokeWidth);
       }
     }
   }
 
-  private boolean badStates(CellState[][] initialStates) {
+  private boolean hasBadStates(CellState[][] initialStates) {
+
+    if(initialStates[0][0] == null) return true;
+    Class firstClass = initialStates[0][0].getClass();
+    for(int i = 0; i < initialStates.length; i++) {
+      for(int j = 0; j < initialStates[0].length; j++) {
+        if(i == 0 && j == 0) continue;
+        if(initialStates[i][j] == null) return true;
+        Class currentClass = initialStates[i][j].getClass();
+        if(firstClass != currentClass)
+          return true;
+      }
+    }
     return false;
   }
 
