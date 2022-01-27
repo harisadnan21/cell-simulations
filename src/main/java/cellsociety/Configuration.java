@@ -21,7 +21,7 @@ public class Configuration {
     private String author;
     private String description;
 
-
+    private int[][] cellConfig;
 
     public void parseXML(String filename) {
         String filePath = "./data/" + filename + ".xml";
@@ -45,7 +45,7 @@ public class Configuration {
                             case "NumberOfRows":
                                 numRows = Integer.parseInt(currentElement.getTextContent());
                                 break;
-                            case "NumberOfCols":
+                            case "NumberOfColumns":
                                 numColumns = Integer.parseInt(currentElement.getTextContent());
                                 break;
                             case "SimulationType":
@@ -59,6 +59,9 @@ public class Configuration {
                                 break;
                             case "Description":
                                 description = currentElement.getTextContent();
+                                break;
+                            case "StartingConfig":
+                                setCellConfig(currentElement.getTextContent());
                                 break;
 
                         }
@@ -79,7 +82,39 @@ public class Configuration {
             e.printStackTrace();
         }
 
+//        System.out.println(numRows);
+//        System.out.println(numColumns);
+//        System.out.println(simulationType);
+//        System.out.println(title);
+//        System.out.println(author);
+//        System.out.println(description);
+        for (int i = 0; i < cellConfig.length; i++) {
+            for (int j = 0; j < cellConfig[0].length; j++) {
+                System.out.print(cellConfig[i][j] + " ");
+            }
+            System.out.println();
+        }
 
 
+
+
+
+    }
+
+    private void setCellConfig(String config) {
+        cellConfig = new int[numRows][numColumns];
+
+        String[] configChars = config.split(" ");
+
+        if(cellConfig.length * cellConfig[0].length != configChars.length) {
+            System.out.println("Incorrect config string length");
+            return;
+        }
+
+        for (int i = 0; i < cellConfig.length; i++) {
+            for (int j = 0; j < cellConfig[0].length; j++) {
+                cellConfig[i][j] = Integer.parseInt(configChars[i + j]);
+            }
+        }
     }
 }
