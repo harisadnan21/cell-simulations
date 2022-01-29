@@ -11,7 +11,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
-public class Configuration {
+public class ConfigurationXMLParser {
     private int numRows;
     private int numColumns;
 
