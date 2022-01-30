@@ -15,8 +15,8 @@ public class Simulation implements EventHandler<ActionEvent> {
   private Group root;
 
 
-  private double GRIDSTARTINGX;
-  private double GRIDSTARTINGY;
+  private double GRIDSTARTINGX = 10;
+  private double GRIDSTARTINGY = 10 ;
   private double GRIDHEIGHT;
   private double GRIDWIDTH;
   private int GRIDCOLS;
@@ -28,19 +28,20 @@ public class Simulation implements EventHandler<ActionEvent> {
   private Button slowDown;
   private Button loadButton;
   private Button saveButton;
-  public static final int FRAMES_PER_SECOND = 60;
-  public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
-
+  public static int FRAMES_PER_SECOND = 60;
+  public static double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
+  private boolean runVal;
 
   private SimulationType simtype;
   public Simulation(){
   }
 
   protected Scene setUpSimulation(int width, int height, Paint background){
+    runVal = true;
     root = new Group();
     CellState[][] initialStates = getInitialConfig();
     Grid newgrid = new Grid(GRIDSTARTINGX, GRIDSTARTINGY,GIDROWS, GRIDCOLS, GRIDWIDTH, GRIDHEIGHT,  initialStates, GRIDSTROKEWIDTH);
-    // How to add newgrid to root.
+
     startButton = new Button();
     stopButton= new Button();
     speedUp = new Button();
@@ -75,7 +76,7 @@ public class Simulation implements EventHandler<ActionEvent> {
     slowDown.setLayoutX();
     slowDown.setLayoutY();
 
-
+    // How to add newgrid to root.
     root.getChildren().add(newgrid);
     root.getChildren().add(startButton);
     root.getChildren().add(stopButton);
@@ -83,8 +84,6 @@ public class Simulation implements EventHandler<ActionEvent> {
     root.getChildren().add(slowDown);
     root.getChildren().add(loadButton);
     root.getChildren().add(saveButton);
-
-
 
     scene = new Scene(root, width, height, background);
 
@@ -101,11 +100,12 @@ public class Simulation implements EventHandler<ActionEvent> {
   private CellState[][] getInitialConfig(){
    // RETURN  A LIST OF STATE OF EACH CELL FROM CONFIGURATION OR GRID
   }
-  private void step(double elapsarlgotiyhm method, updates all cells according to simtype
-          bloedTime){
-    //runckStates.runAlgorithm();
-    if ()
-
+  private void step(double elapsedTime){
+    //method, updates all cells according to simtype
+    //
+    if (runVal){
+      runStates.runAlgorithm
+    }
 
   }
   private void getParameter(){
@@ -115,23 +115,26 @@ public class Simulation implements EventHandler<ActionEvent> {
 
   }
   private void start(){
+    runVal = true;
 
   }
   private void stop(){
-
+    runVal = false;
   }
   private void save(){
-
+    stop();
+    //reverse of creating grid from parsed file
   }
   private void load(){
+    stop();
+    setUpSimulation(Main.SIZE, Main.SIZE, Main.BACKGROUND);
 
   }
   private void speedUp(){
-
-
+    FRAMES_PER_SECOND += 20;
   }
   private void slowDown(){
-    
+    FRAMES_PER_SECOND -= 20;
   }
 
   @Override
