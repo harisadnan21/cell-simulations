@@ -1,5 +1,7 @@
 package cellsociety;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -50,8 +52,8 @@ public class ConfigurationXMLParser {
             genericSimulationValues.put(field, getTextValue(root, field));
         }
 
-        Map<String, String> specificSimulationParams = new HashMap<>();
-
+        Map<String, String> specificSimulationParams = getSpecificParams(root,
+            Integer.parseInt(genericSimulationValues.get("SimulationType")));
 
         return new SimulationData(genericSimulationValues, specificSimulationParams);
     }
@@ -86,6 +88,24 @@ public class ConfigurationXMLParser {
         }
         else {
             return "";
+        }
+    }
+
+    private Map<String, String> getSpecificParams(Element root, int algorithmType) {
+        Map<String, String> params = new HashMap<>();
+
+        List<String> keys = new ArrayList<>();
+
+        switch(algorithmType) {
+            case CellularAutomataAlgorithm.GAME_OF_LIFE -> keys = GameOfLife.SPECIFIC_PARAMS;
+            case CellularAutomataAlgorithm.PERCOLATION -> keys = Percolation.SPECIFIC_PARAMS;
+            case CellularAutomataAlgorithm.SCHELLING_SEGREGATION -> keys = SchellingSegregation.SPECIFIC_PARAMS;
+            case CellularAutomataAlgorithm.SPREADING_OF_FIRE -> keys = SpreadingOfFire.SPECIFIC_PARAMS;
+            case CellularAutomataAlgorithm.WATOR -> keys = WaTor.SPECIFIC_PARAMS;
+        }
+
+        for(String key : keys) {
+            params.put(key, getTextValue(root, key));
         }
     }
 
