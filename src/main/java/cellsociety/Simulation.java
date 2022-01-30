@@ -21,7 +21,7 @@ public class Simulation{
   public Simulation(){
   }
 
-  private Scene setUpSimulation(int width, int height, Paint background){
+  protected Scene setUpSimulation(int width, int height, Paint background){
     root = new Group();
     CellState[][] initialStates = getInitialConfig();
     Grid newgrid = new Grid(GRIDSTARTINGX, GRIDSTARTINGY,GIDROWS, GRIDCOLS, GRIDWIDTH, GRIDHEIGHT,  initialStates, GRIDSTROKEWIDTH);
@@ -34,7 +34,9 @@ public class Simulation{
    // RETURN  A LIST OF STATE OF EACH CELL FROM CONFIGURATION OR GRID
   }
   private void step(CellState[][]){
-    SimulationType.runAlgorithm()
+    //runarlgotiyhm method, updates all cells according to simtype
+
+
   }
   private void getParameter(){
 
@@ -55,6 +57,7 @@ public class Simulation{
 
   }
   private void speedUp(){
+
 
   }
   private void slowDown(){
