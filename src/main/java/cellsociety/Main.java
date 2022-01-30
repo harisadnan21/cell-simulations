@@ -31,6 +31,26 @@ public class Main extends Application {
         Group root = new Group();
         root.getChildren().add(shape);
 
+        int numrows = 50;
+        int numcols = 50;
+
+        CellState[][] startingStates = new CellState[numrows][numcols];
+        for(int i = 0; i < numrows; i++) {
+            for(int j = 0; j < numcols; j++) {
+                int value = (int)(2*Math.random());
+                switch(value) {
+                    case 0 -> startingStates[i][j] = GameOfLifeState.Live;
+                    case 1 -> startingStates[i][j] = GameOfLifeState.Dead;
+                    case 2 -> startingStates[i][j] = PercolationState.Percolated;
+                }
+            }
+        }
+
+        Grid g = new Grid(0.0,0.0,numrows,numcols,SIZE,SIZE,startingStates, 0.0);
+        for(Rectangle r: g.getRects()) {
+            root.getChildren().add(r);
+        }
+
         Scene scene = new Scene(root, SIZE, SIZE, Color.DARKBLUE);
         stage.setScene(scene);
 
