@@ -54,7 +54,8 @@ public abstract class SimulationType {
      */
     protected abstract void setUpSimulationParameters();
 
-    public abstract void runAlgorithm();
+    public void runAlgorithm() {
+    }
 
     // Initializes an array representing the starting state of every cell in the simulation
     private void initializeCellConfig(String config) {
