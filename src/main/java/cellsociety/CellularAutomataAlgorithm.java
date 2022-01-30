@@ -1,8 +1,7 @@
 package cellsociety;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+
 
 /**
  * This class provides an abstraction of a simulation instance and defines what characteristics all simulations should
@@ -10,7 +9,7 @@ import java.util.Map;
  *
  * @author Edison Ooi
  */
-public abstract class SimulationType {
+public abstract class CellularAutomataAlgorithm {
     public static final int GAME_OF_LIFE = 0;
     public static final int PERCOLATION = 1;
     public static final int SCHELLING_SEGREGATION = 2;
@@ -37,7 +36,7 @@ public abstract class SimulationType {
      *
      * @param data SimulationData record that contains the data obtained from parsing the configuration XML
      */
-    public SimulationType(SimulationData data) {
+    public CellularAutomataAlgorithm(SimulationData data) {
         simulationType = data.simulationType();
         numRows = data.numRows();
         numColumns = data.numColumns();
@@ -54,8 +53,7 @@ public abstract class SimulationType {
      */
     protected abstract void setUpSimulationParameters();
 
-    public void runAlgorithm() {
-    }
+    public abstract CellState runAlgorithm(Grid g, Cell c);
 
     // Initializes an array representing the starting state of every cell in the simulation
     private void initializeCellConfig(String config) {

@@ -1,13 +1,10 @@
 package cellsociety;
 
-import cellsociety.CellState.*;
 import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-import javafx.scene.shape.*;
 
 
 /**
@@ -29,7 +26,7 @@ public class Main extends Application {
     public void start (Stage stage) {
 //        Circle shape = new Circle(190, 190, 20);
 //        shape.setFill(Color.LIGHTSTEELBLUE);
-        Simulation newSim = new Simulation();
+        CellularAutomata newSim = new CellularAutomata();
 
         // attach scene to the stage and display it
         Scene scene = newSim.setUpSimulation(SIZE, SIZE, BACKGROUND);

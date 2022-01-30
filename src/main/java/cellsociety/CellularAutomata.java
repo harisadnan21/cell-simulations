@@ -1,5 +1,6 @@
 package cellsociety;
 
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -8,12 +9,14 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
-public class Simulation implements EventHandler<ActionEvent> {
+public class CellularAutomata implements EventHandler<ActionEvent> {
   private Scene scene;
   private Group root;
 
+//>>>>>>> master:src/main/java/cellsociety/Simulation.java
 
   private double GRIDSTARTINGX = 10;
   private double GRIDSTARTINGY = 10 ;
@@ -32,14 +35,15 @@ public class Simulation implements EventHandler<ActionEvent> {
   public static double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
   private boolean runVal;
 
-  private SimulationType simtype;
-  public Simulation(){
+  private CellularAutomataAlgorithm simtype;
+  public CellularAutomata(){
   }
 
   protected Scene setUpSimulation(int width, int height, Paint background){
     runVal = true;
     root = new Group();
     CellState[][] initialStates = getInitialConfig();
+    //TODO: pass in a record to the grid
     Grid newgrid = new Grid(GRIDSTARTINGX, GRIDSTARTINGY,GIDROWS, GRIDCOLS, GRIDWIDTH, GRIDHEIGHT,  initialStates, GRIDSTROKEWIDTH);
 
     startButton = new Button();
@@ -77,7 +81,9 @@ public class Simulation implements EventHandler<ActionEvent> {
     slowDown.setLayoutY();
 
     // How to add newgrid to root.
-    root.getChildren().add(newgrid);
+    for(Rectangle r: newgrid.getRects()) {
+      root.getChildren().add(r);
+    }
     root.getChildren().add(startButton);
     root.getChildren().add(stopButton);
     root.getChildren().add(speedUp);
@@ -98,13 +104,13 @@ public class Simulation implements EventHandler<ActionEvent> {
     return scene;
   }
   private CellState[][] getInitialConfig(){
-   // RETURN  A LIST OF STATE OF EACH CELL FROM CONFIGURATION OR GRID
+   // TODO: RETURN  A LIST OF STATE OF EACH CELL FROM CONFIGURATION OR GRID
   }
   private void step(double elapsedTime){
     //method, updates all cells according to simtype
     //
     if (runVal){
-      runStates.runAlgorithm
+      //runStates.runAlgorithm
     }
 
   }
