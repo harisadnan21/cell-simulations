@@ -56,6 +56,14 @@ public abstract class CellularAutomataAlgorithm {
    */
   protected abstract void setUpSimulationParameters();
 
+  /**
+   * Check if simulationParams contains all the needed parameters for this algorithm. If not, throw
+   * an Exception.
+   *
+   * This should always be called on the first line of setUpSimulationParameters.
+   */
+  protected abstract void checkSimulationParameters();
+
   public abstract CellState runAlgorithm(Grid g, Cell c);
 
   // Initializes an array representing the starting state of every cell in the simulation
