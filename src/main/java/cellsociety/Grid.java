@@ -1,5 +1,10 @@
 package cellsociety;
 
+import cellsociety.CellState.GameOfLifeState;
+import cellsociety.CellState.PercolationState;
+import cellsociety.CellState.SchellingSegregationState;
+import cellsociety.CellState.SpreadingOfFireState;
+import cellsociety.CellState.WaTorState;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -8,8 +13,11 @@ import javafx.scene.shape.Rectangle;
 public class Grid {
 
   private Cell[][] cells;
+  private final CellularAutomataAlgorithm simtype;
+  private SimulationData data;
 
-  public Grid(double startingX, double startingY, int numRows, int numColumns, double width, double height, CellState[][] initialStates, double strokeWidth) {
+
+  public Grid(double startingX, double startingY, int numRows, int numColumns, double width, double height, CellState[][] initialStates, double strokeWidth, SimulationData data) {
 
 
     //make sure arguments are of correct length
@@ -25,6 +33,8 @@ public class Grid {
 
     initializeCells(startingX, startingY, numRows, numColumns, width, height, initialStates, strokeWidth);
     addNeighbors(numRows, numColumns);
+    simtype = getSimulationType(cells[0][0].getState());
+    this.data = data;
   }
 
   private void initializeCells(double startingX, double startingY, int numRows, int numColumns, double width, double height, CellState[][] initialStates, double strokeWidth) {
@@ -140,6 +150,24 @@ public class Grid {
     }
   }
 
+  private CellularAutomataAlgorithm getSimulationType(CellState initialState) {
+    if (initialState instanceof GameOfLifeState)
+      return new GameOfLife(data);
+    if (initialState instanceof SpreadingOfFireState)
+      return new SpreadingOfFire(data);
+    if (initialState instanceof SchellingSegregationState)
+      return new SchellingSegregation(data);
+    if (initialState instanceof WaTorState)
+      return new WaTor(data);
+    if (initialState instanceof PercolationState)
+      return new Percolation(data);
+
+    // TODO: Find better default behavior
+    return new GameOfLife(data);
+
+  }
+
+
   public void update() {
     for(Cell[] cellArray: cells) {
       for(Cell cell: cellArray) {
@@ -151,7 +179,8 @@ public class Grid {
   public void calculate() {
     for(Cell[] cellArray: cells) {
       for(Cell cell: cellArray) {
-        cell.calculate();
+        CellState next = simtype.runAlgorithm(this,cell);
+        cell.assignNextState(next);
       }
     }
   }
