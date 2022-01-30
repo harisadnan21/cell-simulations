@@ -21,7 +21,8 @@ public abstract class SimulationType {
      */
     protected abstract void setUpSimulationParameters();
 
-    public abstract void runAlgorithm();
+    public void runAlgorithm() {
+    }
 
     private void readXML() {
 
