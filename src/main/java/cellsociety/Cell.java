@@ -8,7 +8,6 @@ import javafx.scene.shape.Rectangle;
 
 public class Cell {
   private final Rectangle rect;
-  private final CellularAutomataAlgorithm simtype;
   private CellState currentState;
   private CellState nextState;
   private Collection<Cell> neighbors;
@@ -23,7 +22,6 @@ public class Cell {
     rect.setStroke(getStrokeColor(initialState));
     rect.setStrokeWidth(strokeWidth);
     currentState = initialState;
-    simtype = getSimulationType(initialState);
   }
 
   public Cell(double x, double y, double size, CellState initialState, double strokeWidth) {
@@ -31,22 +29,7 @@ public class Cell {
   }
 
 
-  private CellularAutomataAlgorithm getSimulationType(CellState initialState) {
-    if (initialState instanceof GameOfLifeState)
-      return new GameOfLife();
-    if (initialState instanceof SpreadingOfFireState)
-      return new SpreadingOfFire();
-    if (initialState instanceof SchellingSegregationState)
-      return new SchellingSegregation();
-    if (initialState instanceof WaTorState)
-      return new WaTor();
-    if (initialState instanceof PercolationState)
-      return new Percolation();
 
-    // TODO: Find better default behavior
-    return new GameOfLife();
-
-  }
 
 
   private Paint getFillColor(CellState initialState) {
@@ -119,8 +102,7 @@ public class Cell {
     this.neighbors = neighbors;
   }
 
-  public void calculate() {
-    CellState next = simtype.runAlgorithm(this,neighbors);
+  public void assignNextState(CellState next) {
     nextState = next;
   }
 
@@ -129,9 +111,13 @@ public class Cell {
     nextState = null;
   }
 
+  public Collection<Cell> getNeighbors() { return neighbors;}
+
   public CellState getState() {
     return currentState;
   }
+
+  public CellState getNextState() { return nextState; }
 
   public Rectangle getRect() { return rect; }
 }
