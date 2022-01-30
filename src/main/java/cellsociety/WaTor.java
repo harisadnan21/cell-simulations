@@ -23,6 +23,11 @@ public class WaTor extends CellularAutomataAlgorithm {
   }
 
   @Override
+  protected void checkSimulationParameters() {
+
+  }
+
+  @Override
   public CellState runAlgorithm(Grid g, Cell c) {
     return GameOfLifeState.Dead;
   }

@@ -24,6 +24,11 @@ public class Percolation extends CellularAutomataAlgorithm {
   }
 
   @Override
+  protected void checkSimulationParameters() {
+
+  }
+
+  @Override
   public CellState runAlgorithm(Grid g, Cell c) {
     PercolationState currentState = (PercolationState) c.getState();
 
