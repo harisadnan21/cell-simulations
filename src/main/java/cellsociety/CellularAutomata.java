@@ -1,7 +1,7 @@
 package cellsociety;
 
-public class Simulation{
-  public Simulation(){
+public class CellularAutomata {
+  public CellularAutomata(){
 
   }
   private void setUpSimulation(){

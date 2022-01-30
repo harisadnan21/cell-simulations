@@ -3,10 +3,10 @@ package cellsociety;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class SimulationType {
+public abstract class Algorithm {
     private Map<String, String> simulationParameters;
 
-    public SimulationType() {
+    public Algorithm() {
         simulationParameters = new HashMap<>();
 
         readXML();
