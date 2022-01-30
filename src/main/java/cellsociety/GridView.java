@@ -13,7 +13,7 @@ import javafx.scene.shape.Rectangle;
 public class GridView extends TilePane {
   Rectangle[][] cellViews;
 
-  public GridView(int width, int height, int numRows, int numColumns) {
+  public GridView(double width, double height, int numRows, int numColumns) {
     super();
     setWidth(width);
     setHeight(height);
