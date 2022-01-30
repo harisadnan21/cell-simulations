@@ -43,6 +43,7 @@ public class CellularAutomata implements EventHandler<ActionEvent> {
     runVal = true;
     root = new Group();
     CellState[][] initialStates = getInitialConfig();
+    //TODO: pass in a record to the grid
     Grid newgrid = new Grid(GRIDSTARTINGX, GRIDSTARTINGY,GIDROWS, GRIDCOLS, GRIDWIDTH, GRIDHEIGHT,  initialStates, GRIDSTROKEWIDTH);
 
     startButton = new Button();
@@ -103,13 +104,13 @@ public class CellularAutomata implements EventHandler<ActionEvent> {
     return scene;
   }
   private CellState[][] getInitialConfig(){
-   // RETURN  A LIST OF STATE OF EACH CELL FROM CONFIGURATION OR GRID
+   // TODO: RETURN  A LIST OF STATE OF EACH CELL FROM CONFIGURATION OR GRID
   }
   private void step(double elapsedTime){
     //method, updates all cells according to simtype
     //
     if (runVal){
-      runStates.runAlgorithm
+      //runStates.runAlgorithm
     }
 
   }
