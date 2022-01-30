@@ -2,6 +2,7 @@ package cellsociety;
 
 
 import cellsociety.CellState.GameOfLifeState;
+import cellsociety.CellState.PercolationState;
 
 public class Percolation extends CellularAutomataAlgorithm {
 
@@ -24,6 +25,31 @@ public class Percolation extends CellularAutomataAlgorithm {
 
   @Override
   public CellState runAlgorithm(Grid g, Cell c) {
-    return GameOfLifeState.Dead;
+    PercolationState currentState = (PercolationState) c.getState();
+
+    switch(currentState) {
+      case Open -> {
+        if(hasPercolatedNeighbor(c)) {
+          return PercolationState.Percolated;
+        } else {
+          return PercolationState.Open;
+        }
+      } case Percolated -> {
+        return PercolationState.Percolated;
+      } case Blocked -> {
+        return PercolationState.Blocked;
+      }
+    }
+    return null;
+  }
+
+  private boolean hasPercolatedNeighbor(Cell c) {
+    for(Cell neighbor: c.getNeighbors()) {
+      PercolationState neighborState = (PercolationState) neighbor.getState();
+      if(neighborState == PercolationState.Percolated) {
+        return true;
+      }
+    }
+    return false;
   }
 }
