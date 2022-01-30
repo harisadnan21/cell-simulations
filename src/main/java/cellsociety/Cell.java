@@ -8,7 +8,7 @@ import javafx.scene.shape.Rectangle;
 
 public class Cell {
   private final Rectangle rect;
-  private final Algorithm simtype;
+  private final CellularAutomataAlgorithm simtype;
   private CellState currentState;
   private CellState nextState;
   private Collection<Cell> neighbors;
@@ -31,7 +31,7 @@ public class Cell {
   }
 
 
-  private Algorithm getSimulationType(CellState initialState) {
+  private CellularAutomataAlgorithm getSimulationType(CellState initialState) {
     if (initialState instanceof GameOfLifeState)
       return new GameOfLife();
     if (initialState instanceof SpreadingOfFireState)
