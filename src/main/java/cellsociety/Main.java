@@ -13,13 +13,14 @@ import javafx.scene.shape.*;
 /**
  * Feel free to completely change this code or delete it entirely.
  *
- * @author YOUR NAME HERE
+ * @author Haris Adnan, Matt Knox, Edison Ooi
  */
 public class Main extends Application {
     // useful names for constant values used
     public static final String TITLE = "Example JavaFX Animation";
     public static final int SIZE = 400;
     public static final Paint BACKGROUND = Color.DARKSLATEGRAY;
+
 
     /**
      * Initialize what will be displayed.
