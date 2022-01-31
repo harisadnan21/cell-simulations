@@ -150,13 +150,13 @@ public class CellularAutomata implements EventHandler<ActionEvent> {
 //      System.out.println();
 //    }
 
-    Collection<Cell> neighbors = grid.getCells()[0][2].getNeighbors();
+//    Collection<Cell> neighbors = grid.getCells()[0][2].getNeighbors();
 //    for(Cell cell : neighbors) {
 //      System.out.print(cell.getState() + " ");
 //    }
 //    System.out.println();
 //
-//    gridView.updateCells(grid.getCells());
+    gridView.updateCells(grid.getCells());
 
   }
 
