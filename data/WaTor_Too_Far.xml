@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<CellAutomata>
+  <NumberOfRows>10</NumberOfRows>
+  <NumberOfColumns>10</NumberOfColumns>
+  <SimulationType>4</SimulationType>
+  <Title>WaTor</Title>
+  <Author>Edison Ooi, Matt Knox, Haris Adnan</Author>
+  <Description>Simulation of WaTor where the fish starts too far away from the shark so it dies</Description>
+  <StartingConfig>
+    1 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 2
+  </StartingConfig>
+  <fishRefractoryPeriod>2</fishRefractoryPeriod>
+  <sharkRefractoryPeriod>5</sharkRefractoryPeriod>
+  <energyInFood>5</energyInFood>
+</CellAutomata>
