@@ -24,6 +24,11 @@ public class GameOfLife extends CellularAutomataAlgorithm {
   }
 
   @Override
+  protected void checkSimulationParameters() {
+
+  }
+
+  @Override
   public CellState runAlgorithm(Grid g, Cell c) {
     GameOfLifeState currentState = (GameOfLifeState) c.getState();
     Collection<Cell> neighbors = c.getNeighbors();

@@ -57,18 +57,20 @@ public class SpreadingOfFire extends CellularAutomataAlgorithm {
       case Burning:
         return handleBurningState(c);
     }
-    c.assignNextState(c.getState());
+    //c.assignNextState(c.getState());
     return c.getState();
   }
 
   // If cell is empty, it has a chance of becoming a tree
   private CellState handleEmptyState(Cell c) {
     if (Math.random() < probGeneration) {
-      c.assignNextState(SpreadingOfFireState.Tree);
+      return SpreadingOfFireState.Tree;
+      //c.assignNextState(SpreadingOfFireState.Tree);
     } else {
-      c.assignNextState(SpreadingOfFireState.Empty);
+      return SpreadingOfFireState.Empty;
+      //c.assignNextState(SpreadingOfFireState.Empty);
     }
-    return c.getNextState();
+    //return c.getNextState();
   }
 
   // If cell is a tree, it has a chance of burning if any of its neighbors are burning
@@ -76,19 +78,20 @@ public class SpreadingOfFire extends CellularAutomataAlgorithm {
     for (Cell neighbor : c.getNeighbors()) {
       if (neighbor.getState() == SpreadingOfFireState.Burning) {
         if (Math.random() < probCatch) {
-          c.assignNextState(SpreadingOfFireState.Burning);
-          return c.getNextState();
+          return SpreadingOfFireState.Burning;
+          //c.assignNextState(SpreadingOfFireState.Burning);
+          //return c.getNextState();
         }
       }
     }
-
-    c.assignNextState(SpreadingOfFireState.Tree);
-    return c.getNextState();
+    return SpreadingOfFireState.Tree;
+    //c.assignNextState(SpreadingOfFireState.Tree);
+    //return c.getNextState();
   }
 
   // If cell is burning, it remains burning
   private CellState handleBurningState(Cell c) {
-    c.assignNextState(SpreadingOfFireState.Burning);
+    //c.assignNextState(SpreadingOfFireState.Burning);
     return SpreadingOfFireState.Burning;
   }
 }
