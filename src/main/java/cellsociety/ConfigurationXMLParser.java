@@ -22,102 +22,100 @@ import org.xml.sax.SAXException;
  * @author Robert C. Duvall
  */
 public class ConfigurationXMLParser {
-    // Readable error message that can be displayed by the GUI
-    public static final String ERROR_MESSAGE = "XML file does not represent %s";
-    // name of root attribute that notes the type of file expecting to parse
-    private final String TYPE_ATTRIBUTE;
-    // keep only one documentBuilder because it is expensive to make and can reset it before parsing
-    private final DocumentBuilder DOCUMENT_BUILDER;
+
+  // Readable error message that can be displayed by the GUI
+  public static final String ERROR_MESSAGE = "XML file does not represent %s";
+  // name of root attribute that notes the type of file expecting to parse
+  private final String TYPE_ATTRIBUTE;
+  // keep only one documentBuilder because it is expensive to make and can reset it before parsing
+  private final DocumentBuilder DOCUMENT_BUILDER;
 
 
-    /**
-     * Create parser for XML files of given type.
-     */
-    public ConfigurationXMLParser (String type) throws XMLException {
-        DOCUMENT_BUILDER = getDocumentBuilder();
-        TYPE_ATTRIBUTE = type;
-    }
+  /**
+   * Create parser for XML files of given type.
+   */
+  public ConfigurationXMLParser(String type) throws XMLException {
+    DOCUMENT_BUILDER = getDocumentBuilder();
+    TYPE_ATTRIBUTE = type;
+  }
 
-    /**
-     * Get data contained in this XML file as an object
-     */
-    public SimulationData getSimulationData (File dataFile) throws XMLException {
-        Element root = getRootElement(dataFile);
+  /**
+   * Get data contained in this XML file as an object
+   */
+  public SimulationData getSimulationData(File dataFile) throws XMLException {
+    Element root = getRootElement(dataFile);
 //        if (!isValidFile(root, SimulationData.DATA_TYPE)) {
 //            throw new XMLException(ERROR_MESSAGE, SimulationData.DATA_TYPE);
 //        }
-        // read data associated with the fields given by the object
-        Map<String, String> genericSimulationValues = new HashMap<>();
-        for (String field : SimulationData.GENERIC_DATA_FIELDS) {
-            genericSimulationValues.put(field, getTextValue(root, field));
-        }
-
-        Map<String, String> specificSimulationParams = getSpecificParams(root,
-            Integer.parseInt(genericSimulationValues.get("SimulationType")));
-
-        return new SimulationData(genericSimulationValues, specificSimulationParams);
+    // read data associated with the fields given by the object
+    Map<String, String> genericSimulationValues = new HashMap<>();
+    for (String field : SimulationData.GENERIC_DATA_FIELDS) {
+      genericSimulationValues.put(field, getTextValue(root, field));
     }
 
-    // get root element of an XML file
-    private Element getRootElement (File xmlFile) throws XMLException {
-        try {
-            DOCUMENT_BUILDER.reset();
-            Document xmlDocument = DOCUMENT_BUILDER.parse(xmlFile);
-            return xmlDocument.getDocumentElement();
-        }
-        catch (SAXException | IOException e) {
-            throw new XMLException(e);
-        }
+    Map<String, String> specificSimulationParams = getSpecificParams(root,
+        Integer.parseInt(genericSimulationValues.get("SimulationType")));
+
+    return new SimulationData(genericSimulationValues, specificSimulationParams);
+  }
+
+  // get root element of an XML file
+  private Element getRootElement(File xmlFile) throws XMLException {
+    try {
+      DOCUMENT_BUILDER.reset();
+      Document xmlDocument = DOCUMENT_BUILDER.parse(xmlFile);
+      return xmlDocument.getDocumentElement();
+    } catch (SAXException | IOException e) {
+      throw new XMLException(e);
+    }
+  }
+
+  // returns if this is a valid XML file for the specified object type
+  private boolean isValidFile(Element root, String type) {
+    return getAttribute(root, TYPE_ATTRIBUTE).equals(type);
+  }
+
+  // get value of Element's attribute
+  private String getAttribute(Element e, String attributeName) {
+    return e.getAttribute(attributeName);
+  }
+
+  // get value of Element's text
+  private String getTextValue(Element e, String tagName) {
+    NodeList nodeList = e.getElementsByTagName(tagName);
+    if (nodeList.getLength() > 0) {
+      return nodeList.item(0).getTextContent();
+    } else {
+      return "";
+    }
+  }
+
+  private Map<String, String> getSpecificParams(Element root, int algorithmType) {
+    Map<String, String> params = new HashMap<>();
+
+    List<String> keys = new ArrayList<>();
+
+    switch (algorithmType) {
+      case CellularAutomataAlgorithm.GAME_OF_LIFE -> keys = GameOfLife.SPECIFIC_PARAMS;
+      case CellularAutomataAlgorithm.PERCOLATION -> keys = Percolation.SPECIFIC_PARAMS;
+      case CellularAutomataAlgorithm.SCHELLING_SEGREGATION -> keys = SchellingSegregation.SPECIFIC_PARAMS;
+      case CellularAutomataAlgorithm.SPREADING_OF_FIRE -> keys = SpreadingOfFire.SPECIFIC_PARAMS;
+      case CellularAutomataAlgorithm.WATOR -> keys = WaTor.SPECIFIC_PARAMS;
     }
 
-    // returns if this is a valid XML file for the specified object type
-    private boolean isValidFile (Element root, String type) {
-        return getAttribute(root, TYPE_ATTRIBUTE).equals(type);
+    for (String key : keys) {
+      params.put(key, getTextValue(root, key));
     }
 
-    // get value of Element's attribute
-    private String getAttribute (Element e, String attributeName) {
-        return e.getAttribute(attributeName);
+    return params;
+  }
+
+  // boilerplate code needed to make ANY DocumentBuilder
+  private DocumentBuilder getDocumentBuilder() throws XMLException {
+    try {
+      return DocumentBuilderFactory.newInstance().newDocumentBuilder();
+    } catch (ParserConfigurationException e) {
+      throw new XMLException(e);
     }
-
-    // get value of Element's text
-    private String getTextValue (Element e, String tagName) {
-        NodeList nodeList = e.getElementsByTagName(tagName);
-        if (nodeList.getLength() > 0) {
-            return nodeList.item(0).getTextContent();
-        }
-        else {
-            return "";
-        }
-    }
-
-    private Map<String, String> getSpecificParams(Element root, int algorithmType) {
-        Map<String, String> params = new HashMap<>();
-
-        List<String> keys = new ArrayList<>();
-
-        switch(algorithmType) {
-            case CellularAutomataAlgorithm.GAME_OF_LIFE -> keys = GameOfLife.SPECIFIC_PARAMS;
-            case CellularAutomataAlgorithm.PERCOLATION -> keys = Percolation.SPECIFIC_PARAMS;
-            case CellularAutomataAlgorithm.SCHELLING_SEGREGATION -> keys = SchellingSegregation.SPECIFIC_PARAMS;
-            case CellularAutomataAlgorithm.SPREADING_OF_FIRE -> keys = SpreadingOfFire.SPECIFIC_PARAMS;
-            case CellularAutomataAlgorithm.WATOR -> keys = WaTor.SPECIFIC_PARAMS;
-        }
-
-        for(String key : keys) {
-            params.put(key, getTextValue(root, key));
-        }
-
-        return params;
-    }
-
-    // boilerplate code needed to make ANY DocumentBuilder
-    private DocumentBuilder getDocumentBuilder () throws XMLException {
-        try {
-            return DocumentBuilderFactory.newInstance().newDocumentBuilder();
-        }
-        catch (ParserConfigurationException e) {
-            throw new XMLException(e);
-        }
-    }
+  }
 }
