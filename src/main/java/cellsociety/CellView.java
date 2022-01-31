@@ -9,16 +9,11 @@ public class CellView extends Rectangle {
         super();
     }
 
-    public CellView(double x, double y, double width, double height, CellState initialState, double strokeWidth) {
-
-        setX(x);
-        setY(y);
+    public CellView(double width, double height) {
         setWidth(width);
         setHeight(height);
-        setFill(GridView.getFillColor(initialState));
-        setStroke(GridView.getStrokeColor(initialState));
-        setStrokeWidth(strokeWidth);
-        currentState = initialState;
+        //updateFillAndStroke(initialState);
+        //currentState = initialState;
     }
 
     protected void updateFillAndStroke(CellState nextState){

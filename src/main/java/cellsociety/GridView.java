@@ -22,13 +22,13 @@ public class GridView extends TilePane {
     setPrefColumns(numColumns);
     setTileAlignment(Pos.TOP_LEFT);
     cellViews = new CellView[numRows][numColumns];
-    addCellsToGrid();
+    addCellsToGrid(width, height, numRows, numColumns);
   }
 
-  private void addCellsToGrid() {
+  private void addCellsToGrid(double width, double height, int numRows, int numColumns) {
     for (int i = 0; i < cellViews.length; i++) {
       for (int j = 0; j < cellViews[0].length; j++) {
-        cellViews[i][j] = new CellView();
+        cellViews[i][j] = new CellView((width - 5) / numRows, (height - 5) / numColumns);
         this.getChildren().add(cellViews[i][j]);
       }
     }
