@@ -200,4 +200,7 @@ public class Grid {
     }
     return allRects;
   }
+
+  public Cell[][] getCells() {return cells; }
+
 }
