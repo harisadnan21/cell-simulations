@@ -3,8 +3,11 @@ package cellsociety;
 
 import cellsociety.CellState.GameOfLifeState;
 import java.util.Collection;
+import java.util.List;
 
 public class GameOfLife extends CellularAutomataAlgorithm {
+
+  public static final List<String> SPECIFIC_PARAMS = List.of();
 
 
 
