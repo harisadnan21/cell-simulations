@@ -31,7 +31,7 @@ public class GridView extends TilePane {
     }
   }
 
-  public void updateCells(CellState[][] states) {
+  protected void updateCells(CellState[][] states) {
     if(states.length != getPrefRows() || states[0].length != getPrefColumns()) {
       throw new RuntimeException("CellStates are not the correct size");
     }
@@ -42,9 +42,11 @@ public class GridView extends TilePane {
         cellViews[i][j].setStroke(getStrokeColor(states[i][j]));
       }
     }
+
   }
 
-  private Paint getFillColor(CellState initialState) {
+
+  public static Paint getFillColor(CellState initialState) {
 
     if (initialState instanceof GameOfLifeState) {
       GameOfLifeState s = (GameOfLifeState)initialState;
@@ -95,7 +97,7 @@ public class GridView extends TilePane {
     return Color.GRAY;
   }
 
-  private Paint getStrokeColor(CellState initialState) {
+  public static Paint getStrokeColor(CellState initialState) {
     if (initialState instanceof GameOfLifeState)
       return Color.BLUE;
     else if(initialState instanceof SpreadingOfFireState)
@@ -106,7 +108,6 @@ public class GridView extends TilePane {
       return Color.BLACK;
     else if(initialState instanceof PercolationState)
       return Color.BLACK;
-
     return Color.TRANSPARENT;
   }
 }
