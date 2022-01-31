@@ -1,6 +1,12 @@
 package cellsociety;
 
 
+import cellsociety.CellState.GameOfLifeState;
+import cellsociety.CellState.PercolationState;
+import cellsociety.CellState.SchellingSegregationState;
+import cellsociety.CellState.SpreadingOfFireState;
+import cellsociety.CellState.WaTorState;
+import java.io.File;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -13,13 +19,14 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 public class CellularAutomata implements EventHandler<ActionEvent> {
+
   private Scene scene;
   private Group root;
 
 //>>>>>>> master:src/main/java/cellsociety/Simulation.java
 
   private double GRIDSTARTINGX = 10;
-  private double GRIDSTARTINGY = 10 ;
+  private double GRIDSTARTINGY = 10;
   private double GRIDHEIGHT;
   private double GRIDWIDTH;
   private int GRIDCOLS;
@@ -36,131 +43,165 @@ public class CellularAutomata implements EventHandler<ActionEvent> {
   private boolean runVal;
 
   private CellularAutomataAlgorithm simtype;
-  public CellularAutomata(){
+
+  public CellularAutomata() {
   }
 
-  protected Scene setUpSimulation(int width, int height, Paint background){
+  protected Scene setUpSimulation(int width, int height, Paint background) {
+
+    // Get SimulationData record from XML
+    File configFile = new File("./data/exampleconfig.xml");
+    SimulationData simulationData = new ConfigurationXMLParser(
+        SimulationData.DATA_TYPE).getSimulationData(configFile);
+
     runVal = true;
     root = new Group();
-    CellState[][] initialStates = getInitialConfig();
+
+    CellState[][] initialStates = getInitialConfig(simulationData.startingConfig(),
+        simulationData.numRows(), simulationData.numColumns(), simulationData.simulationType());
     //TODO: pass in a record to the grid
-    Grid newgrid = new Grid(GRIDSTARTINGX, GRIDSTARTINGY,GIDROWS, GRIDCOLS, GRIDWIDTH, GRIDHEIGHT,  initialStates, GRIDSTROKEWIDTH);
+    Grid newgrid = new Grid(GRIDSTARTINGX, GRIDSTARTINGY, GIDROWS, GRIDCOLS, GRIDWIDTH,
+        GRIDHEIGHT, initialStates, GRIDSTROKEWIDTH, simulationData);
+    GridView gridView = new GridView(GRIDWIDTH, GRIDHEIGHT, simulationData.numRows(),
+        simulationData.numColumns());
 
-    startButton = new Button();
-    stopButton= new Button();
-    speedUp = new Button();
-    slowDown= new Button();
-    loadButton = new Button();
-    saveButton = new Button();
+    root.getChildren().add(gridView);
 
-    startButton.setText("Start");
-    stopButton.setText("Stop");
-    speedUp.setText(">>");
-    slowDown.setText("<<");
-    loadButton.setText("Load");
-    saveButton.setText("Save");
-
-    startButton.setOnAction(this);
-    stopButton.setOnAction(this);
-    speedUp.setOnAction(this);
-    slowDown.setOnAction(this);
-    loadButton.setOnAction(this);
-    saveButton.setOnAction(this);
-
-    startButton.setLayoutX();
-    startButton.setLayoutY();
-    stopButton.setLayoutX();
-    stopButton.setLayoutY();
-    saveButton.setLayoutX();
-    saveButton.setLayoutY();
-    loadButton.setLayoutX();
-    loadButton.setLayoutY();
-    speedUp.setLayoutX();
-    speedUp.setLayoutY();
-    slowDown.setLayoutX();
-    slowDown.setLayoutY();
-
-    // How to add newgrid to root.
-    for(Rectangle r: newgrid.getRects()) {
-      root.getChildren().add(r);
-    }
-    root.getChildren().add(startButton);
-    root.getChildren().add(stopButton);
-    root.getChildren().add(speedUp);
-    root.getChildren().add(slowDown);
-    root.getChildren().add(loadButton);
-    root.getChildren().add(saveButton);
+//    startButton = new Button();
+//    stopButton = new Button();
+//    speedUp = new Button();
+//    slowDown = new Button();
+//    loadButton = new Button();
+//    saveButton = new Button();
+//
+//    startButton.setText("Start");
+//    stopButton.setText("Stop");
+//    speedUp.setText(">>");
+//    slowDown.setText("<<");
+//    loadButton.setText("Load");
+//    saveButton.setText("Save");
+//
+//    startButton.setOnAction(this);
+//    stopButton.setOnAction(this);
+//    speedUp.setOnAction(this);
+//    slowDown.setOnAction(this);
+//    loadButton.setOnAction(this);
+//    saveButton.setOnAction(this);
+//
+//    startButton.setLayoutX();
+//    startButton.setLayoutY();
+//    stopButton.setLayoutX();
+//    stopButton.setLayoutY();
+//    saveButton.setLayoutX();
+//    saveButton.setLayoutY();
+//    loadButton.setLayoutX();
+//    loadButton.setLayoutY();
+//    speedUp.setLayoutX();
+//    speedUp.setLayoutY();
+//    slowDown.setLayoutX();
+//    slowDown.setLayoutY();
+//
+//    root.getChildren().add(startButton);
+//    root.getChildren().add(stopButton);
+//    root.getChildren().add(speedUp);
+//    root.getChildren().add(slowDown);
+//    root.getChildren().add(loadButton);
+//    root.getChildren().add(saveButton);
 
     scene = new Scene(root, width, height, background);
 
     //setting up the animation
     Timeline animation = new Timeline();
     animation.setCycleCount(Timeline.INDEFINITE);
-    animation.getKeyFrames().add(new KeyFrame(Duration.seconds(SECOND_DELAY), e -> step(SECOND_DELAY)));
+    animation.getKeyFrames()
+        .add(new KeyFrame(Duration.seconds(SECOND_DELAY), e -> step(SECOND_DELAY)));
     animation.play();
-
-
 
     return scene;
   }
-  private CellState[][] getInitialConfig(){
-   // TODO: RETURN  A LIST OF STATE OF EACH CELL FROM CONFIGURATION OR GRID
+
+  private CellState[][] getInitialConfig(String configString, int numRows, int numColumns,
+      int algorithmType) {
+
+    CellState[][] cellConfig = new CellState[numRows][numColumns];
+    String[] initialStates = configString.split(" ");
+    CellState[] possibleStates = new CellState[0];
+
+    switch (algorithmType) {
+      case CellularAutomataAlgorithm.GAME_OF_LIFE -> possibleStates = GameOfLifeState.values();
+      case CellularAutomataAlgorithm.PERCOLATION -> possibleStates = PercolationState.values();
+      case CellularAutomataAlgorithm.SCHELLING_SEGREGATION -> possibleStates = SchellingSegregationState.values();
+      case CellularAutomataAlgorithm.SPREADING_OF_FIRE -> possibleStates = SpreadingOfFireState.values();
+      case CellularAutomataAlgorithm.WATOR -> possibleStates = WaTorState.values();
+    }
+
+    for (int i = 0; i < cellConfig.length; i++) {
+      for (int j = 0; j < cellConfig[0].length; j++) {
+        cellConfig[i][j] = possibleStates[Integer.parseInt(initialStates[i + j])];
+      }
+    }
+
+    return cellConfig;
   }
-  private void step(double elapsedTime){
+
+  private void step(double elapsedTime) {
     //method, updates all cells according to simtype
     //
-    if (runVal){
+    if (runVal) {
       //runStates.runAlgorithm
     }
 
   }
-  private void getParameter(){
+
+  private void getParameter() {
 
   }
-  private void setParameter(){
+
+  private void setParameter() {
 
   }
-  private void start(){
+
+  private void start() {
     runVal = true;
 
   }
-  private void stop(){
+
+  private void stop() {
     runVal = false;
   }
-  private void save(){
+
+  private void save() {
     stop();
     //reverse of creating grid from parsed file
   }
-  private void load(){
+
+  private void load() {
     stop();
     setUpSimulation(Main.SIZE, Main.SIZE, Main.BACKGROUND);
 
   }
-  private void speedUp(){
+
+  private void speedUp() {
     FRAMES_PER_SECOND += 20;
   }
-  private void slowDown(){
+
+  private void slowDown() {
     FRAMES_PER_SECOND -= 20;
   }
 
   @Override
   public void handle(ActionEvent actionEvent) {
-    if(actionEvent.getSource() == startButton){
+    if (actionEvent.getSource() == startButton) {
       start();
-    }
-    else if(actionEvent.getSource() == stopButton) {
+    } else if (actionEvent.getSource() == stopButton) {
       stop();
-    }
-    else if(actionEvent.getSource() == speedUp) {
+    } else if (actionEvent.getSource() == speedUp) {
       speedUp();
-    }
-    else if(actionEvent.getSource() == slowDown) {
+    } else if (actionEvent.getSource() == slowDown) {
       slowDown();
-    }
-    else if(actionEvent.getSource() == loadButton) {
+    } else if (actionEvent.getSource() == loadButton) {
       load();
-    }
-    else if(actionEvent.getSource() == saveButton) {
+    } else if (actionEvent.getSource() == saveButton) {
       save();
     }
   }
