@@ -17,9 +17,11 @@ public class Grid {
   private SimulationData data;
 
 
-  public Grid(double startingX, double startingY, int numRows, int numColumns, double width, double height, CellState[][] initialStates, double strokeWidth, SimulationData data) {
+  public Grid(int numRows, int numColumns, CellState[][] initialStates, SimulationData data) {
 
 
+    System.out.println(initialStates[0].length);
+    System.out.println(initialStates.length);
     //make sure arguments are of correct length
     if(initialStates[0].length != numColumns) {
       throw new IllegalArgumentException("initialStates has an incorrect number of columns");
@@ -31,20 +33,17 @@ public class Grid {
     if(hasBadStates(initialStates))
       throw new IllegalArgumentException("initialStates is composed of multiple different kinds of states");
 
-    initializeCells(startingX, startingY, numRows, numColumns, width, height, initialStates, strokeWidth);
+    this.data = data;
+    initializeCells(numRows, numColumns, initialStates);
     addNeighbors(numRows, numColumns);
     simtype = getSimulationType(cells[0][0].getState());
-    this.data = data;
+
   }
 
-  private void initializeCells(double startingX, double startingY, int numRows, int numColumns, double width, double height, CellState[][] initialStates, double strokeWidth) {
+  private void initializeCells(int numRows, int numColumns, CellState[][] initialStates) {
     cells = new Cell[numRows][numColumns];
-    double widthPerCell = width / numRows;
-    double heightPerCell = height / numColumns;
     for(int i = 0; i < numRows; i++) {
       for(int j = 0; j < numColumns; j++) {
-        double x = startingX + i*widthPerCell;
-        double y = startingY + j*heightPerCell;
         cells[i][j] = new Cell(initialStates[i][j]);
       }
     }
@@ -177,6 +176,7 @@ public class Grid {
   public void update() {
     for(Cell[] cellArray: cells) {
       for(Cell cell: cellArray) {
+        calculateNextStates();
         cell.update();
       }
     }
@@ -191,14 +191,8 @@ public class Grid {
     }
   }
 
-  public Collection<Rectangle> getRects() {
-    Collection<Rectangle> allRects = new HashSet<>();
-    for(Cell[] cellArray: cells) {
-      for(Cell cell: cellArray) {
-        allRects.add(cell.getRect());
-      }
-    }
-    return allRects;
+  public Cell[][] getCells() {
+    return this.cells;
   }
 
   public Cell[][] getCells() {return cells; }

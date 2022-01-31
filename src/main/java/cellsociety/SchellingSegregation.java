@@ -45,6 +45,11 @@ public class SchellingSegregation extends CellularAutomataAlgorithm {
   }
 
   @Override
+  protected void checkSimulationParameters() {
+
+  }
+
+  @Override
   public CellState runAlgorithm(Grid g, Cell c) {
     switch((SchellingSegregationState)c.getState()) {
       case AgentA -> { return handleAgentAState(g,c); }

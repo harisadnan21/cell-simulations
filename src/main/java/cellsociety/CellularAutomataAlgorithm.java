@@ -95,6 +95,10 @@ public abstract class CellularAutomataAlgorithm {
     return numColumns;
   }
 
+  protected int[][] getInitialCellConfig() {
+    return initialCellConfig;
+  }
+
   protected String getTitle() {
     return title;
   }
