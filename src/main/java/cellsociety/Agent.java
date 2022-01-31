@@ -1,2 +1,9 @@
-package cellsociety;public class Agent {
+package cellsociety;
+
+public class Agent {
+
+  private boolean isAgentA;
+  public Agent(boolean b) { isAgentA = b; }
+  public boolean isAgentA() { return isAgentA; }
+  public boolean isAgentB() { return !isAgentA; }
 }
