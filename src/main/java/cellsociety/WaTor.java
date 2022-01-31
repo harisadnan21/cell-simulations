@@ -52,9 +52,9 @@ public class WaTor extends CellularAutomataAlgorithm {
   @Override
   public CellState runAlgorithm(Grid g, Cell c) {
     switch((WaTorState)c.getState()) {
-      case Fish -> { handleFishState(g,c); }
-      case Shark -> { handleSharkState(g,c); }
-      case Empty -> { handleEmptyState(g,c); }
+      case Fish -> { return handleFishState(g,c); }
+      case Shark -> { return handleSharkState(g,c); }
+      case Empty -> { return handleEmptyState(g,c); }
     }
 
     return null;
