@@ -48,6 +48,8 @@ public abstract class CellularAutomataAlgorithm {
     author = data.author();
     simulationParams = data.params();
 
+    setUpSimulationParameters();
+
     initializeCellConfig(data.startingConfig());
   }
 
