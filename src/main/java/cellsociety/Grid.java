@@ -45,7 +45,7 @@ public class Grid {
       for(int j = 0; j < numColumns; j++) {
         double x = startingX + i*widthPerCell;
         double y = startingY + j*heightPerCell;
-        cells[i][j] = new Cell(x, y, widthPerCell, heightPerCell, initialStates[i][j], strokeWidth);
+        cells[i][j] = new Cell(initialStates[i][j]);
       }
     }
   }
