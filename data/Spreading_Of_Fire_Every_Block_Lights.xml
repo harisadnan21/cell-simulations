@@ -6,7 +6,13 @@
     <Title>Spreading of Fire</Title>
     <Author>Edison Ooi, Matt Knox, Haris Adnan</Author>
     <Description>Simulation of Spreading of Fire in which every block lights up with fire</Description>
-    <StartingConfig>1 1 1 1 1 1 1 1 1 1 1 1 2 1 1 1 1 1 1 1 1 1 1 1 1</StartingConfig>
+    <StartingConfig>
+        1 1 1 1 1
+        1 1 1 1 1
+        1 1 2 1 1
+        1 1 1 1 1
+        1 1 1 1 1
+    </StartingConfig>
     <probCatch>1</probCatch>
     <probGeneration>0.5</probGeneration>
 </CellAutomata>

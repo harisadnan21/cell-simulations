@@ -6,5 +6,11 @@
     <Title>Percolation</Title>
     <Author>Edison Ooi, Matt Knox, Haris Adnan</Author>
     <Description>Simulation of Percolation in which the central percolated block is trapped with surrounding blocks.</Description>
-    <StartingConfig>1 1 1 1 1 1 0 0 0 1 1 0 2 0 1 1 0 0 0 1 1 1 1 1 1</StartingConfig>
+    <StartingConfig>
+        1 1 1 1 1
+        1 0 0 0 1
+        1 0 2 0 1
+        1 0 0 0 1
+        1 1 1 1 1
+    </StartingConfig>
 </CellAutomata>

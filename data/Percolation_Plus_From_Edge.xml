@@ -6,5 +6,10 @@
     <Title>Percolation</Title>
     <Author>Edison Ooi, Matt Knox, Haris Adnan</Author>
     <Description>Simulation of Percolation in which the percolation forms a plus pattern with a filled block on edgeç.</Description>
-    <StartingConfig>0 0 0 0 0 0 0 1 0 0 0 1 1 1 0 0 0 1 0 0 0 0 2 0 0</StartingConfig>
+    <StartingConfig>
+        0 0 0 0 0
+        0 0 1 0 0
+        0 1 1 1 0
+        0 0 1 0 0
+        0 0 2 0 0</StartingConfig>
 </CellAutomata>
