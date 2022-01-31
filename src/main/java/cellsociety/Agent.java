@@ -1,6 +1,6 @@
 package cellsociety;
 
-public class Agent {
+public class Agent extends CellObject{
 
   private boolean isAgentA;
   public Agent(boolean b) { isAgentA = b; }
