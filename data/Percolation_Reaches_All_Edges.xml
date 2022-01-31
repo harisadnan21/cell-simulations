@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<CellAutomata>
+    <NumberOfRows>5</NumberOfRows>
+    <NumberOfColumns>5</NumberOfColumns>
+    <SimulationType>1</SimulationType>
+    <Title>Percolation</Title>
+    <Author>Edison Ooi, Matt Knox, Haris Adnan</Author>
+    <Description>Simulation of Percolation in which the central percolated block percolates to all boundaries</Description>
+    <StartingConfig>1 1 1 1 1 1 0 0 0 1 1 0 2 1 1 1 0 0 0 1 1 1 1 1 1</StartingConfig>
+</CellAutomata>
