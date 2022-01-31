@@ -195,13 +195,6 @@ public class Grid {
     return this.cells;
   }
 
-//  public Collection<Rectangle> getRects() {
-//    Collection<Rectangle> allRects = new HashSet<>();
-//    for(Cell[] cellArray: cells) {
-//      for(Cell cell: cellArray) {
-//        allRects.add(cell.getRect());
-//      }
-//    }
-//    return allRects;
-//  }
+  public Cell[][] getCells() {return cells; }
+
 }
