@@ -21,9 +21,9 @@ public class CellView extends Rectangle {
         currentState = initialState;
     }
 
-    protected void updateColor(CellView rectangle, CellState nextState){
-        rect.setFill(GridView.getFillColor(nextState));
-        rect.setStroke(GridView.getStrokeColor(nextState));
+    protected void updateFillAndStroke(CellState nextState){
+        setFill(GridView.getFillColor(nextState));
+        setStroke(GridView.getStrokeColor(nextState));
 
     }
 

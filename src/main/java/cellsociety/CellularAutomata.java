@@ -39,12 +39,12 @@ public class CellularAutomata implements EventHandler<ActionEvent> {
   private Button slowDown;
   private Button loadButton;
   private Button saveButton;
-  public static int FRAMES_PER_SECOND = 60;
+  public static int FRAMES_PER_SECOND = 1;
   public static double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
   private boolean runVal;
-
-  private CellularAutomataAlgorithm simtype;
-
+  private CellularAutomataAlgorithm simulation;
+  private Grid grid;
+  private GridView gridView;
   public CellularAutomata() {
 
   }
@@ -163,9 +163,27 @@ public class CellularAutomata implements EventHandler<ActionEvent> {
   private void step(double elapsedTime) {
     //method, updates all cells according to simtype
     //
-    if (runVal) {
-      //runStates.runAlgorithm
+    //System.out.println("working");
+
+    grid.update();
+    Cell[][] currentCells = grid.getCells();
+    for(int i = 0; i<currentCells.length; i++){
+      for(int j = 0; j < currentCells[i].length; j++) {
+        System.out.print(currentCells[i][j].getState() + " ");
+      }
+      System.out.println();
     }
+
+    Collection<Cell> neighbors = grid.getCells()[0][2].getNeighbors();
+    for(Cell cell : neighbors) {
+      System.out.print(cell.getState() + " ");
+    }
+    System.out.println();
+
+    gridView.updateCells(grid.getCells());
+
+
+
 
   }
 
