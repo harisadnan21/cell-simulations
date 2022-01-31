@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class SchellingSegregation extends CellularAutomataAlgorithm {
 
-  public static final List<String> SPECIFIC_PARAMS = List.of("satisfaction");
+  public static final List<String> SPECIFIC_PARAMS = List.of("Satisfaction");
 
   private double satisfaction;
 
@@ -29,7 +29,7 @@ public class SchellingSegregation extends CellularAutomataAlgorithm {
   protected void setUpSimulationParameters() {
     checkSimulationParameters();
     Map<String, String> params = getSimulationParams();
-    satisfaction = Double.parseDouble(params.get("satisfaction"));
+    satisfaction = Double.parseDouble(params.get("Satisfaction"));
   }
 
   @Override
