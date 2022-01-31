@@ -60,9 +60,17 @@ public class CellularAutomata implements EventHandler<ActionEvent> {
     runVal = true;
     root = new Group();
 
+    // Initialize simulation instance
+    switch(simulationData.simulationType()) {
+      case CellularAutomataAlgorithm.GAME_OF_LIFE -> simulation = new GameOfLife(simulationData);
+      case CellularAutomataAlgorithm.PERCOLATION -> simulation = new Percolation(simulationData);
+      case CellularAutomataAlgorithm.SCHELLING_SEGREGATION -> simulation = new SchellingSegregation(simulationData);
+      case CellularAutomataAlgorithm.SPREADING_OF_FIRE -> simulation = new SpreadingOfFire(simulationData);
+      case CellularAutomataAlgorithm.WATOR -> simulation = new WaTor(simulationData);
+    }
+
     // Initialize Grid and GridView with starting config
-    CellState[][] initialStates = getInitialConfig(simulationData.startingConfig(),
-        simulationData.numRows(), simulationData.numColumns(), simulationData.simulationType());
+    CellState[][] initialStates = simulation.getInitialCellConfig();
 
     grid = new Grid(simulationData.numRows(), simulationData.numColumns(), initialStates, simulationData);
     gridView = new GridView(width, height, simulationData.numRows(),
@@ -73,13 +81,7 @@ public class CellularAutomata implements EventHandler<ActionEvent> {
 
     //root.getChildren().add(gridView);
 
-//    switch(simulationData.simulationType()) {
-//      case CellularAutomataAlgorithm.GAME_OF_LIFE -> simulation = new GameOfLife(simulationData);
-//      case CellularAutomataAlgorithm.PERCOLATION -> simulation = new Percolation(simulationData);
-//      case CellularAutomataAlgorithm.SCHELLING_SEGREGATION -> simulation = new SchellingSegregation(simulationData);
-//      case CellularAutomataAlgorithm.SPREADING_OF_FIRE -> simulation = new SpreadingOfFire(simulationData);
-//      case CellularAutomataAlgorithm.WATOR -> simulation = new WaTor(simulationData);
-//    }
+
 
 //    startButton = new Button();
 //    stopButton = new Button();
@@ -134,54 +136,27 @@ public class CellularAutomata implements EventHandler<ActionEvent> {
     return scene;
   }
 
-  private CellState[][] getInitialConfig(String configString, int numRows, int numColumns,
-      int algorithmType) {
-
-    CellState[][] cellConfig = new CellState[numRows][numColumns];
-    String[] initialStates = configString.split(" ");
-//    for(String s : initialStates) {
-//      System.out.println(s + " ");
-//    }
-    CellState[] possibleStates = new CellState[0];
-
-    switch (algorithmType) {
-      case CellularAutomataAlgorithm.GAME_OF_LIFE -> possibleStates = GameOfLifeState.values();
-      case CellularAutomataAlgorithm.PERCOLATION -> possibleStates = PercolationState.values();
-      case CellularAutomataAlgorithm.SCHELLING_SEGREGATION -> possibleStates = SchellingSegregationState.values();
-      case CellularAutomataAlgorithm.SPREADING_OF_FIRE -> possibleStates = SpreadingOfFireState.values();
-      case CellularAutomataAlgorithm.WATOR -> possibleStates = WaTorState.values();
-    }
-
-    for (int i = 0; i < cellConfig.length; i++) {
-      for (int j = 0; j < cellConfig[0].length; j++) {
-        cellConfig[i][j] = possibleStates[Integer.parseInt(initialStates[i * cellConfig[0].length + j])];
-      }
-    }
-
-    return cellConfig;
-  }
-
   private void step(double elapsedTime) {
     //method, updates all cells according to simtype
     //
     //System.out.println("working");
 
     grid.update();
-    Cell[][] currentCells = grid.getCells();
-    for(int i = 0; i<currentCells.length; i++){
-      for(int j = 0; j < currentCells[i].length; j++) {
-        System.out.print(currentCells[i][j].getState() + " ");
-      }
-      System.out.println();
-    }
+//    Cell[][] currentCells = grid.getCells();
+//    for(int i = 0; i<currentCells.length; i++){
+//      for(int j = 0; j < currentCells[i].length; j++) {
+//        System.out.print(currentCells[i][j].getState() + " ");
+//      }
+//      System.out.println();
+//    }
 
     Collection<Cell> neighbors = grid.getCells()[0][2].getNeighbors();
-    for(Cell cell : neighbors) {
-      System.out.print(cell.getState() + " ");
-    }
-    System.out.println();
-
-    gridView.updateCells(grid.getCells());
+//    for(Cell cell : neighbors) {
+//      System.out.print(cell.getState() + " ");
+//    }
+//    System.out.println();
+//
+//    gridView.updateCells(grid.getCells());
 
   }
 

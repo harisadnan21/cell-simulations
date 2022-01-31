@@ -1,5 +1,10 @@
 package cellsociety;
 
+import cellsociety.CellState.GameOfLifeState;
+import cellsociety.CellState.PercolationState;
+import cellsociety.CellState.SchellingSegregationState;
+import cellsociety.CellState.SpreadingOfFireState;
+import cellsociety.CellState.WaTorState;
 import java.util.Map;
 
 
@@ -23,7 +28,7 @@ public abstract class CellularAutomataAlgorithm {
   // Information for setting up grid of cells
   private int numRows;
   private int numColumns;
-  private int[][] initialCellConfig; //TODO: Change this to array of CellState
+  private CellState[][] initialCellConfig; //TODO: Change this to array of CellState
 
   // Attributions
   private String title;
@@ -70,17 +75,22 @@ public abstract class CellularAutomataAlgorithm {
 
   // Initializes an array representing the starting state of every cell in the simulation
   private void initializeCellConfig(String config) {
-    String[] configElements = config.split(" ");
+    String trimmedConfig = config.trim().replaceAll("\\s+", " ");
+    initialCellConfig = new CellState[numRows][numColumns];
+    String[] initialStates = trimmedConfig.split(" ");
+    CellState[] possibleStates = new CellState[0];
 
-    if (configElements.length != numColumns * numRows) {
-      throw new RuntimeException("StartingConfig is not the correct size!");
+    switch (simulationType) {
+      case CellularAutomataAlgorithm.GAME_OF_LIFE -> possibleStates = GameOfLifeState.values();
+      case CellularAutomataAlgorithm.PERCOLATION -> possibleStates = PercolationState.values();
+      case CellularAutomataAlgorithm.SCHELLING_SEGREGATION -> possibleStates = SchellingSegregationState.values();
+      case CellularAutomataAlgorithm.SPREADING_OF_FIRE -> possibleStates = SpreadingOfFireState.values();
+      case CellularAutomataAlgorithm.WATOR -> possibleStates = WaTorState.values();
     }
 
-    initialCellConfig = new int[numRows][numColumns];
-
-    for (int i = 0; i < numRows; i++) {
-      for (int j = 0; j < numColumns; j++) {
-        initialCellConfig[i][j] = Integer.parseInt(configElements[i + j]);
+    for (int i = 0; i < initialCellConfig.length; i++) {
+      for (int j = 0; j < initialCellConfig[0].length; j++) {
+        initialCellConfig[i][j] = possibleStates[Integer.parseInt(initialStates[i * initialCellConfig[0].length + j])];
       }
     }
   }
@@ -97,7 +107,7 @@ public abstract class CellularAutomataAlgorithm {
     return numColumns;
   }
 
-  protected int[][] getInitialCellConfig() {
+  protected CellState[][] getInitialCellConfig() {
     return initialCellConfig;
   }
 
