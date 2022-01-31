@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<CellAutomata>
+  <NumberOfRows>3</NumberOfRows>
+  <NumberOfColumns>3</NumberOfColumns>
+  <SimulationType>2</SimulationType>
+  <Title>Schelling Segregation</Title>
+  <Author>Edison Ooi, Matt Knox, Haris Adnan</Author>
+  <Description>Simulation of Schelling Segregation in which couples find each other</Description>
+  <StartingConfig>
+    1 0 2
+    0 0 0
+    1 0 2
+  </StartingConfig>
+  <Satisfaction>0.125</Satisfaction>
+</CellAutomata>

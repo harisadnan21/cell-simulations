@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<CellAutomata>
+  <NumberOfRows>5</NumberOfRows>
+  <NumberOfColumns>5</NumberOfColumns>
+  <SimulationType>2</SimulationType>
+  <Title>Schelling Segregation</Title>
+  <Author>Edison Ooi, Matt Knox, Haris Adnan</Author>
+  <Description>Simulation of Schelling Segregation where nobody will ever be satisfied</Description>
+  <StartingConfig>
+    1 2 1 2 1
+    2 1 2 1 2
+    1 2 1 2 1
+    2 1 2 1 2
+    1 2 1 2 1
+  </StartingConfig>
+  <Satisfaction>0.5</Satisfaction>
+</CellAutomata>
