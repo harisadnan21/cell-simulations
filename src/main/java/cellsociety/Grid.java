@@ -167,6 +167,12 @@ public class Grid {
 
   }
 
+  private boolean isGameOfLife() { return cells[0][0].getState() instanceof GameOfLifeState; }
+  private boolean isSpreadingOfFire() { return cells[0][0].getState() instanceof SpreadingOfFireState; }
+  private boolean isSchellingSegregationState() { return cells[0][0].getState() instanceof SchellingSegregationState; }
+  private boolean isWaTorState() { return cells[0][0].getState() instanceof WaTorState; }
+  private boolean isPercolationState() { return cells[0][0].getState() instanceof PercolationState; }
+
 
   public void update() {
     for(Cell[] cellArray: cells) {
@@ -176,7 +182,7 @@ public class Grid {
     }
   }
 
-  public void calculate() {
+  public void calculateNextStates() {
     for(Cell[] cellArray: cells) {
       for(Cell cell: cellArray) {
         CellState next = simtype.runAlgorithm(this,cell);
