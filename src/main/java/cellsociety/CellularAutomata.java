@@ -183,22 +183,16 @@ public class CellularAutomata implements EventHandler<ActionEvent> {
 
     gridView.updateCells(grid.getCells());
 
-
-
-
   }
 
   private void getParameter() {
-
   }
 
   private void setParameter() {
-
   }
 
   private void start() {
     runVal = true;
-
   }
 
   private void stop() {

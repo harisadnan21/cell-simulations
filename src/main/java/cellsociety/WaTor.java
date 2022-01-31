@@ -63,7 +63,9 @@ public class WaTor extends CellularAutomataAlgorithm {
   private CellState handleFishState(Grid g, Cell c) {
     WaTorState currentState = (WaTorState) c.getState();
     Fish resident = (Fish)c.getResident();
+
     resident.age();
+
     List<Cell> neighborList = new ArrayList<Cell>(c.getNeighbors());
     Collections.shuffle(neighborList);
     for(Cell neighbor: neighborList) {
