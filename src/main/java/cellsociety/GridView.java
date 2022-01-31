@@ -11,7 +11,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 public class GridView extends TilePane {
-  Rectangle[][] cellViews;
+  CellView[][] cellViews;
 
   public GridView(double width, double height, int numRows, int numColumns) {
     super();
@@ -19,7 +19,7 @@ public class GridView extends TilePane {
     setHeight(height);
     setPrefRows(numRows);
     setPrefColumns(numColumns);
-    cellViews = new Rectangle[numRows][numColumns];
+    cellViews = new CellView[numRows][numColumns];
     addCellsToGrid();
   }
 
@@ -31,18 +31,16 @@ public class GridView extends TilePane {
     }
   }
 
-  protected void updateCells(CellState[][] states) {
-    if(states.length != getPrefRows() || states[0].length != getPrefColumns()) {
+  protected void updateCells(Cell[][] cells) {
+    if(cells.length != getPrefRows() || cells[0].length != getPrefColumns()) {
       throw new RuntimeException("CellStates are not the correct size");
     }
 
-    for (int i = 0; i < states.length; i++) {
-      for (int j = 0; j < states[0].length; j++) {
-        cellViews[i][j].setFill(getFillColor(states[i][j]));
-        cellViews[i][j].setStroke(getStrokeColor(states[i][j]));
+    for (int i = 0; i < cells.length; i++) {
+      for (int j = 0; j < cells[0].length; j++) {
+        cellViews[i][j].updateFillAndStroke(cells[i][j].getState());
       }
     }
-
   }
 
 
