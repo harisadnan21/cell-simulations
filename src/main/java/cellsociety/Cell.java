@@ -7,21 +7,14 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 public class Cell {
-  private final Rectangle rect;
   private CellState currentState;
   private CellState nextState;
   private Collection<Cell> neighbors;
   private CellObject resident;
 
   public Cell(CellState initialState) {
-    rect = new Rectangle();
     currentState = initialState;
-//HEAD
     resident = setResident(initialState);
-  }
-
-  public Cell(double x, double y, double size, CellState initialState, double strokeWidth) {
-    this(x,y,size,size,initialState,strokeWidth);
   }
 
   private CellObject setResident(CellState initialState) {
@@ -49,17 +42,6 @@ public class Cell {
   public CellObject getResident() { return resident; }
 
   public void setResident(CellObject o) { resident = o; }
-=======
-    nextState = getNextState();
->>>>>>> master
-
-
-  }
-
-
-
-
-
 
   public void addNeighbors(Collection<Cell> neighbors) {
     this.neighbors = neighbors;
@@ -81,6 +63,4 @@ public class Cell {
   }
 
   public CellState getNextState() { return nextState; }
-
-  public Rectangle getRect() { return rect; }
 }
