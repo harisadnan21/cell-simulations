@@ -77,6 +77,7 @@ public class SpreadingOfFire extends CellularAutomataAlgorithm {
   private CellState handleTreeState(Cell c) {
     for (Cell neighbor : c.getNeighbors()) {
       if (neighbor.getState() == SpreadingOfFireState.Burning) {
+        System.out.println("It's burning!");
         if (Math.random() < probCatch) {
           return SpreadingOfFireState.Burning;
           //c.assignNextState(SpreadingOfFireState.Burning);

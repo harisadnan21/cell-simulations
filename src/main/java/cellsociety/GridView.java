@@ -5,13 +5,14 @@ import cellsociety.CellState.PercolationState;
 import cellsociety.CellState.SchellingSegregationState;
 import cellsociety.CellState.SpreadingOfFireState;
 import cellsociety.CellState.WaTorState;
+import javafx.geometry.Pos;
 import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 public class GridView extends TilePane {
-  CellView[][] cellViews;
+  private CellView[][] cellViews;
 
   public GridView(double width, double height, int numRows, int numColumns) {
     super();
@@ -19,6 +20,7 @@ public class GridView extends TilePane {
     setHeight(height);
     setPrefRows(numRows);
     setPrefColumns(numColumns);
+    setTileAlignment(Pos.TOP_LEFT);
     cellViews = new CellView[numRows][numColumns];
     addCellsToGrid();
   }
@@ -26,6 +28,7 @@ public class GridView extends TilePane {
   private void addCellsToGrid() {
     for (int i = 0; i < cellViews.length; i++) {
       for (int j = 0; j < cellViews[0].length; j++) {
+        cellViews[i][j] = new CellView();
         this.getChildren().add(cellViews[i][j]);
       }
     }

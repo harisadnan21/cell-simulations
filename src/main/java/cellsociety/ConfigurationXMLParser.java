@@ -43,9 +43,9 @@ public class ConfigurationXMLParser {
      */
     public SimulationData getSimulationData (File dataFile) throws XMLException {
         Element root = getRootElement(dataFile);
-        if (!isValidFile(root, SimulationData.DATA_TYPE)) {
-            throw new XMLException(ERROR_MESSAGE, SimulationData.DATA_TYPE);
-        }
+//        if (!isValidFile(root, SimulationData.DATA_TYPE)) {
+//            throw new XMLException(ERROR_MESSAGE, SimulationData.DATA_TYPE);
+//        }
         // read data associated with the fields given by the object
         Map<String, String> genericSimulationValues = new HashMap<>();
         for (String field : SimulationData.GENERIC_DATA_FIELDS) {
@@ -107,6 +107,8 @@ public class ConfigurationXMLParser {
         for(String key : keys) {
             params.put(key, getTextValue(root, key));
         }
+
+        return params;
     }
 
     // boilerplate code needed to make ANY DocumentBuilder

@@ -48,6 +48,7 @@ public class Cell {
   }
 
   public void assignNextState(CellState next) {
+    //System.out.println("Next state was assigned");
     nextState = next;
   }
 

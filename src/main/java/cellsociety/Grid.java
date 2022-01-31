@@ -20,6 +20,8 @@ public class Grid {
   public Grid(int numRows, int numColumns, CellState[][] initialStates, SimulationData data) {
 
 
+    System.out.println(initialStates[0].length);
+    System.out.println(initialStates.length);
     //make sure arguments are of correct length
     if(initialStates[0].length != numColumns) {
       throw new IllegalArgumentException("initialStates has an incorrect number of columns");
@@ -31,10 +33,11 @@ public class Grid {
     if(hasBadStates(initialStates))
       throw new IllegalArgumentException("initialStates is composed of multiple different kinds of states");
 
+    this.data = data;
     initializeCells(numRows, numColumns, initialStates);
     addNeighbors(numRows, numColumns);
     simtype = getSimulationType(cells[0][0].getState());
-    this.data = data;
+
   }
 
   private void initializeCells(double startingX, double startingY, int numRows, int numColumns, double width, double height, CellState[][] initialStates, double strokeWidth) {
@@ -173,6 +176,7 @@ public class Grid {
   public void update() {
     for(Cell[] cellArray: cells) {
       for(Cell cell: cellArray) {
+        calculateNextStates();
         cell.update();
       }
     }

@@ -7,6 +7,7 @@ import cellsociety.CellState.SchellingSegregationState;
 import cellsociety.CellState.SpreadingOfFireState;
 import cellsociety.CellState.WaTorState;
 import java.io.File;
+import java.util.Collection;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -45,6 +46,7 @@ public class CellularAutomata implements EventHandler<ActionEvent> {
   private CellularAutomataAlgorithm simtype;
 
   public CellularAutomata() {
+
   }
 
   protected Scene setUpSimulation(int width, int height, Paint background) {
@@ -57,15 +59,26 @@ public class CellularAutomata implements EventHandler<ActionEvent> {
     runVal = true;
     root = new Group();
 
+    // Initialize Grid and GridView with starting config
     CellState[][] initialStates = getInitialConfig(simulationData.startingConfig(),
         simulationData.numRows(), simulationData.numColumns(), simulationData.simulationType());
-    //TODO: pass in a record to the grid
-    Grid newgrid = new Grid(GRIDSTARTINGX, GRIDSTARTINGY, GIDROWS, GRIDCOLS, GRIDWIDTH,
-        GRIDHEIGHT, initialStates, GRIDSTROKEWIDTH, simulationData);
-    GridView gridView = new GridView(GRIDWIDTH, GRIDHEIGHT, simulationData.numRows(),
+
+    grid = new Grid(simulationData.numRows(), simulationData.numColumns(), initialStates, simulationData);
+    gridView = new GridView(width, height, simulationData.numRows(),
         simulationData.numColumns());
+    gridView.updateCells(grid.getCells());
+    gridView.setLayoutX(0);
+    gridView.setLayoutY(0);
 
     root.getChildren().add(gridView);
+
+//    switch(simulationData.simulationType()) {
+//      case CellularAutomataAlgorithm.GAME_OF_LIFE -> simulation = new GameOfLife(simulationData);
+//      case CellularAutomataAlgorithm.PERCOLATION -> simulation = new Percolation(simulationData);
+//      case CellularAutomataAlgorithm.SCHELLING_SEGREGATION -> simulation = new SchellingSegregation(simulationData);
+//      case CellularAutomataAlgorithm.SPREADING_OF_FIRE -> simulation = new SpreadingOfFire(simulationData);
+//      case CellularAutomataAlgorithm.WATOR -> simulation = new WaTor(simulationData);
+//    }
 
 //    startButton = new Button();
 //    stopButton = new Button();
@@ -125,6 +138,9 @@ public class CellularAutomata implements EventHandler<ActionEvent> {
 
     CellState[][] cellConfig = new CellState[numRows][numColumns];
     String[] initialStates = configString.split(" ");
+//    for(String s : initialStates) {
+//      System.out.println(s + " ");
+//    }
     CellState[] possibleStates = new CellState[0];
 
     switch (algorithmType) {
@@ -137,7 +153,7 @@ public class CellularAutomata implements EventHandler<ActionEvent> {
 
     for (int i = 0; i < cellConfig.length; i++) {
       for (int j = 0; j < cellConfig[0].length; j++) {
-        cellConfig[i][j] = possibleStates[Integer.parseInt(initialStates[i + j])];
+        cellConfig[i][j] = possibleStates[Integer.parseInt(initialStates[i * cellConfig[0].length + j])];
       }
     }
 

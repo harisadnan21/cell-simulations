@@ -5,7 +5,11 @@ import javafx.scene.shape.Rectangle;
 public class CellView extends Rectangle {
     private CellState currentState;
 
-    private CellView(double x, double y, double width, double height, CellState initialState, double strokeWidth) {
+    public CellView() {
+        super(50, 50);
+    }
+
+    public CellView(double x, double y, double width, double height, CellState initialState, double strokeWidth) {
 
         setX(x);
         setY(y);
