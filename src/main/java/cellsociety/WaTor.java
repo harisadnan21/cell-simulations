@@ -88,7 +88,9 @@ public class WaTor extends CellularAutomataAlgorithm {
   private CellState handleSharkState(Grid  g,  Cell c) {
     WaTorState currentState = (WaTorState) c.getState();
     Shark resident = (Shark)c.getResident();
+
     resident.age();
+
     if(resident.isDead()) {
       c.setResident(null);
       return WaTorState.Empty;

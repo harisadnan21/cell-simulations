@@ -15,6 +15,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
@@ -70,7 +71,7 @@ public class CellularAutomata implements EventHandler<ActionEvent> {
     gridView.setLayoutX(0);
     gridView.setLayoutY(0);
 
-    root.getChildren().add(gridView);
+    //root.getChildren().add(gridView);
 
 //    switch(simulationData.simulationType()) {
 //      case CellularAutomataAlgorithm.GAME_OF_LIFE -> simulation = new GameOfLife(simulationData);
@@ -121,7 +122,7 @@ public class CellularAutomata implements EventHandler<ActionEvent> {
 //    root.getChildren().add(loadButton);
 //    root.getChildren().add(saveButton);
 
-    scene = new Scene(root, width, height, background);
+    scene = new Scene(new HBox(gridView), width, height, background);
 
     //setting up the animation
     Timeline animation = new Timeline();

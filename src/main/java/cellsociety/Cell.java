@@ -65,8 +65,6 @@ public class Cell {
 
   public CellState getNextState() { return nextState; }
 
-  public Rectangle getRect() { return rect; }
-
   public void moveResidentTo(Cell c) {
     c.setResident(resident);
     resident = null;

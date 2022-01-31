@@ -6,7 +6,7 @@ public class CellView extends Rectangle {
     private CellState currentState;
 
     public CellView() {
-        super(50, 50);
+        super();
     }
 
     public CellView(double x, double y, double width, double height, CellState initialState, double strokeWidth) {

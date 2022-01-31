@@ -195,6 +195,4 @@ public class Grid {
     return this.cells;
   }
 
-  public Cell[][] getCells() {return cells; }
-
 }
