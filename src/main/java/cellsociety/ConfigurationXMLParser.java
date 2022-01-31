@@ -107,6 +107,7 @@ public class ConfigurationXMLParser {
         for(String key : keys) {
             params.put(key, getTextValue(root, key));
         }
+        return params;
     }
 
     // boilerplate code needed to make ANY DocumentBuilder
