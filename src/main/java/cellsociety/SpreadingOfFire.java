@@ -46,53 +46,57 @@ public class SpreadingOfFire extends CellularAutomataAlgorithm {
   }
 
   @Override
-  public CellState runAlgorithm(Grid g, Cell c) {
+  public void runAlgorithm(Grid g) {
+    for(Cell[] cellArray: g.getCells()) {
+      for(Cell c: cellArray) {
+        updateCell(c);
+      }
+    }
+  }
+
+  private void updateCell(Cell c) {
     CellState currentState = c.getState();
 
     switch ((SpreadingOfFireState) currentState) {
       case Empty:
-        return handleEmptyState(c);
+        handleEmptyState(c);
       case Tree:
-        return handleTreeState(c);
+        handleTreeState(c);
       case Burning:
-        return handleBurningState(c);
+        handleBurningState(c);
     }
-    //c.assignNextState(c.getState());
-    return c.getState();
+    c.assignNextState(c.getState());
   }
 
   // If cell is empty, it has a chance of becoming a tree
-  private CellState handleEmptyState(Cell c) {
+  private void handleEmptyState(Cell c) {
     if (Math.random() < probGeneration) {
-      return SpreadingOfFireState.Tree;
-      //c.assignNextState(SpreadingOfFireState.Tree);
+      c.assignNextState(SpreadingOfFireState.Tree);
     } else {
-      return SpreadingOfFireState.Empty;
-      //c.assignNextState(SpreadingOfFireState.Empty);
+      c.assignNextState(SpreadingOfFireState.Empty);
     }
-    //return c.getNextState();
   }
 
   // If cell is a tree, it has a chance of burning if any of its neighbors are burning
-  private CellState handleTreeState(Cell c) {
+  private void handleTreeState(Cell c) {
     for (Cell neighbor : c.getNeighbors()) {
       if (neighbor.getState() == SpreadingOfFireState.Burning) {
         System.out.println("It's burning!");
         if (Math.random() < probCatch) {
-          return SpreadingOfFireState.Burning;
-          //c.assignNextState(SpreadingOfFireState.Burning);
+          //return SpreadingOfFireState.Burning;
+          c.assignNextState(SpreadingOfFireState.Burning);
           //return c.getNextState();
         }
       }
     }
-    return SpreadingOfFireState.Tree;
-    //c.assignNextState(SpreadingOfFireState.Tree);
+    //return SpreadingOfFireState.Tree;
+    c.assignNextState(SpreadingOfFireState.Tree);
     //return c.getNextState();
   }
 
   // If cell is burning, it remains burning
-  private CellState handleBurningState(Cell c) {
-    //c.assignNextState(SpreadingOfFireState.Burning);
-    return SpreadingOfFireState.Burning;
+  private void handleBurningState(Cell c) {
+    c.assignNextState(SpreadingOfFireState.Burning);
+    //return SpreadingOfFireState.Burning;
   }
 }

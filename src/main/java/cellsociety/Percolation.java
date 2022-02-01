@@ -31,23 +31,35 @@ public class Percolation extends CellularAutomataAlgorithm {
   }
 
   @Override
-  public CellState runAlgorithm(Grid g, Cell c) {
+  public void runAlgorithm(Grid g) {
+    for(Cell[] cellarray: g.getCells()) {
+      for(Cell c: cellarray) {
+        updateCell(c);
+      }
+    }
+  }
+
+  private void updateCell(Cell c) {
     PercolationState currentState = (PercolationState) c.getState();
 
     switch(currentState) {
       case Open -> {
         if(hasPercolatedNeighbor(c)) {
-          return PercolationState.Percolated;
+          c.assignNextState(PercolationState.Percolated);
+          //return PercolationState.Percolated;
         } else {
-          return PercolationState.Open;
+          c.assignNextState(PercolationState.Open);
+          //return PercolationState.Open;
         }
       } case Percolated -> {
-        return PercolationState.Percolated;
+        c.assignNextState(PercolationState.Percolated);
+        //return PercolationState.Percolated;
       } case Blocked -> {
-        return PercolationState.Blocked;
+        c.assignNextState(PercolationState.Blocked);
+        //return PercolationState.Blocked;
       }
     }
-    return null;
+    //return null;
   }
 
   private boolean hasPercolatedNeighbor(Cell c) {

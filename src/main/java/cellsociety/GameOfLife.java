@@ -31,7 +31,15 @@ public class GameOfLife extends CellularAutomataAlgorithm {
   }
 
   @Override
-  public CellState runAlgorithm(Grid g, Cell c) {
+  public void runAlgorithm(Grid g) {
+    for(Cell[] cellArray: g.getCells()) {
+      for(Cell c: cellArray) {
+        updateCell(c);
+      }
+    }
+  }
+
+  private void updateCell(Cell c) {
     GameOfLifeState currentState = (GameOfLifeState) c.getState();
     Collection<Cell> neighbors = c.getNeighbors();
 
@@ -46,15 +54,20 @@ public class GameOfLife extends CellularAutomataAlgorithm {
 
     switch(currentState) {
       case Dead -> {
-        if(liveCount == 3) return GameOfLifeState.Live;
-        return GameOfLifeState.Dead;
+        if(liveCount == 3) {
+          c.assignNextState(GameOfLifeState.Live);
+        } else {
+          c.assignNextState(GameOfLifeState.Dead);
+        }
       }
       case Live -> {
-        if(liveCount == 2 || liveCount == 3) return GameOfLifeState.Live;
-        return GameOfLifeState.Dead;
+        if(liveCount == 2 || liveCount == 3) {
+          c.assignNextState(GameOfLifeState.Live);
+        } else {
+          c.assignNextState(GameOfLifeState.Dead);
+        }
       }
     }
-    return null;
   }
 
 }
