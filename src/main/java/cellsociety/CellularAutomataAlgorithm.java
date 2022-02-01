@@ -71,7 +71,7 @@ public abstract class CellularAutomataAlgorithm {
    */
   protected abstract void checkSimulationParameters();
 
-  public abstract CellState runAlgorithm(Grid g, Cell c);
+  public abstract void runAlgorithm(Grid g);
 
   // Initializes an array representing the starting state of every cell in the simulation
   private void initializeCellConfig(String config) {
