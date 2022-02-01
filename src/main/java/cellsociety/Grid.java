@@ -183,12 +183,15 @@ public class Grid {
   }
 
   public void calculateNextStates() {
+    simtype.runAlgorithm(this);
+    /*
     for(Cell[] cellArray: cells) {
       for(Cell cell: cellArray) {
         CellState next = simtype.runAlgorithm(this,cell);
         cell.assignNextState(next);
       }
     }
+     */
   }
 
   public Cell[][] getCells() {
