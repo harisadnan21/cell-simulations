@@ -60,10 +60,13 @@ public class SpreadingOfFire extends CellularAutomataAlgorithm {
     switch ((SpreadingOfFireState) currentState) {
       case Empty:
         handleEmptyState(c);
+        return;
       case Tree:
         handleTreeState(c);
+        return;
       case Burning:
         handleBurningState(c);
+        return;
     }
     c.assignNextState(c.getState());
   }
@@ -85,6 +88,7 @@ public class SpreadingOfFire extends CellularAutomataAlgorithm {
         if (Math.random() < probCatch) {
           //return SpreadingOfFireState.Burning;
           c.assignNextState(SpreadingOfFireState.Burning);
+          return;
           //return c.getNextState();
         }
       }
