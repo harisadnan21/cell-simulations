@@ -9,6 +9,7 @@ public class Shark extends CellObject{
   public Shark(int refractoryPeriod, int energyInFood) {
     this.energyInFood = energyInFood;
     this.refractoryPeriod = refractoryPeriod;
+    energy = 5;
   }
 
   public void age() { energy--; timeSinceSex++; }
@@ -16,4 +17,14 @@ public class Shark extends CellObject{
   public void eat() { energy += energyInFood; }
   public boolean canReproduce() { return timeSinceSex >= refractoryPeriod; }
   public void reproduce() { timeSinceSex = 0; }
+
+  @Override
+  public boolean isFish() {
+    return false;
+  }
+
+  @Override
+  public boolean isShark() {
+    return true;
+  }
 }
