@@ -176,7 +176,7 @@ public class Grid {
   public void update() {
     for(Cell[] cellArray: cells) {
       for(Cell cell: cellArray) {
-        calculateNextStates();
+        //calculateNextStates();
         cell.update();
       }
     }
