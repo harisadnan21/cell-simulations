@@ -141,6 +141,7 @@ public class CellularAutomata implements EventHandler<ActionEvent> {
     //
     //System.out.println("working");
 
+    grid.calculateNextStates();
     grid.update();
 //    Cell[][] currentCells = grid.getCells();
 //    for(int i = 0; i<currentCells.length; i++){
