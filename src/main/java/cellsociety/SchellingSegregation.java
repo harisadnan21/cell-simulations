@@ -53,31 +53,27 @@ public class SchellingSegregation extends CellularAutomataAlgorithm {
    */
   @Override
   public void runAlgorithm(Grid g) {
-    for(Cell[] cellArray: g.getCells()) {
-      for(Cell c: cellArray) {
-        SchellingSegregationState currentState = (SchellingSegregationState) c.getState();
-        if(currentState != SchellingSegregationState.Empty) {
-          if(!isSatisfied(c)) {
-            Cell nextLocation = findEmptyCell(g);
-            if(nextLocation == null) { //no new location has been found
-              c.assignNextState(currentState);
-            } else { //new location found
-              c.assignNextState(SchellingSegregationState.Empty);
-              nextLocation.assignNextState(currentState);
-            }
-          } else { //location is satisfied
-            c.assignNextState(c.getState());
+    for(Cell c: g.getCells()) {
+      SchellingSegregationState currentState = (SchellingSegregationState) c.getState();
+      if(currentState != SchellingSegregationState.Empty) {
+        if(!isSatisfied(c)) {
+          Cell nextLocation = findEmptyCell(g);
+          if(nextLocation == null) { //no new location has been found
+            c.assignNextState(currentState);
+          } else { //new location found
+            c.assignNextState(SchellingSegregationState.Empty);
+            nextLocation.assignNextState(currentState);
           }
+        } else { //location is satisfied
+          c.assignNextState(c.getState());
         }
       }
     }
-    for(Cell[] cellArray: g.getCells()) {
-      for(Cell c: cellArray) {
-        SchellingSegregationState currentState = (SchellingSegregationState) c.getState();
-        if(currentState == SchellingSegregationState.Empty) {
-          if(c.getNextState() == null) {
-            c.assignNextState(SchellingSegregationState.Empty);
-          }
+    for(Cell c: g.getCells()) {
+      SchellingSegregationState currentState = (SchellingSegregationState) c.getState();
+      if(currentState == SchellingSegregationState.Empty) {
+        if(c.getNextState() == null) {
+          c.assignNextState(SchellingSegregationState.Empty);
         }
       }
     }
@@ -140,12 +136,9 @@ public class SchellingSegregation extends CellularAutomataAlgorithm {
   //If a cell is empty, it's state is empty
   //If it has not been assigned yet, it's next state is null
   private Cell findEmptyCell(Grid g) {
-    Cell[][] allCells = g.getCells();
-    for(Cell[] cellArray: allCells) {
-      for(Cell c: cellArray) {
-        if(c.getState() == SchellingSegregationState.Empty && c.getNextState() == null) //found empty cell
-          return c;
-      }
+    for(Cell c: g.getCells()) {
+      if(c.getState() == SchellingSegregationState.Empty && c.getNextState() == null) //found empty cell
+        return c;
     }
     return null;
   }

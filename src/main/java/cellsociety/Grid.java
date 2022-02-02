@@ -194,8 +194,14 @@ public class Grid {
      */
   }
 
-  public Cell[][] getCells() {
-    return this.cells;
+  public Collection<Cell> getCells() {
+    Collection<Cell> allCells = new HashSet<>();
+    for(Cell[] cellArray: cells) {
+      for(Cell c: cellArray) {
+        allCells.add(c);
+      }
+    }
+    return allCells;
   }
 
 }
