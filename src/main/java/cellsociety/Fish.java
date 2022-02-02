@@ -11,4 +11,13 @@ public class Fish extends CellObject{
   public boolean canReproduce() { return timeSinceSex >= refractoryPeriod; }
   public void reproduce() { timeSinceSex = 0; }
 
+  @Override
+  public boolean isFish() {
+    return true;
+  }
+
+  @Override
+  public boolean isShark() {
+    return false;
+  }
 }
