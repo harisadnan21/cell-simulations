@@ -28,7 +28,7 @@ public class GridView extends TilePane {
   private void addCellsToGrid(double width, double height, int numRows, int numColumns) {
     for (int i = 0; i < cellViews.length; i++) {
       for (int j = 0; j < cellViews[0].length; j++) {
-        cellViews[i][j] = new CellView((width - 5) / numRows, (height - 5) / numColumns);
+        cellViews[i][j] = new CellView((width / 1.2) / numRows, (height / 1.2) / numColumns);
         this.getChildren().add(cellViews[i][j]);
       }
     }
