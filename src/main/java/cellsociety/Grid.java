@@ -66,74 +66,12 @@ public class Grid {
   }
 
   private void addNeighbors(int numRows, int numColumns) {
-    //add corner cell neighbors
-    //top left corner
-    cells[0][0].addNeighbors(new HashSet<>(Arrays.asList(
-        cells[0][1],
-        cells[1][0],
-        cells[1][1])));
-    //top right corner
-    cells[0][numColumns -1].addNeighbors(new HashSet<>(Arrays.asList(
-        cells[0][numColumns -2],
-        cells[1][numColumns -1],
-        cells[1][numColumns -2])));
-    //bottom left corner
-    cells[numRows -1][0].addNeighbors(new HashSet<>(Arrays.asList(
-        cells[numRows -2][0],
-        cells[numRows -1][1],
-        cells[numRows -2][1])));
-    //bottom right corner
-    cells[numRows -1][numColumns -1].addNeighbors(new HashSet<>(Arrays.asList(
-        cells[numRows -2][numColumns -2],
-        cells[numRows -2][numColumns -1],
-        cells[numRows -1][numColumns -2])));
+    addCornerNeighbors(numRows, numColumns);
+    addEdgeNeighbors(numRows, numColumns);
+    addInnerNeighbors(numRows, numColumns);
+  }
 
-    //add edge cell neighbors
-    //left column
-    for(int i = 1; i < numRows -1; i++) {
-      int j = 0;
-      cells[i][j].addNeighbors(new HashSet<>(Arrays.asList(
-          cells[i-1][j],
-          cells[i+1][j],
-          cells[i-1][j+1],
-          cells[i][j+1],
-          cells[i+1][j+1])));
-    }
-
-    //right column
-    for(int i = 1; i < numRows -1; i++) {
-      int j = numColumns - 1;
-      cells[i][j].addNeighbors(new HashSet<>(Arrays.asList(
-          cells[i-1][j],
-          cells[i+1][j],
-          cells[i-1][j-1],
-          cells[i][j-1],
-          cells[i+1][j-1])));
-    }
-
-    //top row
-    for(int j = 1; j < numColumns -1; j++) {
-      int i = 0;
-      cells[i][j].addNeighbors(new HashSet<>(Arrays.asList(
-          cells[i][j-1],
-          cells[i][j+1],
-          cells[i+1][j-1],
-          cells[i+1][j],
-          cells[i+1][j+1])));
-    }
-
-    // bottom row
-    for(int j = 1; j < numColumns -1; j++) {
-      int i = numRows - 1;
-      cells[i][j].addNeighbors(new HashSet<>(Arrays.asList(
-          cells[i][j-1],
-          cells[i][j+1],
-          cells[i-1][j-1],
-          cells[i-1][j],
-          cells[i-1][j+1])));
-    }
-
-    //add inner cell neighbors
+  private void addInnerNeighbors(int numRows, int numColumns) {
     for(int i = 1; i < numRows - 1; i++) {
       for(int j = 1; j < numColumns - 1; j++) {
         cells[i][j].addNeighbors(new HashSet<>(Arrays.asList(
@@ -147,6 +85,96 @@ public class Grid {
             cells[i-1][j-1])));
       }
     }
+  }
+
+  private void addEdgeNeighbors(int numRows, int numColumns) {
+    addLeftColumnNeighbors(numRows);
+    addRightColumnNeighbors(numRows, numColumns);
+    addTopRowNeighbors(numColumns);
+    addBottomRowNeighbors(numRows, numColumns);
+  }
+
+  private void addBottomRowNeighbors(int numRows, int numColumns) {
+    for(int j = 1; j < numColumns -1; j++) {
+      int i = numRows - 1;
+      cells[i][j].addNeighbors(new HashSet<>(Arrays.asList(
+          cells[i][j-1],
+          cells[i][j+1],
+          cells[i-1][j-1],
+          cells[i-1][j],
+          cells[i-1][j+1])));
+    }
+  }
+
+  private void addTopRowNeighbors(int numColumns) {
+    for(int j = 1; j < numColumns -1; j++) {
+      int i = 0;
+      cells[i][j].addNeighbors(new HashSet<>(Arrays.asList(
+          cells[i][j-1],
+          cells[i][j+1],
+          cells[i+1][j-1],
+          cells[i+1][j],
+          cells[i+1][j+1])));
+    }
+  }
+
+  private void addRightColumnNeighbors(int numRows, int numColumns) {
+    for(int i = 1; i < numRows -1; i++) {
+      int j = numColumns - 1;
+      cells[i][j].addNeighbors(new HashSet<>(Arrays.asList(
+          cells[i-1][j],
+          cells[i+1][j],
+          cells[i-1][j-1],
+          cells[i][j-1],
+          cells[i+1][j-1])));
+    }
+  }
+
+  private void addLeftColumnNeighbors(int numRows) {
+    for(int i = 1; i < numRows -1; i++) {
+      int j = 0;
+      cells[i][j].addNeighbors(new HashSet<>(Arrays.asList(
+          cells[i-1][j],
+          cells[i+1][j],
+          cells[i-1][j+1],
+          cells[i][j+1],
+          cells[i+1][j+1])));
+    }
+  }
+
+  private void addCornerNeighbors(int numRows, int numColumns) {
+    addTopLeftCornerNeighbors();
+    addTopRightCornerNeighbors(numColumns);
+    addBottomLeftCornerNeighbors(numRows);
+    addBottomRightCornerNeighbors(numRows, numColumns);
+  }
+
+  private void addBottomRightCornerNeighbors(int numRows, int numColumns) {
+    cells[numRows -1][numColumns -1].addNeighbors(new HashSet<>(Arrays.asList(
+        cells[numRows -2][numColumns -2],
+        cells[numRows -2][numColumns -1],
+        cells[numRows -1][numColumns -2])));
+  }
+
+  private void addBottomLeftCornerNeighbors(int numRows) {
+    cells[numRows -1][0].addNeighbors(new HashSet<>(Arrays.asList(
+        cells[numRows -2][0],
+        cells[numRows -1][1],
+        cells[numRows -2][1])));
+  }
+
+  private void addTopRightCornerNeighbors(int numColumns) {
+    cells[0][numColumns -1].addNeighbors(new HashSet<>(Arrays.asList(
+        cells[0][numColumns -2],
+        cells[1][numColumns -1],
+        cells[1][numColumns -2])));
+  }
+
+  private void addTopLeftCornerNeighbors() {
+    cells[0][0].addNeighbors(new HashSet<>(Arrays.asList(
+        cells[0][1],
+        cells[1][0],
+        cells[1][1])));
   }
 
   private CellularAutomataAlgorithm getSimulationType(CellState initialState) {
