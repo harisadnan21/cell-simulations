@@ -40,8 +40,8 @@ public class CellularAutomata implements EventHandler<ActionEvent> {
   private Button slowDown;
   private Button loadButton;
   private Button saveButton;
-  public static int FRAMES_PER_SECOND = 1;
-  public static double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
+  private int FRAMES_PER_SECOND = 1;
+  private double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
   private boolean runVal;
   private CellularAutomataAlgorithm simulation;
   private Grid grid;
