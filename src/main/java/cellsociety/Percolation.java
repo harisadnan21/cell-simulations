@@ -32,8 +32,10 @@ public class Percolation extends CellularAutomataAlgorithm {
 
   @Override
   public void runAlgorithm(Grid g) {
-    for(Cell c: g.getCells()) {
-      updateCell(c);
+    for(Cell[] cellarray: g.getCells()) {
+      for(Cell c: cellarray) {
+        updateCell(c);
+      }
     }
   }
 
