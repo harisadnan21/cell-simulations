@@ -41,30 +41,12 @@ public class SchellingSegregation extends CellularAutomataAlgorithm {
   public void runAlgorithm(Grid g) {
     for(Cell[] cellArray: g.getCells()) {
       for(Cell c: cellArray) {
-        SchellingSegregationState currentState = (SchellingSegregationState) c.getState();
-        if(currentState != SchellingSegregationState.Empty) {
-          if(!isSatisfied(c)) {
-            Cell nextLocation = findEmptyCell(g);
-            if(nextLocation == null) { //no new location has been found
-              c.assignNextState(currentState);
-            } else { //new location found
-              c.assignNextState(SchellingSegregationState.Empty);
-              nextLocation.assignNextState(currentState);
-            }
-          } else { //location is satisfied
-            c.assignNextState(c.getState());
-          }
-        }
+        assignAgentsNextState(g, c);
       }
     }
     for(Cell[] cellArray: g.getCells()) {
       for(Cell c: cellArray) {
-        SchellingSegregationState currentState = (SchellingSegregationState) c.getState();
-        if(currentState == SchellingSegregationState.Empty) {
-          if(c.getNextState() == null) {
-            c.assignNextState(SchellingSegregationState.Empty);
-          }
-        }
+        assignEmptyNextState(c);
       }
     }
     /*
@@ -75,6 +57,32 @@ public class SchellingSegregation extends CellularAutomataAlgorithm {
     }
      */
 
+  }
+
+  private void assignEmptyNextState(Cell c) {
+    SchellingSegregationState currentState = (SchellingSegregationState) c.getState();
+    if(currentState == SchellingSegregationState.Empty) {
+      if(c.getNextState() == null) {
+        c.assignNextState(SchellingSegregationState.Empty);
+      }
+    }
+  }
+
+  private void assignAgentsNextState(Grid g, Cell c) {
+    SchellingSegregationState currentState = (SchellingSegregationState) c.getState();
+    if(currentState != SchellingSegregationState.Empty) {
+      if(!isSatisfied(c)) {
+        Cell nextLocation = findEmptyCell(g);
+        if(nextLocation == null) { //no new location has been found
+          c.assignNextState(currentState);
+        } else { //new location found
+          c.assignNextState(SchellingSegregationState.Empty);
+          nextLocation.assignNextState(currentState);
+        }
+      } else { //location is satisfied
+        c.assignNextState(c.getState());
+      }
+    }
   }
 
   /*
