@@ -120,8 +120,44 @@ public class WaTor extends CellularAutomataAlgorithm {
   public void runAlgorithm(Grid g) {
     // find out where each resident will go
     Map<Cell, Set<CellObject>> locations = createLocations(g); //maps cells to their new resident
+    manageSharkFishConflicts(locations);
+    manageSharkDeath(locations);
+    assignNextStates(locations);
 
-    // manage shark and fish conflicts
+
+  }
+
+  private void assignNextStates(Map<Cell, Set<CellObject>> locations) {
+    for(Cell c: locations.keySet()) {
+      Set<CellObject> location = locations.get(c);
+      if(location.isEmpty()) {
+        c.assignNextState(WaTorState.Empty);
+        continue;
+      }
+      for(CellObject resident: location) {
+        if(resident.isShark()) {
+          c.assignNextState(WaTorState.Shark);
+        } else if (resident.isFish()) {
+          c.assignNextState(WaTorState.Fish);
+        }
+      }
+    }
+  }
+
+  private void manageSharkDeath(Map<Cell, Set<CellObject>> locations) {
+    for(Set<CellObject> location: locations.values()) {
+      for(CellObject resident: location) {
+        if(resident.isShark()) {
+          Shark r = (Shark) resident;
+          if(r.isDead()) {
+            location.remove(resident);
+          }
+        }
+      }
+    }
+  }
+
+  private void manageSharkFishConflicts(Map<Cell, Set<CellObject>> locations) {
     for(Set<CellObject> location: locations.values()) {
       if(location.size() >= 2) {
         System.out.printf("New locations has a size of %d.\n",location.size());
@@ -138,73 +174,6 @@ public class WaTor extends CellularAutomataAlgorithm {
         location.removeAll(fishToRemove);
       }
     }
-
-    //check if sharks die, remove them if necessary
-    for(Set<CellObject> location: locations.values()) {
-      for(CellObject resident: location) {
-        if(resident.isShark()) {
-          Shark r = (Shark) resident;
-          if(r.isDead()) {
-            location.remove(resident);
-          }
-        }
-      }
-    }
-
-    // assign new states
-    for(Cell c: locations.keySet()) {
-      Set<CellObject> location = locations.get(c);
-      if(location.isEmpty()) {
-        c.assignNextState(WaTorState.Empty);
-        continue;
-      }
-      for(CellObject resident: location) {
-        if(resident.isShark()) {
-          c.assignNextState(WaTorState.Shark);
-        } else if (resident.isFish()) {
-          c.assignNextState(WaTorState.Fish);
-        }
-      }
-    }
-
-    // chec
-
-    /*
-    for(Cell[] cellArray: g.getCells()) {
-      for(Cell c: cellArray) {
-        WaTorState currentState = (WaTorState) c.getState();
-        switch(currentState) {
-          case Fish -> {
-            CellObject r = c.getResident();
-            boolean isAlive = r.isFish();
-            if (isAlive) { //the fish was not eaten
-              Fish resident = (Fish) c.getResident();
-              Cell nextLocation = findNextFishNeighbor(c);
-            } else { //the fish was eaten
-
-            }
-
-
-          }
-          case Shark -> {
-
-          }
-        }
-      }
-    }
-
-     */
-
-    /*
-    switch((WaTorState)c.getState()) {
-      case Fish -> { return handleFishState(g,c); }
-      case Shark -> { return handleSharkState(g,c); }
-      case Empty -> { return handleEmptyState(g,c); }
-    }
-
-    return null;
-
-     */
   }
 
   private Cell findEmptyNeighbor(Cell c) {
