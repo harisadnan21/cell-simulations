@@ -1,5 +1,12 @@
 package cellsociety;
 
+import cellsociety.Model.CellularAutomataAlgorithm;
+import cellsociety.Model.GameOfLife;
+import cellsociety.Model.Percolation;
+import cellsociety.Model.SchellingSegregation;
+import cellsociety.Model.SimulationData;
+import cellsociety.Model.SpreadingOfFire;
+import cellsociety.Model.WaTor;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
@@ -11,7 +18,6 @@ import java.util.HashMap;
 import java.util.Map;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 

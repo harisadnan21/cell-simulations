@@ -1,13 +1,16 @@
 package cellsociety;
 
 
-import cellsociety.CellState.GameOfLifeState;
-import cellsociety.CellState.PercolationState;
-import cellsociety.CellState.SchellingSegregationState;
-import cellsociety.CellState.SpreadingOfFireState;
-import cellsociety.CellState.WaTorState;
+import cellsociety.Model.CellularAutomataAlgorithm;
+import cellsociety.Model.GameOfLife;
+import cellsociety.Model.Grid;
+import cellsociety.Model.Percolation;
+import cellsociety.Model.SchellingSegregation;
+import cellsociety.Model.SimulationData;
+import cellsociety.Model.SpreadingOfFire;
+import cellsociety.Model.WaTor;
+import cellsociety.View.GridView;
 import java.io.File;
-import java.util.Collection;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -17,10 +20,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
-public class CellularAutomata implements EventHandler<ActionEvent> {
+public class CellularAutomata{
 
   private Scene scene;
   private Group root;
@@ -40,8 +42,8 @@ public class CellularAutomata implements EventHandler<ActionEvent> {
   private Button slowDown;
   private Button loadButton;
   private Button saveButton;
-  private int FRAMES_PER_SECOND = 1;
-  private double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
+  private final int FRAMES_PER_SECOND = 1;
+  private final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
   private boolean runVal;
   private CellularAutomataAlgorithm simulation;
   private Grid grid;
@@ -161,53 +163,53 @@ public class CellularAutomata implements EventHandler<ActionEvent> {
 
   }
 
-  private void getParameter() {
-  }
+//  private void getParameter() {
+//  }
+//
+//  private void setParameter() {
+//  }
+//
+//  private void start() {
+//    runVal = true;
+//  }
+//
+//  private void stop() {
+//    runVal = false;
+//  }
+//
+//  private void save() {
+//    stop();
+//    //reverse of creating grid from parsed file
+//  }
+//
+//  private void load() {
+//    stop();
+//    setUpSimulation(Main.SIZE, Main.SIZE, Main.BACKGROUND);
+//
+//  }
+//
+//  private void speedUp() {
+//    FRAMES_PER_SECOND += 20;
+//  }
+//
+//  private void slowDown() {
+//    FRAMES_PER_SECOND -= 20;
+//  }
 
-  private void setParameter() {
-  }
-
-  private void start() {
-    runVal = true;
-  }
-
-  private void stop() {
-    runVal = false;
-  }
-
-  private void save() {
-    stop();
-    //reverse of creating grid from parsed file
-  }
-
-  private void load() {
-    stop();
-    setUpSimulation(Main.SIZE, Main.SIZE, Main.BACKGROUND);
-
-  }
-
-  private void speedUp() {
-    FRAMES_PER_SECOND += 20;
-  }
-
-  private void slowDown() {
-    FRAMES_PER_SECOND -= 20;
-  }
-
-  @Override
-  public void handle(ActionEvent actionEvent) {
-    if (actionEvent.getSource() == startButton) {
-      start();
-    } else if (actionEvent.getSource() == stopButton) {
-      stop();
-    } else if (actionEvent.getSource() == speedUp) {
-      speedUp();
-    } else if (actionEvent.getSource() == slowDown) {
-      slowDown();
-    } else if (actionEvent.getSource() == loadButton) {
-      load();
-    } else if (actionEvent.getSource() == saveButton) {
-      save();
-    }
-  }
+//  @Override
+//  public void handle(ActionEvent actionEvent) {
+//    if (actionEvent.getSource() == startButton) {
+//      start();
+//    } else if (actionEvent.getSource() == stopButton) {
+//      stop();
+//    } else if (actionEvent.getSource() == speedUp) {
+//      speedUp();
+//    } else if (actionEvent.getSource() == slowDown) {
+//      slowDown();
+//    } else if (actionEvent.getSource() == loadButton) {
+//      load();
+//    } else if (actionEvent.getSource() == saveButton) {
+//      save();
+//    }
+//  }
 }

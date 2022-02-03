@@ -1,14 +1,13 @@
-package cellsociety;
+package cellsociety.Model;
 
+import cellsociety.CellState;
 import cellsociety.CellState.GameOfLifeState;
 import cellsociety.CellState.PercolationState;
 import cellsociety.CellState.SchellingSegregationState;
 import cellsociety.CellState.SpreadingOfFireState;
 import cellsociety.CellState.WaTorState;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashSet;
-import javafx.scene.shape.Rectangle;
 
 public class Grid {
 

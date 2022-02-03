@@ -1,5 +1,7 @@
-package cellsociety;
+package cellsociety.View;
 
+import cellsociety.Model.Cell;
+import cellsociety.CellState;
 import cellsociety.CellState.GameOfLifeState;
 import cellsociety.CellState.PercolationState;
 import cellsociety.CellState.SchellingSegregationState;
@@ -9,7 +11,6 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
 
 public class GridView extends TilePane {
   private CellView[][] cellViews;
@@ -34,7 +35,7 @@ public class GridView extends TilePane {
     }
   }
 
-  protected void updateCells(Cell[][] cells) {
+  public void updateCells(Cell[][] cells) {
     if(cells.length != getPrefRows() || cells[0].length != getPrefColumns()) {
       throw new RuntimeException("CellStates are not the correct size");
     }

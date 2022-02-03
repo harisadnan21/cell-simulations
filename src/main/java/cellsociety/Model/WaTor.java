@@ -1,10 +1,10 @@
-package cellsociety;
+package cellsociety.Model;
 
 
-import cellsociety.CellState.GameOfLifeState;
+import cellsociety.CellObject;
+import cellsociety.CellState;
 import cellsociety.CellState.WaTorState;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;

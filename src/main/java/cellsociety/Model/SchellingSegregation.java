@@ -1,9 +1,7 @@
-package cellsociety;
+package cellsociety.Model;
 
 
-import cellsociety.CellState.GameOfLifeState;
 import cellsociety.CellState.SchellingSegregationState;
-import cellsociety.CellState.WaTorState;
 import java.util.List;
 import java.util.Map;
 

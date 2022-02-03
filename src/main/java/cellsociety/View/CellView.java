@@ -1,5 +1,6 @@
-package cellsociety;
+package cellsociety.View;
 
+import cellsociety.CellState;
 import javafx.scene.shape.Rectangle;
 
 /**

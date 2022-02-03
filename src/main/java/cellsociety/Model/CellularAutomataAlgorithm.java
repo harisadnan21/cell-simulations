@@ -1,5 +1,6 @@
-package cellsociety;
+package cellsociety.Model;
 
+import cellsociety.CellState;
 import cellsociety.CellState.GameOfLifeState;
 import cellsociety.CellState.PercolationState;
 import cellsociety.CellState.SchellingSegregationState;
@@ -117,7 +118,7 @@ public abstract class CellularAutomataAlgorithm {
     return numColumns;
   }
 
-  protected CellState[][] getInitialCellConfig() {
+  public CellState[][] getInitialCellConfig() {
     return initialCellConfig;
   }
 

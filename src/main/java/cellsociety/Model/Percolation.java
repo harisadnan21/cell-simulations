@@ -1,7 +1,6 @@
-package cellsociety;
+package cellsociety.Model;
 
 
-import cellsociety.CellState.GameOfLifeState;
 import cellsociety.CellState.PercolationState;
 import java.util.ArrayList;
 import java.util.List;

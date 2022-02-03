@@ -1,6 +1,8 @@
-package cellsociety;
+package cellsociety.Model;
 
-public class Shark extends CellObject{
+import cellsociety.CellObject;
+
+public class Shark extends CellObject {
   private int energy;
   private int timeSinceSex;
   private final int energyInFood;

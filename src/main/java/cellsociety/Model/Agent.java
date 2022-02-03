@@ -1,6 +1,8 @@
-package cellsociety;
+package cellsociety.Model;
 
-public class Agent extends CellObject{
+import cellsociety.CellObject;
+
+public class Agent extends CellObject {
 
   private boolean isAgentA;
   public Agent(boolean a) { isAgentA = a; }
