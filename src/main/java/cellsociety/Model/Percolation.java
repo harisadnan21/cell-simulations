@@ -1,7 +1,7 @@
 package cellsociety.Model;
 
 
-import cellsociety.CellState.PercolationState;
+import cellsociety.Model.CellState.PercolationState;
 import java.util.ArrayList;
 import java.util.List;
 

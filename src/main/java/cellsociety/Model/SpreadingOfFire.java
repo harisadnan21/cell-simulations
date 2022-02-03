@@ -1,8 +1,7 @@
 package cellsociety.Model;
 
 
-import cellsociety.CellState;
-import cellsociety.CellState.SpreadingOfFireState;
+import cellsociety.Model.CellState.SpreadingOfFireState;
 import java.util.List;
 import java.util.Map;
 

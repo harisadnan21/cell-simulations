@@ -1,7 +1,7 @@
 package cellsociety.Model;
 
 
-import cellsociety.CellState.GameOfLifeState;
+import cellsociety.Model.CellState.GameOfLifeState;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

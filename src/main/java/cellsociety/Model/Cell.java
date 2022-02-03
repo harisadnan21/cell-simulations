@@ -1,8 +1,6 @@
 package cellsociety.Model;
 
-import cellsociety.CellObject;
-import cellsociety.CellState;
-import cellsociety.CellState.*;
+import cellsociety.Model.CellState.*;
 import java.util.Collection;
 
 public class Cell {

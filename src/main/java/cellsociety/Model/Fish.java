@@ -1,7 +1,5 @@
 package cellsociety.Model;
 
-import cellsociety.CellObject;
-
 public class Fish extends CellObject {
   private int timeSinceSex;
   private final int refractoryPeriod;

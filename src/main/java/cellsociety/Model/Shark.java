@@ -1,7 +1,5 @@
 package cellsociety.Model;
 
-import cellsociety.CellObject;
-
 public class Shark extends CellObject {
   private int energy;
   private int timeSinceSex;

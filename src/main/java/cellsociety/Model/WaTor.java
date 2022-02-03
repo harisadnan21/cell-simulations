@@ -1,9 +1,7 @@
 package cellsociety.Model;
 
 
-import cellsociety.CellObject;
-import cellsociety.CellState;
-import cellsociety.CellState.WaTorState;
+import cellsociety.Model.CellState.WaTorState;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;

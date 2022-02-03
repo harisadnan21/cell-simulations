@@ -1,11 +1,10 @@
 package cellsociety.Model;
 
-import cellsociety.CellState;
-import cellsociety.CellState.GameOfLifeState;
-import cellsociety.CellState.PercolationState;
-import cellsociety.CellState.SchellingSegregationState;
-import cellsociety.CellState.SpreadingOfFireState;
-import cellsociety.CellState.WaTorState;
+import cellsociety.Model.CellState.GameOfLifeState;
+import cellsociety.Model.CellState.PercolationState;
+import cellsociety.Model.CellState.SchellingSegregationState;
+import cellsociety.Model.CellState.SpreadingOfFireState;
+import cellsociety.Model.CellState.WaTorState;
 import java.util.Arrays;
 import java.util.HashSet;
 

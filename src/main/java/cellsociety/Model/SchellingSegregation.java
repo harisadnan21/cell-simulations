@@ -1,7 +1,7 @@
 package cellsociety.Model;
 
 
-import cellsociety.CellState.SchellingSegregationState;
+import cellsociety.Model.CellState.SchellingSegregationState;
 import java.util.List;
 import java.util.Map;
 

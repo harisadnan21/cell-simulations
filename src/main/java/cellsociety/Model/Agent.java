@@ -1,7 +1,5 @@
 package cellsociety.Model;
 
-import cellsociety.CellObject;
-
 public class Agent extends CellObject {
 
   private boolean isAgentA;

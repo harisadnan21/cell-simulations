@@ -1,6 +1,7 @@
 package cellsociety;
 
 
+import cellsociety.Model.CellState;
 import cellsociety.Model.CellularAutomataAlgorithm;
 import cellsociety.Model.GameOfLife;
 import cellsociety.Model.Grid;
@@ -13,8 +14,6 @@ import cellsociety.View.GridView;
 import java.io.File;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -22,7 +21,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Paint;
 import javafx.util.Duration;
 
-public class CellularAutomata{
+public class CellularAutomata  {
 
   private Scene scene;
   private Group root;
@@ -81,7 +80,6 @@ public class CellularAutomata{
     gridView.setLayoutX(0);
     gridView.setLayoutY(0);
 
-    //root.getChildren().add(gridView);
 
 
 
@@ -139,26 +137,9 @@ public class CellularAutomata{
   }
 
   private void step(double elapsedTime) {
-    //method, updates all cells according to simtype
-    //
-    //System.out.println("working");
 
     grid.calculateNextStates();
     grid.update();
-//    Cell[][] currentCells = grid.getCells();
-//    for(int i = 0; i<currentCells.length; i++){
-//      for(int j = 0; j < currentCells[i].length; j++) {
-//        System.out.print(currentCells[i][j].getState() + " ");
-//      }
-//      System.out.println();
-//    }
-
-//    Collection<Cell> neighbors = grid.getCells()[0][2].getNeighbors();
-//    for(Cell cell : neighbors) {
-//      System.out.print(cell.getState() + " ");
-//    }
-//    System.out.println();
-//
     gridView.updateCells(grid.getCells());
 
   }
