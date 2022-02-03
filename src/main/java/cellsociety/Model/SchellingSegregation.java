@@ -49,13 +49,6 @@ public class SchellingSegregation extends CellularAutomataAlgorithm {
         assignEmptyNextState(c);
       }
     }
-    /*
-    switch((SchellingSegregationState)c.getState()) {
-      case AgentA -> { return handleAgentAState(g,c); }
-      case AgentB -> { return handleAgentBState(g,c); }
-      case Empty -> { return handleEmptyState(g,c); }
-    }
-     */
 
   }
 
@@ -85,33 +78,6 @@ public class SchellingSegregation extends CellularAutomataAlgorithm {
     }
   }
 
-  /*
-  private CellState handleEmptyState(Grid g, Cell c) {
-    return SchellingSegregationState.Empty;
-  }
-
-  private CellState handleAgentBState(Grid g, Cell c) {
-    if(isSatisfied(c)) {
-      return SchellingSegregationState.AgentB;
-    } else {
-      Cell destination = findEmptyCell(g);
-      c.moveResidentTo(destination);
-      destination.assignNextState(SchellingSegregationState.AgentB);
-      return SchellingSegregationState.Empty;
-    }
-  }
-
-  private CellState handleAgentAState(Grid g, Cell c) {
-    if(isSatisfied(c)) {
-      return SchellingSegregationState.AgentA;
-    } else {
-      Cell destination = findEmptyCell(g);
-      c.moveResidentTo(destination);
-      destination.assignNextState(SchellingSegregationState.AgentA);
-      return SchellingSegregationState.Empty;
-    }
-  }
-   */
 
   private boolean isSatisfied(Cell c) {
     int numInGroup = 0;
