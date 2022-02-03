@@ -27,21 +27,9 @@ public class SchellingSegregation extends CellularAutomataAlgorithm {
 
   @Override
   protected void setUpSimulationParameters() {
-    checkSimulationParameters();
+    checkSimulationParameters(SPECIFIC_PARAMS);
     Map<String, String> params = getSimulationParams();
     satisfaction = Double.parseDouble(params.get("Satisfaction"));
-  }
-
-  @Override
-  protected void checkSimulationParameters() {
-    Map<String, String> params = getSimulationParams();
-
-    for (String param : SPECIFIC_PARAMS) {
-      if (!params.containsKey(param)) {
-        throw new RuntimeException("Parameter " + param + " not found for simulation type "
-            + "SchellingSegregation");
-      }
-    }
   }
 
   /*

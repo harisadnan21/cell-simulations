@@ -5,6 +5,7 @@ import cellsociety.CellState.PercolationState;
 import cellsociety.CellState.SchellingSegregationState;
 import cellsociety.CellState.SpreadingOfFireState;
 import cellsociety.CellState.WaTorState;
+import java.util.List;
 import java.util.Map;
 
 
@@ -69,7 +70,16 @@ public abstract class CellularAutomataAlgorithm {
    *
    * This should always be called on the first line of setUpSimulationParameters.
    */
-  protected abstract void checkSimulationParameters();
+  protected void checkSimulationParameters(List<String> SPECIFIC_PARAMS) {
+    Map<String, String> params = getSimulationParams();
+
+    for (String param : SPECIFIC_PARAMS) {
+      if (!params.containsKey(param)) {
+        throw new RuntimeException("Parameter " + param + " not found for simulation type "
+            + getSimulationType());
+      }
+    }
+  }
 
   public abstract void runAlgorithm(Grid g);
 

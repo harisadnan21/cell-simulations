@@ -33,23 +33,11 @@ public class WaTor extends CellularAutomataAlgorithm {
 
   @Override
   protected void setUpSimulationParameters() {
-    checkSimulationParameters();
+    checkSimulationParameters(SPECIFIC_PARAMS);
     Map<String, String> params = getSimulationParams();
     fishRefractoryPeriod = Integer.parseInt(params.get("fishRefractoryPeriod"));
     sharkRefractoryPeriod = Integer.parseInt(params.get("sharkRefractoryPeriod"));
     energyInFood = Integer.parseInt(params.get("energyInFood"));
-  }
-
-  @Override
-  protected void checkSimulationParameters() {
-    Map<String, String> params = getSimulationParams();
-
-    for (String param : SPECIFIC_PARAMS) {
-      if (!params.containsKey(param)) {
-        throw new RuntimeException("Parameter " + param + " not found for simulation type "
-            + "WaTor");
-      }
-    }
   }
   
   private boolean fishWillBePresent(Map<Cell, Set<CellObject>> locations, Cell c) {
