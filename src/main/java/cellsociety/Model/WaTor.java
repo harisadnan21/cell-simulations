@@ -64,56 +64,68 @@ public class WaTor extends CellularAutomataAlgorithm {
   
   private Map<Cell, Set<CellObject>> createLocations(Grid g) {
     Map<Cell, Set<CellObject>> locations = new HashMap<>();
-    for(Cell[] cellArray: g.getCells()) {
-      for(Cell c: cellArray) {
-        WaTorState currentState = (WaTorState) c.getState();
-        if(currentState != WaTorState.Empty) {
-          switch (currentState) {
-            case Fish -> {
-              Fish resident = (Fish) c.getResident();
-              resident.age();
-              Cell nextLocation = findNextFishNeighbor(c,locations);
-              if (nextLocation != null) { //found a location
-                locations.putIfAbsent(nextLocation,new HashSet<>());
-                locations.get(nextLocation).add(resident);
-                if(resident.canReproduce()) {
-                  resident.reproduce();
-                  Fish child = new Fish(fishRefractoryPeriod);
-                  locations.putIfAbsent(c,new HashSet<>());
-                  locations.get(c).add(child);
-                }
-              } else { //did not find a location
-                locations.putIfAbsent(c,new HashSet<>());
-                locations.get(c).add(resident);
-              }
-            }
-            case Shark -> {
-              Shark resident = (Shark) c.getResident();
-              resident.age();
-              Cell nextLocation = findNextSharkNeighbor(c,locations);
-              if(nextLocation != null) {
-                locations.putIfAbsent(nextLocation, new HashSet<>());
-                locations.get(nextLocation).add(resident);
-                if(resident.canReproduce()) {
-                  resident.reproduce();
-                  Shark child = new Shark(sharkRefractoryPeriod,energyInFood);
-                  locations.get(c).add(child);
-                }
-              } else { //did not find a location
-                locations.putIfAbsent(c,new HashSet<>());
-                locations.get(c).add(resident);
-              }
-            }
-          }
-        }
-      }
-    }
+    handleFishAndSharkLocation(g, locations);
+    handleEmptyLocation(g, locations);
+    return locations;
+  }
+
+  private void handleEmptyLocation(Grid g, Map<Cell, Set<CellObject>> locations) {
     for(Cell[] cellArray: g.getCells()) {
       for(Cell c: cellArray) {
         locations.putIfAbsent(c,new HashSet<>());
       }
     }
-    return locations;
+  }
+
+  private void handleFishAndSharkLocation(Grid g, Map<Cell, Set<CellObject>> locations) {
+    for(Cell[] cellArray: g.getCells()) {
+      for(Cell c: cellArray) {
+        WaTorState currentState = (WaTorState) c.getState();
+        if(currentState != WaTorState.Empty) {
+          switch (currentState) {
+            case Fish -> handleFishLocation(locations, c);
+            case Shark -> handleSharkLocation(locations, c);
+          }
+        }
+      }
+    }
+  }
+
+  private void handleSharkLocation(Map<Cell, Set<CellObject>> locations, Cell c) {
+    Shark resident = (Shark) c.getResident();
+    resident.age();
+    Cell nextLocation = findNextSharkNeighbor(c, locations);
+    if(nextLocation != null) {
+      locations.putIfAbsent(nextLocation, new HashSet<>());
+      locations.get(nextLocation).add(resident);
+      if(resident.canReproduce()) {
+        resident.reproduce();
+        Shark child = new Shark(sharkRefractoryPeriod,energyInFood);
+        locations.get(c).add(child);
+      }
+    } else { //did not find a location
+      locations.putIfAbsent(c,new HashSet<>());
+      locations.get(c).add(resident);
+    }
+  }
+
+  private void handleFishLocation(Map<Cell, Set<CellObject>> locations, Cell c) {
+    Fish resident = (Fish) c.getResident();
+    resident.age();
+    Cell nextLocation = findNextFishNeighbor(c, locations);
+    if (nextLocation != null) { //found a location
+      locations.putIfAbsent(nextLocation,new HashSet<>());
+      locations.get(nextLocation).add(resident);
+      if(resident.canReproduce()) {
+        resident.reproduce();
+        Fish child = new Fish(fishRefractoryPeriod);
+        locations.putIfAbsent(c,new HashSet<>());
+        locations.get(c).add(child);
+      }
+    } else { //did not find a location
+      locations.putIfAbsent(c,new HashSet<>());
+      locations.get(c).add(resident);
+    }
   }
 
   @Override
