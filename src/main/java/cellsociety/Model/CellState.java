@@ -1,4 +1,4 @@
-package cellsociety;
+package cellsociety.Model;
 
 public interface CellState {
   enum GameOfLifeState implements CellState {

@@ -1,10 +1,8 @@
-package cellsociety;
+package cellsociety.Model;
 
 
-import cellsociety.CellState.GameOfLifeState;
-import cellsociety.CellState.WaTorState;
+import cellsociety.Model.CellState.WaTorState;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -33,23 +31,11 @@ public class WaTor extends CellularAutomataAlgorithm {
 
   @Override
   protected void setUpSimulationParameters() {
-    checkSimulationParameters();
+    checkSimulationParameters(SPECIFIC_PARAMS);
     Map<String, String> params = getSimulationParams();
     fishRefractoryPeriod = Integer.parseInt(params.get("fishRefractoryPeriod"));
     sharkRefractoryPeriod = Integer.parseInt(params.get("sharkRefractoryPeriod"));
     energyInFood = Integer.parseInt(params.get("energyInFood"));
-  }
-
-  @Override
-  protected void checkSimulationParameters() {
-    Map<String, String> params = getSimulationParams();
-
-    for (String param : SPECIFIC_PARAMS) {
-      if (!params.containsKey(param)) {
-        throw new RuntimeException("Parameter " + param + " not found for simulation type "
-            + "WaTor");
-      }
-    }
   }
   
   private boolean fishWillBePresent(Map<Cell, Set<CellObject>> locations, Cell c) {
@@ -76,64 +62,112 @@ public class WaTor extends CellularAutomataAlgorithm {
   
   private Map<Cell, Set<CellObject>> createLocations(Grid g) {
     Map<Cell, Set<CellObject>> locations = new HashMap<>();
-    for(Cell[] cellArray: g.getCells()) {
-      for(Cell c: cellArray) {
-        WaTorState currentState = (WaTorState) c.getState();
-        if(currentState != WaTorState.Empty) {
-          switch (currentState) {
-            case Fish -> {
-              Fish resident = (Fish) c.getResident();
-              resident.age();
-              Cell nextLocation = findNextFishNeighbor(c,locations);
-              if (nextLocation != null) { //found a location
-                locations.putIfAbsent(nextLocation,new HashSet<>());
-                locations.get(nextLocation).add(resident);
-                if(resident.canReproduce()) {
-                  resident.reproduce();
-                  Fish child = new Fish(fishRefractoryPeriod);
-                  locations.putIfAbsent(c,new HashSet<>());
-                  locations.get(c).add(child);
-                }
-              } else { //did not find a location
-                locations.putIfAbsent(c,new HashSet<>());
-                locations.get(c).add(resident);
-              }
-            }
-            case Shark -> {
-              Shark resident = (Shark) c.getResident();
-              resident.age();
-              Cell nextLocation = findNextSharkNeighbor(c,locations);
-              if(nextLocation != null) {
-                locations.putIfAbsent(nextLocation, new HashSet<>());
-                locations.get(nextLocation).add(resident);
-                if(resident.canReproduce()) {
-                  resident.reproduce();
-                  Shark child = new Shark(sharkRefractoryPeriod,energyInFood);
-                  locations.get(c).add(child);
-                }
-              } else { //did not find a location
-                locations.putIfAbsent(c,new HashSet<>());
-                locations.get(c).add(resident);
-              }
-            }
-          }
-        }
-      }
-    }
+    handleFishAndSharkLocation(g, locations);
+    handleEmptyLocation(g, locations);
+    return locations;
+  }
+
+  private void handleEmptyLocation(Grid g, Map<Cell, Set<CellObject>> locations) {
     for(Cell[] cellArray: g.getCells()) {
       for(Cell c: cellArray) {
         locations.putIfAbsent(c,new HashSet<>());
       }
     }
-    return locations;
+  }
+
+  private void handleFishAndSharkLocation(Grid g, Map<Cell, Set<CellObject>> locations) {
+    for(Cell[] cellArray: g.getCells()) {
+      for(Cell c: cellArray) {
+        WaTorState currentState = (WaTorState) c.getState();
+        if(currentState != WaTorState.Empty) {
+          switch (currentState) {
+            case Fish -> handleFishLocation(locations, c);
+            case Shark -> handleSharkLocation(locations, c);
+          }
+        }
+      }
+    }
+  }
+
+  private void handleSharkLocation(Map<Cell, Set<CellObject>> locations, Cell c) {
+    Shark resident = (Shark) c.getResident();
+    resident.age();
+    Cell nextLocation = findNextSharkNeighbor(c, locations);
+    if(nextLocation != null) {
+      locations.putIfAbsent(nextLocation, new HashSet<>());
+      locations.get(nextLocation).add(resident);
+      if(resident.canReproduce()) {
+        resident.reproduce();
+        Shark child = new Shark(sharkRefractoryPeriod,energyInFood);
+        locations.get(c).add(child);
+      }
+    } else { //did not find a location
+      locations.putIfAbsent(c,new HashSet<>());
+      locations.get(c).add(resident);
+    }
+  }
+
+  private void handleFishLocation(Map<Cell, Set<CellObject>> locations, Cell c) {
+    Fish resident = (Fish) c.getResident();
+    resident.age();
+    Cell nextLocation = findNextFishNeighbor(c, locations);
+    if (nextLocation != null) { //found a location
+      locations.putIfAbsent(nextLocation,new HashSet<>());
+      locations.get(nextLocation).add(resident);
+      if(resident.canReproduce()) {
+        resident.reproduce();
+        Fish child = new Fish(fishRefractoryPeriod);
+        locations.putIfAbsent(c,new HashSet<>());
+        locations.get(c).add(child);
+      }
+    } else { //did not find a location
+      locations.putIfAbsent(c,new HashSet<>());
+      locations.get(c).add(resident);
+    }
   }
 
   @Override
   public void runAlgorithm(Grid g) {
     // find out where each resident will go
     Map<Cell, Set<CellObject>> locations = createLocations(g); //maps cells to their new resident
+    manageSharkFishConflicts(locations);
+    manageSharkDeath(locations);
+    assignNextStates(locations);
 
-    // manage shark and fish conflicts
+
+  }
+
+  private void assignNextStates(Map<Cell, Set<CellObject>> locations) {
+    for(Cell c: locations.keySet()) {
+      Set<CellObject> location = locations.get(c);
+      if(location.isEmpty()) {
+        c.assignNextState(WaTorState.Empty);
+        continue;
+      }
+      for(CellObject resident: location) {
+        if(resident.isShark()) {
+          c.assignNextState(WaTorState.Shark);
+        } else if (resident.isFish()) {
+          c.assignNextState(WaTorState.Fish);
+        }
+      }
+    }
+  }
+
+  private void manageSharkDeath(Map<Cell, Set<CellObject>> locations) {
+    for(Set<CellObject> location: locations.values()) {
+      for(CellObject resident: location) {
+        if(resident.isShark()) {
+          Shark r = (Shark) resident;
+          if(r.isDead()) {
+            location.remove(resident);
+          }
+        }
+      }
+    }
+  }
+
+  private void manageSharkFishConflicts(Map<Cell, Set<CellObject>> locations) {
     for(Set<CellObject> location: locations.values()) {
       if(location.size() >= 2) {
         System.out.printf("New locations has a size of %d.\n",location.size());
@@ -150,73 +184,6 @@ public class WaTor extends CellularAutomataAlgorithm {
         location.removeAll(fishToRemove);
       }
     }
-
-    //check if sharks die, remove them if necessary
-    for(Set<CellObject> location: locations.values()) {
-      for(CellObject resident: location) {
-        if(resident.isShark()) {
-          Shark r = (Shark) resident;
-          if(r.isDead()) {
-            location.remove(resident);
-          }
-        }
-      }
-    }
-
-    // assign new states
-    for(Cell c: locations.keySet()) {
-      Set<CellObject> location = locations.get(c);
-      if(location.isEmpty()) {
-        c.assignNextState(WaTorState.Empty);
-        continue;
-      }
-      for(CellObject resident: location) {
-        if(resident.isShark()) {
-          c.assignNextState(WaTorState.Shark);
-        } else if (resident.isFish()) {
-          c.assignNextState(WaTorState.Fish);
-        }
-      }
-    }
-
-    // chec
-
-    /*
-    for(Cell[] cellArray: g.getCells()) {
-      for(Cell c: cellArray) {
-        WaTorState currentState = (WaTorState) c.getState();
-        switch(currentState) {
-          case Fish -> {
-            CellObject r = c.getResident();
-            boolean isAlive = r.isFish();
-            if (isAlive) { //the fish was not eaten
-              Fish resident = (Fish) c.getResident();
-              Cell nextLocation = findNextFishNeighbor(c);
-            } else { //the fish was eaten
-
-            }
-
-
-          }
-          case Shark -> {
-
-          }
-        }
-      }
-    }
-
-     */
-
-    /*
-    switch((WaTorState)c.getState()) {
-      case Fish -> { return handleFishState(g,c); }
-      case Shark -> { return handleSharkState(g,c); }
-      case Empty -> { return handleEmptyState(g,c); }
-    }
-
-    return null;
-
-     */
   }
 
   private Cell findEmptyNeighbor(Cell c) {

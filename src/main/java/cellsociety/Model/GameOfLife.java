@@ -1,7 +1,7 @@
-package cellsociety;
+package cellsociety.Model;
 
 
-import cellsociety.CellState.GameOfLifeState;
+import cellsociety.Model.CellState.GameOfLifeState;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -22,11 +22,6 @@ public class GameOfLife extends CellularAutomataAlgorithm {
 
   @Override
   protected void setUpSimulationParameters() {
-
-  }
-
-  @Override
-  protected void checkSimulationParameters() {
 
   }
 

@@ -1,8 +1,7 @@
-package cellsociety;
+package cellsociety.Model;
 
 
-import cellsociety.CellState.GameOfLifeState;
-import cellsociety.CellState.PercolationState;
+import cellsociety.Model.CellState.PercolationState;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,11 +21,6 @@ public class Percolation extends CellularAutomataAlgorithm {
 
   @Override
   protected void setUpSimulationParameters() {
-
-  }
-
-  @Override
-  protected void checkSimulationParameters() {
 
   }
 

@@ -1,6 +1,6 @@
-package cellsociety;
+package cellsociety.Model;
 
-public class Fish extends CellObject{
+public class Fish extends CellObject {
   private int timeSinceSex;
   private final int refractoryPeriod;
   public Fish(int refractoryPeriod) {

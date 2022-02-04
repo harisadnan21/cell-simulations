@@ -1,10 +1,7 @@
-package cellsociety;
+package cellsociety.Model;
 
-import cellsociety.CellState.*;
+import cellsociety.Model.CellState.*;
 import java.util.Collection;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
 
 public class Cell {
   private CellState currentState;

@@ -1,9 +1,7 @@
-package cellsociety;
+package cellsociety.Model;
 
 
-import cellsociety.CellState.GameOfLifeState;
-import cellsociety.CellState.SpreadingOfFireState;
-import java.util.Collection;
+import cellsociety.Model.CellState.SpreadingOfFireState;
 import java.util.List;
 import java.util.Map;
 
@@ -27,22 +25,10 @@ public class SpreadingOfFire extends CellularAutomataAlgorithm {
 
   @Override
   protected void setUpSimulationParameters() {
-    checkSimulationParameters();
+    checkSimulationParameters(SPECIFIC_PARAMS);
     Map<String, String> params = getSimulationParams();
     probCatch = Double.parseDouble(params.get("probCatch"));
     probGeneration = Double.parseDouble(params.get("probGeneration"));
-  }
-
-  @Override
-  protected void checkSimulationParameters() {
-    Map<String, String> params = getSimulationParams();
-
-    for (String param : SPECIFIC_PARAMS) {
-      if (!params.containsKey(param)) {
-        throw new RuntimeException("Parameter " + param + " not found for simulation type "
-            + "Spreading of Fire");
-      }
-    }
   }
 
   @Override
