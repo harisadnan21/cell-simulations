@@ -11,41 +11,20 @@ public class Cell {
 
   public Cell(CellState initialState) {
     currentState = initialState;
-    resident = setResident(initialState);
   }
 
-  private CellObject setResident(CellState initialState) {
-    if(initialState instanceof SchellingSegregationState) {
-      SchellingSegregationState s = (SchellingSegregationState) initialState;
-      switch(s) {
-        case Empty -> { return null; }
-        case AgentA -> { return new Agent(true); }
-        case AgentB -> { return new Agent(false); }
-      }
-    }
-
-    if(initialState instanceof  WaTorState) {
-      WaTorState s = (WaTorState) initialState;
-      switch(s) {
-        case Empty -> { return null; }
-        case Shark -> { return new Shark(5,5); }
-        case Fish -> { return new Fish(5); }
-      }
-    }
-
-    return null;
-  }
 
   public CellObject getResident() { return resident; }
 
   public void setResident(CellObject o) { resident = o; }
+
+  public void clearResident() { resident = null; }
 
   public void addNeighbors(Collection<Cell> neighbors) {
     this.neighbors = neighbors;
   }
 
   public void assignNextState(CellState next) {
-    //System.out.println("Next state was assigned");
     nextState = next;
   }
 
