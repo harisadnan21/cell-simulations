@@ -30,6 +30,11 @@ public class SchellingSegregation extends CellularAutomataAlgorithm {
     satisfaction = Double.parseDouble(params.get("Satisfaction"));
   }
 
+  @Override
+  protected void initializeResidents(Grid g) {
+
+  }
+
   /*
   Algorithm:
   iterate through all agents, if they are not satisfied, find a new location

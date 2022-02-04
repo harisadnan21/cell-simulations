@@ -26,6 +26,12 @@ public class GameOfLife extends CellularAutomataAlgorithm {
   }
 
   @Override
+  protected void initializeResidents(Grid g) {
+
+  }
+
+
+  @Override
   public void runAlgorithm(Grid g) {
     for(Cell[] cellArray: g.getCells()) {
       for(Cell c: cellArray) {
