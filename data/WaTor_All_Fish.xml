@@ -23,4 +23,5 @@
   <fishRefractoryPeriod>2</fishRefractoryPeriod>
   <sharkRefractoryPeriod>5</sharkRefractoryPeriod>
   <energyInFood>5</energyInFood>
+  <sharkInitialEnergy>3</sharkInitialEnergy>
 </CellAutomata>

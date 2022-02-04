@@ -23,7 +23,8 @@
     1 1 0 0 0 0 1 1
     2 1 0 0 0 0 1 2
   </StartingConfig>
-  <fishRefractoryPeriod>2</fishRefractoryPeriod>
-  <sharkRefractoryPeriod>5</sharkRefractoryPeriod>
-  <energyInFood>5</energyInFood>
+  <fishRefractoryPeriod>5</fishRefractoryPeriod>
+  <sharkRefractoryPeriod>8</sharkRefractoryPeriod>
+  <energyInFood>2</energyInFood>
+  <sharkInitialEnergy>3</sharkInitialEnergy>
 </CellAutomata>

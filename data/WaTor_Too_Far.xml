@@ -14,7 +14,7 @@
     1 1 1
   </NeighborConfig>
   <StartingConfig>
-    1 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0
     0 0 0 0 0 0 0 0 0 0
     0 0 0 0 0 0 0 0 0 0
     0 0 0 0 0 0 0 0 0 0
@@ -26,6 +26,7 @@
     0 0 0 0 0 0 0 0 0 2
   </StartingConfig>
   <fishRefractoryPeriod>2</fishRefractoryPeriod>
-  <sharkRefractoryPeriod>5</sharkRefractoryPeriod>
+  <sharkRefractoryPeriod>1</sharkRefractoryPeriod>
   <energyInFood>5</energyInFood>
+  <sharkInitialEnergy>2</sharkInitialEnergy>
 </CellAutomata>
