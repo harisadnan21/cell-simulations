@@ -1,15 +1,15 @@
 package cellsociety.Model;
 
 public class Shark extends CellObject {
-  private int energy;
+  public int energy;
   private int timeSinceSex;
   private final int energyInFood;
   private final int refractoryPeriod;
 
-  public Shark(int refractoryPeriod, int energyInFood) {
+  public Shark(int refractoryPeriod, int energyInFood, int initialEnergy) {
     this.energyInFood = energyInFood;
     this.refractoryPeriod = refractoryPeriod;
-    energy = 5;
+    energy = initialEnergy;
   }
 
   public void age() { energy--; timeSinceSex++; }
@@ -27,4 +27,7 @@ public class Shark extends CellObject {
   public boolean isShark() {
     return true;
   }
+
+  @Override
+  public String toString() { return "Shark"; }
 }
