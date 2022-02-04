@@ -38,6 +38,14 @@ public class Grid {
     simtype.initializeResidents(this);
   }
 
+  public void clearAllResidents() {
+    for(Cell[] cellArray: cells) {
+      for(Cell c: cellArray) {
+        c.clearResident();
+      }
+    }
+  }
+
   private void initializeCells(int numRows, int numColumns, CellState[][] initialStates) {
     cells = new Cell[numRows][numColumns];
     for(int i = 0; i < numRows; i++) {
