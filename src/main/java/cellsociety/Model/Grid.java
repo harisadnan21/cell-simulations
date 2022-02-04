@@ -35,7 +35,7 @@ public class Grid {
     initializeCells(numRows, numColumns, initialStates);
     addNeighbors(numRows, numColumns);
     simtype = getSimulationType(cells[0][0].getState());
-
+    simtype.initializeResidents(this);
   }
 
   private void initializeCells(int numRows, int numColumns, CellState[][] initialStates) {
@@ -202,7 +202,6 @@ public class Grid {
   public void update() {
     for(Cell[] cellArray: cells) {
       for(Cell cell: cellArray) {
-        //calculateNextStates();
         cell.update();
       }
     }
@@ -210,14 +209,6 @@ public class Grid {
 
   public void calculateNextStates() {
     simtype.runAlgorithm(this);
-    /*
-    for(Cell[] cellArray: cells) {
-      for(Cell cell: cellArray) {
-        CellState next = simtype.runAlgorithm(this,cell);
-        cell.assignNextState(next);
-      }
-    }
-     */
   }
 
   public Cell[][] getCells() {
