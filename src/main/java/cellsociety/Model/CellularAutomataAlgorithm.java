@@ -90,6 +90,8 @@ public abstract class CellularAutomataAlgorithm {
     }
   }
 
+  protected abstract void initializeResidents(Grid g);
+
   public abstract void runAlgorithm(Grid g);
 
   // Initializes an array representing the starting state of every cell in the simulation
