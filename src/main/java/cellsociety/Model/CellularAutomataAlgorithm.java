@@ -153,8 +153,13 @@ public abstract class CellularAutomataAlgorithm {
         }
       }
     }
+
+    if(!foundReferenceCell) {
+      throw new IllegalArgumentException("Reference cell in neighborhood config not found");
+    }
   }
 
+  // Helper method to convert a configuration string read from XML to a desirable String array
   private String[] getArrayFromConfigString(String config) {
     String trimmedConfig = config.trim().replaceAll("\\s+", " ");
     return trimmedConfig.split(" ");
@@ -174,6 +179,10 @@ public abstract class CellularAutomataAlgorithm {
 
   public CellState[][] getInitialCellConfig() {
     return initialCellConfig;
+  }
+
+  public int[][] getNeighborhoodConfig() {
+    return neighborhoodConfig;
   }
 
   protected String getTitle() {
