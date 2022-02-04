@@ -20,4 +20,7 @@ public class Fish extends CellObject {
   public boolean isShark() {
     return false;
   }
+
+  @Override
+  public String toString() { return "Fish"; }
 }
