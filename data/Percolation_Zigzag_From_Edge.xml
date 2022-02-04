@@ -6,6 +6,13 @@
     <Title>Percolation</Title>
     <Author>Edison Ooi, Matt Knox, Haris Adnan</Author>
     <Description>Simulation of Percolation with a zigzag pattern forming with a filled block from the edges.</Description>
+    <NumberOfNeighborRows>3</NumberOfNeighborRows>
+    <NumberOfNeighborColumns>3</NumberOfNeighborColumns>
+    <NeighborConfig>
+        1 1 1
+        1 X 1
+        1 1 1
+    </NeighborConfig>
     <StartingConfig>
         0 0 0 1 2
         0 0 1 1 0

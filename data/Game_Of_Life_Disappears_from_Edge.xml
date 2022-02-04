@@ -6,6 +6,13 @@
     <Title>Game of Life</Title>
     <Author>Edison Ooi, Matt Knox, Haris Adnan</Author>
     <Description>Simulation of Game of life in which the pattern disappears, and a block is connected to the edge of the simulation.</Description>
+    <NumberOfNeighborRows>3</NumberOfNeighborRows>
+    <NumberOfNeighborColumns>3</NumberOfNeighborColumns>
+    <NeighborConfig>
+        1 1 1
+        1 X 1
+        1 1 1
+    </NeighborConfig>
     <StartingConfig>
         1 1 1 1 1
         1 1 1 1 1
