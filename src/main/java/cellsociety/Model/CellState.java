@@ -29,5 +29,11 @@ public interface CellState {
     Open,
     Percolated
   }
+
+  enum RPSState implements CellState {
+    Rock,
+    Paper,
+    Scissors
+  }
 }
 
