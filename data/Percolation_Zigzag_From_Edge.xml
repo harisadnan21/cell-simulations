@@ -9,9 +9,9 @@
     <NumberOfNeighborRows>3</NumberOfNeighborRows>
     <NumberOfNeighborColumns>3</NumberOfNeighborColumns>
     <NeighborConfig>
-        1 1 1
+        0 1 0
         1 X 1
-        1 1 1
+        0 1 0
     </NeighborConfig>
     <StartingConfig>
         0 0 0 1 2
