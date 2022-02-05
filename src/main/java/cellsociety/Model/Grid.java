@@ -15,7 +15,7 @@ public class Grid {
   private SimulationData data;
 
 
-  public Grid(int numRows, int numColumns, CellState[][] initialStates, SimulationData data) {
+  public Grid(int numRows, int numColumns, CellState[][] initialStates, SimulationData data, int[][] neighbors) {
 
 
     System.out.println(initialStates[0].length);
@@ -33,7 +33,9 @@ public class Grid {
 
     this.data = data;
     initializeCells(numRows, numColumns, initialStates);
-    addNeighbors(numRows, numColumns);
+
+    Neighborhood n = new Neighborhood(neighbors);
+    n.addNeighbors(cells);
     simtype = getSimulationType(cells[0][0].getState());
     simtype.initializeResidents(this);
   }
@@ -71,11 +73,13 @@ public class Grid {
     return false;
   }
 
+  /*
   private void addNeighbors(int numRows, int numColumns) {
     addCornerNeighbors(numRows, numColumns);
     addEdgeNeighbors(numRows, numColumns);
     addInnerNeighbors(numRows, numColumns);
   }
+   */
 
   private void addInnerNeighbors(int numRows, int numColumns) {
     for(int i = 1; i < numRows - 1; i++) {
