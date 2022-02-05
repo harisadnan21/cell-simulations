@@ -141,12 +141,12 @@ public abstract class CellularAutomataAlgorithm {
         String currentNeighbor = neighbors[i * numNeighborColumns + j];
 
         switch (currentNeighbor) {
-          case "0" -> neighborhoodConfig[i][j] = 0;
-          case "1" -> neighborhoodConfig[i][j] = 1;
-          case "X" -> {
+          case Neighborhood.ignoreCellString -> neighborhoodConfig[i][j] = Neighborhood.ignoreCell;
+          case Neighborhood.neighborCellString -> neighborhoodConfig[i][j] = Neighborhood.neighborCell;
+          case Neighborhood.refCellString -> {
             // Only add central reference cell if it has not been seen before, else we have bad input
             if (!foundReferenceCell) {
-              neighborhoodConfig[i][j] = 2;
+              neighborhoodConfig[i][j] = Neighborhood.refCell;
               foundReferenceCell = true;
             } else {
               throw new RuntimeException("Multiple reference cells found in neighborhood config.");
