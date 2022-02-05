@@ -5,6 +5,7 @@ import cellsociety.Model.CellState.PercolationState;
 import cellsociety.Model.CellState.SchellingSegregationState;
 import cellsociety.Model.CellState.SpreadingOfFireState;
 import cellsociety.Model.CellState.WaTorState;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -98,15 +99,7 @@ public abstract class CellularAutomataAlgorithm {
   private void initializeCellConfig(String config) {
     String[] initialStates = getArrayFromConfigString(config);
 
-    if (numRows * numColumns != initialStates.length) {
-      throw new IllegalArgumentException(
-          "Cell config size does not match number of rows and columns!");
-    }
-
-    initialCellConfig = new CellState[numRows][numColumns];
-
     CellState[] possibleStates = new CellState[0];
-
     switch (simulationType) {
       case CellularAutomataAlgorithm.GAME_OF_LIFE -> possibleStates = GameOfLifeState.values();
       case CellularAutomataAlgorithm.PERCOLATION -> possibleStates = PercolationState.values();
@@ -115,10 +108,71 @@ public abstract class CellularAutomataAlgorithm {
       case CellularAutomataAlgorithm.WATOR -> possibleStates = WaTorState.values();
     }
 
+    initialCellConfig = new CellState[numRows][numColumns];
+
+    switch (initialStates[0]) {
+      case "Random" -> initializeRandomCellConfig(possibleStates);
+      case "Probability" -> initializeProbabilityCellConfig(initialStates, possibleStates);
+      default -> initializeSetCellConfig(initialStates, possibleStates);
+    }
+  }
+
+  // Initializes cell config from the given configuration from the XML file
+  private void initializeSetCellConfig(String[] initialStates, CellState[] possibleStates) {
+    if (numRows * numColumns != initialStates.length) {
+      throw new IllegalArgumentException(
+          "Cell config size does not match number of rows and columns!");
+    }
+
     for (int i = 0; i < initialCellConfig.length; i++) {
       for (int j = 0; j < initialCellConfig[0].length; j++) {
         initialCellConfig[i][j] = possibleStates[Integer.parseInt(
             initialStates[i * initialCellConfig[0].length + j])];
+      }
+    }
+  }
+
+  // Initializes cell config by choosing a random state for each cell
+  private void initializeRandomCellConfig(CellState[] possibleStates) {
+    for (int i = 0; i < initialCellConfig.length; i++) {
+      for (int j = 0; j < initialCellConfig[0].length; j++) {
+        initialCellConfig[i][j] = possibleStates[(int) (Math.random() * possibleStates.length)];
+      }
+    }
+  }
+
+  // Initializes cell config given the probability that each cell should have a certain state
+  private void initializeProbabilityCellConfig(String[] initialStates, CellState[] possibleStates) {
+    if (initialStates.length - 1 != possibleStates.length) {
+      throw new IllegalArgumentException(
+          "Probabilities given in cell config do not match number of possible states!");
+    }
+
+    double[] probabilities = new double[initialStates.length - 1];
+    probabilities[0] = Double.parseDouble(initialStates[1]);
+    double cumulativeSum = probabilities[0];
+
+    for (int i = 2; i < initialStates.length; i++) {
+      double currentProb = Double.parseDouble(initialStates[i]);
+
+      probabilities[i - 1] = Double.parseDouble(initialStates[i]) + probabilities[i - 2];
+      cumulativeSum += currentProb;
+    }
+
+    if (cumulativeSum != 1.0) {
+      throw new IllegalArgumentException("Probabilities given in cell config do not add up to 1.");
+    }
+
+    for (int i = 0; i < initialCellConfig.length; i++) {
+      for (int j = 0; j < initialCellConfig[0].length; j++) {
+        double rand = Math.random();
+
+        for (int k = 0; k < probabilities.length; k++) {
+          if (rand < probabilities[k]) {
+            initialCellConfig[i][j] = possibleStates[k];
+            break;
+          }
+        }
       }
     }
   }
@@ -156,7 +210,7 @@ public abstract class CellularAutomataAlgorithm {
       }
     }
 
-    if(!foundReferenceCell) {
+    if (!foundReferenceCell) {
       throw new IllegalArgumentException("Reference cell in neighborhood config not found");
     }
   }
