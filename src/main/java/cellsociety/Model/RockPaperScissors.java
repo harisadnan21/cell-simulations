@@ -3,7 +3,6 @@ package cellsociety.Model;
 import cellsociety.Model.CellState.RPSState;
 import java.util.List;
 import java.util.Map;
-import javafx.util.Pair;
 
 public class RockPaperScissors extends CellularAutomataAlgorithm{
 

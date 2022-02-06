@@ -1,6 +1,5 @@
 package cellsociety.Model;
 
-import cellsociety.Model.CellState.*;
 import java.util.Collection;
 
 public class Cell {
