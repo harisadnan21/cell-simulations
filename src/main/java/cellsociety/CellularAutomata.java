@@ -12,6 +12,7 @@ import cellsociety.Model.SpreadingOfFire;
 import cellsociety.Model.WaTor;
 import cellsociety.View.GridView;
 import java.io.File;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -24,7 +25,7 @@ import javafx.util.Duration;
 
 public class CellularAutomata  {
 
-  public static final String VIEW_RESOURCE_PACKAGE = "./src/main/resources/view/";
+  public static final String VIEW_RESOURCE_PACKAGE = "/view/";
 
   private Scene scene;
   private Group root;
@@ -53,13 +54,13 @@ public class CellularAutomata  {
   private GridView gridView;
 
   public CellularAutomata() {
-    myResources = ResourceBundle.getBundle(VIEW_RESOURCE_PACKAGE + "SimulationValues");
+    myResources = ResourceBundle.getBundle(VIEW_RESOURCE_PACKAGE + "SimulationValues", Locale.getDefault());
   }
 
   protected Scene setUpSimulation(int width, int height, Paint background) {
 
     // Get SimulationData record from XML
-    File configFile = new File("./data/simulation_configs/Game_Of_Life_Disappears.xml");
+    File configFile = new File("./data/simulation_configs/Spreading_Of_Fire_Every_Block_Lights.xml");
     SimulationData simulationData = new ConfigurationXMLParser(
         SimulationData.DATA_TYPE).getSimulationData(configFile);
 
