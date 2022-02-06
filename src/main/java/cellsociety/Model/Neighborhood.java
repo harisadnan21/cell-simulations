@@ -17,10 +17,12 @@ public class Neighborhood {
 
   private Set<Pair<Integer,Integer>> allNeighbors;
   private int[][] neighbors;
+  boolean wrap;
 
 
-  public Neighborhood(int[][] data) {
+  public Neighborhood(int[][] data, boolean wrap) {
     neighbors = data;
+    this.wrap = wrap;
     allNeighbors = new HashSet<>();
     Pair<Integer,Integer> referenceCell = getReferenceCell(neighbors);
     int xLocation = referenceCell.getKey();
@@ -66,11 +68,21 @@ public class Neighborhood {
           int yLocation = j + neighbor.getValue();
           if(inBounds(xLocation,yLocation,cells)) {
             assignedNeighbors.add(cells[xLocation][yLocation]);
+          } else if (wrap) {
+            addIfAble(cells,xLocation - cells.length, yLocation, assignedNeighbors);
+            addIfAble(cells,xLocation + cells.length, yLocation, assignedNeighbors);
+            addIfAble(cells,xLocation,yLocation - cells[0].length, assignedNeighbors);
+            addIfAble(cells,xLocation,yLocation + cells[0].length, assignedNeighbors);
           }
         }
         cells[i][j].addNeighbors(assignedNeighbors);
       }
     }
+  }
+
+  private void addIfAble(Cell[][] cells, int xLocation, int yLocation, Collection<Cell> asssignedNeighborss) {
+    if(inBounds(xLocation,yLocation,cells))
+      asssignedNeighborss.add(cells[xLocation][yLocation]);
   }
 
 

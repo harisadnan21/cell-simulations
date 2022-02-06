@@ -73,8 +73,9 @@ public class CellularAutomata  {
     // Initialize Grid and GridView with starting config
     CellState[][] initialStates = simulation.getInitialCellConfig();
     int[][] neighbors = simulation.getNeighborhoodConfig();
+    boolean wrap = simulation.getWrap();
 
-    grid = new Grid(simulationData.numRows(), simulationData.numColumns(), initialStates, simulationData, neighbors);
+    grid = new Grid(simulationData.numRows(), simulationData.numColumns(), initialStates, simulationData, neighbors, wrap);
     gridView = new GridView(width, height, simulationData.numRows(),
         simulationData.numColumns());
     gridView.updateCells(grid.getCells());
