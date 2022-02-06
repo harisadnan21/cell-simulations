@@ -41,6 +41,12 @@ public class CellularAutomata  {
   public static final int TRIANGLE = 1;
   public static final int HEXAGON = 2;
 
+  public static final String moore = "Moore";
+  public static final String vonNeumann = "Von Neumann";
+  public static final String maximum = "max";
+  public static final String tips = "tips";
+  public static final String sides = "sides";
+
 //>>>>>>> master:src/main/java/cellsociety/Simulation.java
 
   private double GRIDSTARTINGX = 10;
