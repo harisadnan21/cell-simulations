@@ -25,6 +25,7 @@
     2 0 0 0 0 0 0 0 0 0
     2 0 0 0 0 0 0 0 0 0
   </StartingConfig>
+  <ShouldWrap>false</ShouldWrap>
   <fishRefractoryPeriod>2</fishRefractoryPeriod>
   <sharkRefractoryPeriod>5</sharkRefractoryPeriod>
   <energyInFood>5</energyInFood>

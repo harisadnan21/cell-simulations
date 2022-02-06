@@ -20,6 +20,7 @@
         1 1 1 1 1
         1 1 1 1 1
     </StartingConfig>
+    <ShouldWrap>false</ShouldWrap>
     <probCatch>0</probCatch>
     <probGeneration>0</probGeneration>
 </CellAutomata>
