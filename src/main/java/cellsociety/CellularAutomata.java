@@ -12,6 +12,7 @@ import cellsociety.Model.SpreadingOfFire;
 import cellsociety.Model.WaTor;
 import cellsociety.View.GridView;
 import java.io.File;
+import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
@@ -23,8 +24,11 @@ import javafx.util.Duration;
 
 public class CellularAutomata  {
 
+  public static final String VIEW_RESOURCE_PACKAGE = "./src/main/resources/view/";
+
   private Scene scene;
   private Group root;
+  private ResourceBundle myResources;
 
 //>>>>>>> master:src/main/java/cellsociety/Simulation.java
 
@@ -47,14 +51,15 @@ public class CellularAutomata  {
   private CellularAutomataAlgorithm simulation;
   private Grid grid;
   private GridView gridView;
-  public CellularAutomata() {
 
+  public CellularAutomata() {
+    myResources = ResourceBundle.getBundle(VIEW_RESOURCE_PACKAGE + "SimulationValues");
   }
 
   protected Scene setUpSimulation(int width, int height, Paint background) {
 
     // Get SimulationData record from XML
-    File configFile = new File("./data/WaTor_Too_Far.xml");
+    File configFile = new File("./data/simulation_configs/Game_Of_Life_Disappears.xml");
     SimulationData simulationData = new ConfigurationXMLParser(
         SimulationData.DATA_TYPE).getSimulationData(configFile);
 
