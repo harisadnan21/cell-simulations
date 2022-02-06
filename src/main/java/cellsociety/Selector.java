@@ -18,7 +18,7 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.Pane;
 
 
-public class Selector {
+public class Selector extends Scene{
     private ResourceBundle resources;
     private Button fileLoadButton;
     private final Group root;
@@ -29,13 +29,15 @@ public class Selector {
 
     public Selector(GUIController guicontroller, double width, double height, ResourceBundle resources) {
         super(new Group(), width, height);
-        this.root = (Group) this.getScene().getRoot();
+        this.root = (Group) this.getRoot();
         this.width = width;
         this.height = height;
         this.resources = resources;
         this.guicontroller = guicontroller;
         setScene();
     }
+
+
     private void changeLanguage(Language lang) {
         this.resources = ResourceBundle.getBundle(guicontroller.RESOURCE_PATH + lang);
         guicontroller.setLanguage(lang);

@@ -1,4 +1,5 @@
 package cellsociety;
+import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -13,7 +14,7 @@ public class GUIController {
     private final double frameDelay;
     private final String local;
     private final Stage stage;
-
+    public static final String RESOURCE_PATH = "cellsociety.recources.";
     private ResourceBundle languageResources;
     private Theme theme;
     private final CellularAutomata controllerClass;
@@ -55,14 +56,13 @@ public class GUIController {
         return filec.showSaveDialog(stage);
     }
 
-    // Sends a refresh notice to the SimulationController.
     private void refresh(double elapsedTime) {
         controllerClass.update(elapsedTime);
     }
 
 
     private void presentLoadSimScene() {
-        this.stage.setScene(new Selector(this, WINDOW_WIDTH, WINDOW_HEIGHT,
+        this.stage.setScene(new Selector(this, WIDTH, HEIGHT,
                 languageResources));
         this.stage.show();
     }
@@ -73,19 +73,18 @@ public class GUIController {
 
     protected void exitSimulation() {
         controllerClass.stopSim();
-        stage.setScene(new Selector(this, WINDOW_WIDTH, WINDOW_HEIGHT,
+        stage.setScene(new Selector(this, WIDTH, HEIGHT,
                 languageResources));
     }
 
     protected void loadNewSimulation() {
-        controllerClass.setUpSimulation(600, 600, "Black");
+        controllerClass.setUpSimulation(600, 600, Paint.valueOf("Black"));
     }
 
 
     protected void showSimulation(CellularAutomata controllerClass) {
         Selector sds =
-                new Selector(this.controllerClass, WINDOW_WIDTH, WINDOW_HEIGHT,
-                        this.languageResources, this.theme);
+                new Selector(this.controllerClass, WIDTH, HEIGHT, this.languageResources, this.theme);
         this.stage.setScene(sds);
     }
 
