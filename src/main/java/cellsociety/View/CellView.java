@@ -1,6 +1,7 @@
 package cellsociety.View;
 
 import cellsociety.Model.CellState;
+import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 
 /**
@@ -8,7 +9,7 @@ import javafx.scene.shape.Rectangle;
  *
  * @author Edison Ooi
  */
-public class CellView extends Rectangle {
+public abstract class CellView extends Polygon {
 
   /**
    * Class constructor. Sets the width and height, in pixels, for this Rectangle.
@@ -18,6 +19,7 @@ public class CellView extends Rectangle {
    */
   public CellView(double width, double height) {
     super(width, height);
+    drawShape();
   }
 
   // Updates visual properties of CellView according to its state
@@ -25,4 +27,6 @@ public class CellView extends Rectangle {
     setFill(GridView.getFillColor(nextState));
     setStroke(GridView.getStrokeColor(nextState));
   }
+
+  public abstract void drawShape();
 }
