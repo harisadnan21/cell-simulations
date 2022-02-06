@@ -51,6 +51,8 @@ public class RockPaperScissors extends CellularAutomataAlgorithm{
     }
     if(numLosses > threshold)
       c.assignNextState(defeatorState);
+    else
+      c.assignNextState(c.getState());
   }
 
   private RPSState getDefeatorState(RPSState currentState) {
