@@ -29,6 +29,7 @@ public class GUIController {
         this.local = locale;
         this.theme = Theme.DEFAULT;
         startUpdates();
+        presentLoadSimScene();
     }
 
     private void startUpdates() {
@@ -60,17 +61,43 @@ public class GUIController {
     }
 
 
+    private void presentLoadSimScene() {
+        this.stage.setScene(new Selector(this, WINDOW_WIDTH, WINDOW_HEIGHT,
+                languageResources));
+        this.stage.show();
+    }
+
+
+
+
+
+    protected void exitSimulation() {
+        controllerClass.stopSim();
+        stage.setScene(new Selector(this, WINDOW_WIDTH, WINDOW_HEIGHT,
+                languageResources));
+    }
+
+    protected void loadNewSimulation() {
+        controllerClass.setUpSimulation(600, 600, "Black");
+    }
+
+
+    protected void showSimulation(CellularAutomata controllerClass) {
+        Selector sds =
+                new Selector(this.controllerClass, WINDOW_WIDTH, WINDOW_HEIGHT,
+                        this.languageResources, this.theme);
+        this.stage.setScene(sds);
+    }
+
+
+
     protected void giveException(Exception e) {
         Alert a = new Alert(AlertType.ERROR, e.getMessage());
         e.printStackTrace();
         a.show();
     }
 
-    /**
-     * Instantiates a new <code>UIController</code>, creates a new stage, and shows that stage.
-     * Effectively opens a second instance of the application. Used to show multiple simulations
-     * concurrently.
-     */
+
     protected void createNewControlledStage() {
         Stage s = new Stage();
         new GUIController(s, frameDelay, local);

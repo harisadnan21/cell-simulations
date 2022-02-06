@@ -8,27 +8,29 @@ import javafx.scene.layout.VBox;
 import javafx.geometry.Pos;
 import javafx.collections.ObservableList;
 import java.util.ResourceBundle;
+import cellsociety.GUIController.Theme;
+import javafx.scene.Node;
 /**
- * This class builds the GUI of the software
+ *
  * @author Haris Adnan
  * @author Matthew Knox
  * @author Edison Ooi
  */
 
-public class Displayer extends Scene {private final SimulationController simulationController;
+public class Displayer extends Scene {
+
+    private final CellularAutomata controllerClass;
     private final Group root;
     private final double WIDTH;
     private final double HEIGHT;
-    private final GraphicalCellGrid graphicalCellGrid;
     private final ResourceBundle resources;
 
-    public Displayer{
-        SimulationController simulationController, double width, double height,
+    public Displayer(
+        CellularAutomata controllerClass, double width, double height,
         ResourceBundle resources, Theme theme) {
             super(new Group(), width, height);
             this.root = (Group) this.getRoot();
-            this.simulationController = simulationController;
-            this.graphicalCellGrid = simulationController.graphicalCellGridForCurrentSimulation();
+            this.controllerClass = controllerClass;
             this.resources = resources;
             this.WIDTH = width;
             this.HEIGHT = height;
@@ -45,12 +47,12 @@ public class Displayer extends Scene {private final SimulationController simulat
             Button stepButton = new Button(resources.getString("Step"));
             Button extraSettingsButton = new Button(resources.getString("ExtraSettings"));
 
-            playButton.setOnAction(e -> simulationController.startSimulation());
-            speedUpButton.setOnAction(e -> simulationController.speedUpSimulation());
-            slowDownButton.setOnAction(e -> simulationController.slowDownSimulation());
-            pauseButton.setOnAction(e -> simulationController.pauseSimulation());
-            stepButton.setOnAction(e -> simulationController.step());
-            extraSettingsButton.setOnAction(e -> simulationController.showParametersPopout());
+            playButton.setOnAction(e -> controllerClass.startSim());
+            speedUpButton.setOnAction(e -> controllerClass.speedUp());
+            slowDownButton.setOnAction(e -> controllerClass.slowDown());
+            pauseButton.setOnAction(e -> controllerClass.stop());
+            stepButton.setOnAction(e -> controllerClass.step());
+
 
             row.getChildren().addAll(playButton, speedUpButton, slowDownButton, pauseButton,
                     stepButton, extraSettingsButton);
@@ -66,10 +68,10 @@ public class Displayer extends Scene {private final SimulationController simulat
             Button saveButton = new Button(resources.getString("SaveSim"));
             Button loadAdditionalButton = new Button(resources.getString("LoadAdditionalSimulation"));
 
-            exitButton.setOnAction(e -> simulationController.exitSimulation());
-            showGraphButton.setOnAction(e -> simulationController.showVisualization());
-            saveButton.setOnAction(e -> simulationController.saveSimulationToDisk());
-            loadAdditionalButton.setOnAction(e -> simulationController.openAdditionalSimulation());
+            exitButton.setOnAction(e -> controllerClass.exitSimulation());
+            showGraphButton.setOnAction(e -> controllerClass.showVisualization());
+            saveButton.setOnAction(e -> controllerClass.saveSimulationToDisk());
+            loadAdditionalButton.setOnAction(e -> controllerClass.openAdditionalSimulation());
 
             row.getChildren().addAll(exitButton, showGraphButton, saveButton, loadAdditionalButton);
             row.setAlignment(Pos.CENTER);
@@ -78,7 +80,8 @@ public class Displayer extends Scene {private final SimulationController simulat
 
         private void buildScene() {
             ObservableList<Node> rootChildren = this.root.getChildren();
-            rootChildren.add(this.graphicalCellGrid.getNode());
+            // add graph
+            rootChildren.add(this.graph.getNode());
 
             VBox rows = new VBox(10);
             HBox rowOne = firstButtonRow();
@@ -92,6 +95,9 @@ public class Displayer extends Scene {private final SimulationController simulat
             rootChildren.add(rows);
         }
 
-
-
     }
+
+
+
+
+}

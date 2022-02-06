@@ -85,51 +85,6 @@ public class CellularAutomata  {
     gridView.updateCells(grid.getCells());
     gridView.setLayoutX(0);
     gridView.setLayoutY(0);
-
-
-
-
-//    startButton = new Button();
-//    stopButton = new Button();
-//    speedUp = new Button();
-//    slowDown = new Button();
-//    loadButton = new Button();
-//    saveButton = new Button();
-//
-//    startButton.setText("Start");
-//    stopButton.setText("Stop");
-//    speedUp.setText(">>");
-//    slowDown.setText("<<");
-//    loadButton.setText("Load");
-//    saveButton.setText("Save");
-//
-//    startButton.setOnAction(this);
-//    stopButton.setOnAction(this);
-//    speedUp.setOnAction(this);
-//    slowDown.setOnAction(this);
-//    loadButton.setOnAction(this);
-//    saveButton.setOnAction(this);
-//
-//    startButton.setLayoutX();
-//    startButton.setLayoutY();
-//    stopButton.setLayoutX();
-//    stopButton.setLayoutY();
-//    saveButton.setLayoutX();
-//    saveButton.setLayoutY();
-//    loadButton.setLayoutX();
-//    loadButton.setLayoutY();
-//    speedUp.setLayoutX();
-//    speedUp.setLayoutY();
-//    slowDown.setLayoutX();
-//    slowDown.setLayoutY();
-//
-//    root.getChildren().add(startButton);
-//    root.getChildren().add(stopButton);
-//    root.getChildren().add(speedUp);
-//    root.getChildren().add(slowDown);
-//    root.getChildren().add(loadButton);
-//    root.getChildren().add(saveButton);
-
     scene = new Scene(new HBox(gridView), width, height, background);
 
     //setting up the animation
@@ -142,7 +97,7 @@ public class CellularAutomata  {
     return scene;
   }
 
-  private void step(double elapsedTime) {
+  public void step(double elapsedTime) {
 
     grid.calculateNextStates();
     grid.update();
@@ -150,18 +105,10 @@ public class CellularAutomata  {
 
   }
 
-
-
-//  private void getParameter() {
-//  }
-//
-//  private void setParameter() {
-//  }
-//
   public void startSim() {
     runVal = true;
   }
-//
+
   public void stopSim() {
     runVal = false;
   }
@@ -185,20 +132,5 @@ public class CellularAutomata  {
     frameDelay = frameDelay * 2;
   }
 
-//  @Override
-//  public void handle(ActionEvent actionEvent) {
-//    if (actionEvent.getSource() == startButton) {
-//      start();
-//    } else if (actionEvent.getSource() == stopButton) {
-//      stop();
-//    } else if (actionEvent.getSource() == speedUp) {
-//      speedUp();
-//    } else if (actionEvent.getSource() == slowDown) {
-//      slowDown();
-//    } else if (actionEvent.getSource() == loadButton) {
-//      load();
-//    } else if (actionEvent.getSource() == saveButton) {
-//      save();
-//    }
-//  }
+
 }
