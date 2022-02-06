@@ -13,27 +13,111 @@ public class GUIController {
     private final double frameDelay;
     private final String local;
     private final Stage stage;
+
     private ResourceBundle languageResources;
     private Theme theme;
+    private final CellularAutomata controllerClass;
     private static final double WIDTH = 600;
     private static final double HEIGHT = 750;
 
+    public GUIController(Stage primaryStage, double frameDelay, String locale) {
+        this.stage = primaryStage;
+        this.languageResources = ResourceBundle.getBundle(RESOURCE_PATH + Language.ENGLISH);
+        this.controllerClass = new CellularAutomata(this, languageResources);
+        this.stage.setResizable(false);
+        this.frameDelay = frameDelay;
+        this.local = locale;
+        this.theme = Theme.DEFAULT;
+        startUpdates();
+    }
+
+    private void startUpdates() {
+        KeyFrame frame = new KeyFrame(Duration.seconds(frameDelay), e -> refresh(frameDelay));
+        Timeline animation = new Timeline();
+        animation.setCycleCount(Timeline.INDEFINITE);
+        animation.getKeyFrames().add(frame);
+        animation.play();
+    }
+
+    protected void setTitle(String title) {
+        stage.setTitle(title);
+    }
+    protected File openFile() {
+        FileChooser filec = new FileChooser();
+        Stage stage = new Stage();
+        return filec.showOpenDialog(stage);
+    }
+
+    protected File saveFile() {
+        FileChooser filec = new FileChooser();
+        Stage stage = new Stage();
+        return filec.showSaveDialog(stage);
+    }
+
+    // Sends a refresh notice to the SimulationController.
+    private void refresh(double elapsedTime) {
+        controllerClass.update(elapsedTime);
+    }
 
 
+    protected void giveException(Exception e) {
+        Alert a = new Alert(AlertType.ERROR, e.getMessage());
+        e.printStackTrace();
+        a.show();
+    }
+
+    /**
+     * Instantiates a new <code>UIController</code>, creates a new stage, and shows that stage.
+     * Effectively opens a second instance of the application. Used to show multiple simulations
+     * concurrently.
+     */
+    protected void createNewControlledStage() {
+        Stage s = new Stage();
+        new GUIController(s, frameDelay, local);
+        s.show();
+    }
+
+
+    protected void setTheme(Theme theme) {
+        this.theme = theme;
+    }
+
+    protected void setLanguage(Language lang) {
+        this.languageResources = ResourceBundle.getBundle(RESOURCE_PATH + lang);
+    }
 
     public enum Theme {
         DEFAULT("Default"),
         FIRE_SPREAD("Light"),
         DARK("Dark");
 
-        private final String bundleName;
+        private final String bundle;
 
         Theme(String s) {
-            this.bundleName = s;
+            this.bundle = s;
         }
 
         @Override
         public String toString() {
-            return this.bundleName;
+            return this.bundle;
         }
+    }
+
+    public enum Language {
+        ENGLISH("English"),
+        FRENCH("French"),
+        SPANISH("Spanish");
+
+        private final String bundle;
+
+        Language(String s) {
+            this.bundle = s;
+        }
+
+        @Override
+        public String toString() {
+            return this.bundle;
+        }
+    }
+
 }

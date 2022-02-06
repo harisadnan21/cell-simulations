@@ -46,15 +46,13 @@ public class CellularAutomata  {
   private Button slowDown;
   private Button loadButton;
   private Button saveButton;
-//  private  int FRAMES_PER_SECOND = 1;
-//  private final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
   private boolean runVal;
   private CellularAutomataAlgorithm simulation;
   private Grid grid;
   private GridView gridView;
   private double frameDelay = 1;
 
-  public CellularAutomata() {
+  public CellularAutomata(GUIController guiController, ResourceBundle languageResources) {
     myResources = ResourceBundle.getBundle(VIEW_RESOURCE_PACKAGE + "SimulationValues", Locale.getDefault());
   }
 

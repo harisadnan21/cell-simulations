@@ -25,7 +25,7 @@ public class Main extends Application {
    */
   @Override
   public void start(Stage stage) {
-    CellularAutomata newSim = new CellularAutomata();
+    CellularAutomata newSim = new CellularAutomata(this, languageResources);
 
     // attach scene to the stage and display it
     Scene scene = newSim.setUpSimulation(SIZE, SIZE, BACKGROUND);
