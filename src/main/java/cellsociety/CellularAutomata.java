@@ -46,12 +46,13 @@ public class CellularAutomata  {
   private Button slowDown;
   private Button loadButton;
   private Button saveButton;
-  private final int FRAMES_PER_SECOND = 1;
-  private final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
+//  private  int FRAMES_PER_SECOND = 1;
+//  private final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
   private boolean runVal;
   private CellularAutomataAlgorithm simulation;
   private Grid grid;
   private GridView gridView;
+  private double frameDelay = 1;
 
   public CellularAutomata() {
     myResources = ResourceBundle.getBundle(VIEW_RESOURCE_PACKAGE + "SimulationValues", Locale.getDefault());
@@ -137,7 +138,7 @@ public class CellularAutomata  {
     Timeline animation = new Timeline();
     animation.setCycleCount(Timeline.INDEFINITE);
     animation.getKeyFrames()
-        .add(new KeyFrame(Duration.seconds(SECOND_DELAY), e -> step(SECOND_DELAY)));
+        .add(new KeyFrame(Duration.seconds(frameDelay), e -> step(frameDelay)));
     animation.play();
 
     return scene;
@@ -151,19 +152,21 @@ public class CellularAutomata  {
 
   }
 
+
+
 //  private void getParameter() {
 //  }
 //
 //  private void setParameter() {
 //  }
 //
-//  private void start() {
-//    runVal = true;
-//  }
+  public void startSim() {
+    runVal = true;
+  }
 //
-//  private void stop() {
-//    runVal = false;
-//  }
+  public void stopSim() {
+    runVal = false;
+  }
 //
 //  private void save() {
 //    stop();
@@ -176,13 +179,13 @@ public class CellularAutomata  {
 //
 //  }
 //
-//  private void speedUp() {
-//    FRAMES_PER_SECOND += 20;
-//  }
+  private void speedUp() {
+    frameDelay = frameDelay / 2;
+  }
 //
-//  private void slowDown() {
-//    FRAMES_PER_SECOND -= 20;
-//  }
+  private void slowDown() {
+    frameDelay = frameDelay * 2;
+  }
 
 //  @Override
 //  public void handle(ActionEvent actionEvent) {

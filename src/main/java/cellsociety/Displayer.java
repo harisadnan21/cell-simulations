@@ -17,6 +17,5 @@ import java.util.ResourceBundle;
 
 public class Displayer extends Scene {
 
-    
 
 }
