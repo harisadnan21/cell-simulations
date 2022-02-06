@@ -1,5 +1,6 @@
 package cellsociety.Model;
 
+import cellsociety.CellularAutomata;
 import cellsociety.Model.CellState.GameOfLifeState;
 import cellsociety.Model.CellState.PercolationState;
 import cellsociety.Model.CellState.SchellingSegregationState;
@@ -18,11 +19,7 @@ import java.util.Map;
  */
 public abstract class CellularAutomataAlgorithm {
 
-  public static final int GAME_OF_LIFE = 0;
-  public static final int PERCOLATION = 1;
-  public static final int SCHELLING_SEGREGATION = 2;
-  public static final int SPREADING_OF_FIRE = 3;
-  public static final int WATOR = 4;
+
 
   private final int simulationType; //TODO: Change this to an enum of some kind
 
@@ -101,11 +98,11 @@ public abstract class CellularAutomataAlgorithm {
 
     CellState[] possibleStates = new CellState[0];
     switch (simulationType) {
-      case CellularAutomataAlgorithm.GAME_OF_LIFE -> possibleStates = GameOfLifeState.values();
-      case CellularAutomataAlgorithm.PERCOLATION -> possibleStates = PercolationState.values();
-      case CellularAutomataAlgorithm.SCHELLING_SEGREGATION -> possibleStates = SchellingSegregationState.values();
-      case CellularAutomataAlgorithm.SPREADING_OF_FIRE -> possibleStates = SpreadingOfFireState.values();
-      case CellularAutomataAlgorithm.WATOR -> possibleStates = WaTorState.values();
+      case CellularAutomata.GAME_OF_LIFE -> possibleStates = GameOfLifeState.values();
+      case CellularAutomata.PERCOLATION -> possibleStates = PercolationState.values();
+      case CellularAutomata.SCHELLING_SEGREGATION -> possibleStates = SchellingSegregationState.values();
+      case CellularAutomata.SPREADING_OF_FIRE -> possibleStates = SpreadingOfFireState.values();
+      case CellularAutomata.WATOR -> possibleStates = WaTorState.values();
     }
 
     initialCellConfig = new CellState[numRows][numColumns];
