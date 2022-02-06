@@ -5,7 +5,6 @@ import cellsociety.Model.CellState.PercolationState;
 import cellsociety.Model.CellState.SchellingSegregationState;
 import cellsociety.Model.CellState.SpreadingOfFireState;
 import cellsociety.Model.CellState.WaTorState;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -79,11 +78,12 @@ public abstract class CellularAutomataAlgorithm {
    * an Exception.
    * <p>
    * This should always be called on the first line of setUpSimulationParameters.
+   * @param specificParams
    */
-  protected void checkSimulationParameters(List<String> SPECIFIC_PARAMS) {
+  protected void checkSimulationParameters(List<String> specificParams) {
     Map<String, String> params = getSimulationParams();
 
-    for (String param : SPECIFIC_PARAMS) {
+    for (String param : specificParams) {
       if (!params.containsKey(param)) {
         throw new RuntimeException("Parameter " + param + " not found for simulation type "
             + getSimulationType());
