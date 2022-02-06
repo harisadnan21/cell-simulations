@@ -32,6 +32,10 @@
             <resource>
                 <directory>data</directory>
             </resource>
+
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
         </resources>
         <plugins>
             <!-- compiles project source code using correct version and flags -->
