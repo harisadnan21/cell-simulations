@@ -17,7 +17,7 @@ public class Neighborhood {
 
   private Set<Pair<Integer,Integer>> allNeighbors;
   private int[][] neighbors;
-  boolean wrap;
+  private boolean wrap;
 
 
   public Neighborhood(int[][] data, boolean wrap) {

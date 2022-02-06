@@ -37,6 +37,10 @@ public class CellularAutomata  {
   public static final int SPREADING_OF_FIRE = 3;
   public static final int WATOR = 4;
 
+  public static final int SQUARE = 0;
+  public static final int TRIANGLE = 1;
+  public static final int HEXAGON = 2;
+
 //>>>>>>> master:src/main/java/cellsociety/Simulation.java
 
   private double GRIDSTARTINGX = 10;
@@ -88,7 +92,7 @@ public class CellularAutomata  {
 
     grid = new Grid(simulationData.numRows(), simulationData.numColumns(), initialStates, simulationData, neighbors, false);
     gridView = new GridView(width, height, simulationData.numRows(),
-        simulationData.numColumns(),GridView.SQUARE, simulationData.simulationType());
+        simulationData.numColumns(),SQUARE, simulationData.simulationType());
     gridView.updateCells(grid.getCells());
     gridView.setLayoutX(0);
     gridView.setLayoutY(0);

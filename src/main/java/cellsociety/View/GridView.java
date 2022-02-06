@@ -1,5 +1,6 @@
 package cellsociety.View;
 
+
 import cellsociety.CellularAutomata;
 import cellsociety.Model.Cell;
 import cellsociety.Model.CellState;
@@ -17,9 +18,7 @@ public class GridView extends TilePane {
   private CellView[][] cellViews;
   private int simulationType;
 
-  public static final int SQUARE = 0;
-  public static final int TRIANGLE = 1;
-  public static final int HEXAGON = 2;
+
 
 
 
@@ -39,9 +38,9 @@ public class GridView extends TilePane {
     for (int i = 0; i < cellViews.length; i++) {
       for (int j = 0; j < cellViews[0].length; j++) {
         switch(typeOfGrid) {
-          case SQUARE -> cellViews[i][j] = new SquareCellView((width / 1.2) / numRows, (height / 1.2) / numColumns);
-          case TRIANGLE -> cellViews[i][j] = new TriangleCellView((width / 1.2) / numRows, (height / 1.2) / numColumns,i+j);
-          case HEXAGON -> cellViews[i][j] = new HexagonCellView((width / 1.2) / numRows, (height / 1.2) / numColumns,i);
+          case CellularAutomata.SQUARE -> cellViews[i][j] = new SquareCellView((width / 1.2) / numRows, (height / 1.2) / numColumns);
+          case CellularAutomata.TRIANGLE -> cellViews[i][j] = new TriangleCellView((width / 1.2) / numRows, (height / 1.2) / numColumns,i+j);
+          case CellularAutomata.HEXAGON -> cellViews[i][j] = new HexagonCellView((width / 1.2) / numRows, (height / 1.2) / numColumns,i);
         }
         //cellViews[i][j] = new CellView((width / 1.2) / numRows, (height / 1.2) / numColumns);
         this.getChildren().add(cellViews[i][j]);
