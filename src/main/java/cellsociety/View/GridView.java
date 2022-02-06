@@ -15,7 +15,11 @@ import javafx.scene.paint.Paint;
 public class GridView extends TilePane {
   private CellView[][] cellViews;
 
-  public GridView(double width, double height, int numRows, int numColumns) {
+  public static final int SQUARE = 0;
+  public static final int TRIANGLE = 1;
+  public static final int HEXAGON = 2;
+
+  public GridView(double width, double height, int numRows, int numColumns, int typeOfGrid) {
     super();
     setWidth(width);
     setHeight(height);
@@ -23,13 +27,18 @@ public class GridView extends TilePane {
     setPrefColumns(numColumns);
     setTileAlignment(Pos.TOP_LEFT);
     cellViews = new CellView[numRows][numColumns];
-    addCellsToGrid(width, height, numRows, numColumns);
+    addCellsToGrid(width, height, numRows, numColumns, typeOfGrid);
   }
 
-  private void addCellsToGrid(double width, double height, int numRows, int numColumns) {
+  private void addCellsToGrid(double width, double height, int numRows, int numColumns, int typeOfGrid) {
     for (int i = 0; i < cellViews.length; i++) {
       for (int j = 0; j < cellViews[0].length; j++) {
-        cellViews[i][j] = new CellView((width / 1.2) / numRows, (height / 1.2) / numColumns);
+        switch(typeOfGrid) {
+          case SQUARE -> cellViews[i][j] = new SquareCellView((width / 1.2) / numRows, (height / 1.2) / numColumns);
+          case TRIANGLE -> cellViews[i][j] = new TriangleCellView((width / 1.2) / numRows, (height / 1.2) / numColumns,i+j);
+          case HEXAGON -> cellViews[i][j] = new HexagonCellView((width / 1.2) / numRows, (height / 1.2) / numColumns,i);
+        }
+        //cellViews[i][j] = new CellView((width / 1.2) / numRows, (height / 1.2) / numColumns);
         this.getChildren().add(cellViews[i][j]);
       }
     }
