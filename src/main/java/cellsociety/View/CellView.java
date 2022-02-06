@@ -2,7 +2,6 @@ package cellsociety.View;
 
 import cellsociety.Model.CellState;
 import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Rectangle;
 
 /**
  * This class represents a rectangular visual depiction of one cell in a cell automata simulation.
@@ -23,9 +22,9 @@ public abstract class CellView extends Polygon {
   }
 
   // Updates visual properties of CellView according to its state
-  protected void updateFillAndStroke(CellState nextState) {
-    setFill(GridView.getFillColor(nextState));
-    setStroke(GridView.getStrokeColor(nextState));
+  protected void updateFillAndStroke(CellState nextState, int simulationType) {
+    setFill(GridView.getFillColor(nextState,simulationType));
+    setStroke(GridView.getStrokeColor(nextState,simulationType));
   }
 
   public abstract void drawShape();

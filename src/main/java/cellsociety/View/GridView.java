@@ -1,5 +1,6 @@
 package cellsociety.View;
 
+import cellsociety.CellularAutomata;
 import cellsociety.Model.Cell;
 import cellsociety.Model.CellState;
 import cellsociety.Model.CellState.GameOfLifeState;
@@ -14,18 +15,22 @@ import javafx.scene.paint.Paint;
 
 public class GridView extends TilePane {
   private CellView[][] cellViews;
+  private int simulationType;
 
   public static final int SQUARE = 0;
   public static final int TRIANGLE = 1;
   public static final int HEXAGON = 2;
 
-  public GridView(double width, double height, int numRows, int numColumns, int typeOfGrid) {
+
+
+  public GridView(double width, double height, int numRows, int numColumns, int typeOfGrid, int simulationType) {
     super();
     setWidth(width);
     setHeight(height);
     setPrefRows(numRows);
     setPrefColumns(numColumns);
     setTileAlignment(Pos.TOP_LEFT);
+    this.simulationType = simulationType;
     cellViews = new CellView[numRows][numColumns];
     addCellsToGrid(width, height, numRows, numColumns, typeOfGrid);
   }
@@ -51,74 +56,78 @@ public class GridView extends TilePane {
 
     for (int i = 0; i < cells.length; i++) {
       for (int j = 0; j < cells[0].length; j++) {
-        cellViews[i][j].updateFillAndStroke(cells[i][j].getState());
+        cellViews[i][j].updateFillAndStroke(cells[i][j].getState(),simulationType);
       }
     }
   }
 
 
-  public static Paint getFillColor(CellState initialState) {
+  public static Paint getFillColor(CellState initialState, int simulationType) {
 
-    if (initialState instanceof GameOfLifeState) {
-      GameOfLifeState s = (GameOfLifeState)initialState;
-      switch(s) {
-        case Live: return Color.BLACK;
-        case Dead: return Color.WHITE;
+    switch(simulationType) {
+      case CellularAutomata.GAME_OF_LIFE -> {
+        GameOfLifeState s = (GameOfLifeState)initialState;
+        return switch (s) {
+          case Live -> Color.BLACK;
+          case Dead -> Color.WHITE;
+        };
       }
-    }
-
-    if (initialState instanceof SpreadingOfFireState) {
-      SpreadingOfFireState s = (SpreadingOfFireState)initialState;
-      switch(s) {
-        case Empty: return Color.YELLOW;
-        case Tree: return Color.GREEN;
-        case Burning: return Color.DARKRED;
+      case CellularAutomata.PERCOLATION -> {
+        PercolationState s = (PercolationState)initialState;
+        return switch (s) {
+          case Blocked -> Color.BLACK;
+          case Open -> Color.WHITE;
+          case Percolated -> Color.BLUE;
+        };
       }
-    }
-
-    if (initialState instanceof SchellingSegregationState) {
-      SchellingSegregationState s = (SchellingSegregationState)initialState;
-      switch(s) {
-        case Empty: return Color.WHITE;
-        case AgentA: return Color.RED;
-        case AgentB: return Color.BLUE;
+      case CellularAutomata.SCHELLING_SEGREGATION -> {
+        SchellingSegregationState s = (SchellingSegregationState)initialState;
+        return switch (s) {
+          case Empty -> Color.WHITE;
+          case AgentA -> Color.RED;
+          case AgentB -> Color.BLUE;
+        };
       }
-    }
-
-
-    if (initialState instanceof WaTorState) {
-      WaTorState s = (WaTorState)initialState;
-      switch(s) {
-        case Empty: return Color.WHITE;
-        case Fish: return Color.GREEN;
-        case Shark: return Color.BLUE;
+      case CellularAutomata.SPREADING_OF_FIRE -> {
+        SpreadingOfFireState s = (SpreadingOfFireState)initialState;
+        return switch (s) {
+          case Empty -> Color.YELLOW;
+          case Tree -> Color.GREEN;
+          case Burning -> Color.DARKRED;
+        };
       }
-    }
-
-
-    if (initialState instanceof PercolationState) {
-      PercolationState s = (PercolationState)initialState;
-      switch(s) {
-        case Blocked: return Color.BLACK;
-        case Open: return Color.WHITE;
-        case Percolated: return Color.BLUE;
+      case CellularAutomata.WATOR -> {
+        WaTorState s = (WaTorState)initialState;
+        return switch (s) {
+          case Empty -> Color.WHITE;
+          case Fish -> Color.GREEN;
+          case Shark -> Color.BLUE;
+        };
       }
     }
 
     return Color.GRAY;
   }
 
-  public static Paint getStrokeColor(CellState initialState) {
-    if (initialState instanceof GameOfLifeState)
-      return Color.BLUE;
-    else if(initialState instanceof SpreadingOfFireState)
-      return Color.BLACK;
-    else if(initialState instanceof SchellingSegregationState)
-      return Color.BLACK;
-    else if(initialState instanceof WaTorState)
-      return Color.BLACK;
-    else if(initialState instanceof PercolationState)
-      return Color.BLACK;
+  public static Paint getStrokeColor(CellState initialState, int simulationType) {
+    switch (simulationType) {
+      case CellularAutomata.GAME_OF_LIFE -> {
+        return Color.BLUE;
+      }
+      case CellularAutomata.PERCOLATION -> {
+        return Color.BLACK;
+      }
+      case CellularAutomata.SCHELLING_SEGREGATION -> {
+        return Color.BLACK;
+      }
+      case CellularAutomata.SPREADING_OF_FIRE -> {
+        return Color.BLACK;
+      }
+      case CellularAutomata.WATOR -> {
+        return Color.BLACK;
+      }
+    }
+
     return Color.TRANSPARENT;
   }
 }
