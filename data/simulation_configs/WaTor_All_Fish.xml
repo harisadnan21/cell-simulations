@@ -20,6 +20,7 @@
     1 1 1 1 1
     1 1 1 1 1
   </StartingConfig>
+  <ShouldWrap>false</ShouldWrap>
   <fishRefractoryPeriod>2</fishRefractoryPeriod>
   <sharkRefractoryPeriod>5</sharkRefractoryPeriod>
   <energyInFood>5</energyInFood>
