@@ -1,10 +1,6 @@
 package cellsociety.Model;
 
-import cellsociety.Model.CellState.GameOfLifeState;
-import cellsociety.Model.CellState.PercolationState;
-import cellsociety.Model.CellState.SchellingSegregationState;
-import cellsociety.Model.CellState.SpreadingOfFireState;
-import cellsociety.Model.CellState.WaTorState;
+import cellsociety.CellularAutomata;
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -36,7 +32,7 @@ public class Grid {
 
     Neighborhood n = new Neighborhood(neighbors,wrap);
     n.addNeighbors(cells);
-    simtype = getSimulationType(cells[0][0].getState());
+    simtype = getSimulationType();
     simtype.initializeResidents(this);
   }
 
@@ -187,28 +183,20 @@ public class Grid {
         cells[1][1])));
   }
 
-  private CellularAutomataAlgorithm getSimulationType(CellState initialState) {
-    if (initialState instanceof GameOfLifeState)
-      return new GameOfLife(data);
-    if (initialState instanceof SpreadingOfFireState)
-      return new SpreadingOfFire(data);
-    if (initialState instanceof SchellingSegregationState)
-      return new SchellingSegregation(data);
-    if (initialState instanceof WaTorState)
-      return new WaTor(data);
-    if (initialState instanceof PercolationState)
-      return new Percolation(data);
+  private CellularAutomataAlgorithm getSimulationType() {
 
-    // TODO: Find better default behavior
-    return new GameOfLife(data);
+
+    return switch(data.simulationType()) {
+      case CellularAutomata.GAME_OF_LIFE -> new GameOfLife(data);
+      case CellularAutomata.PERCOLATION -> new Percolation(data);
+      case CellularAutomata.SCHELLING_SEGREGATION -> new SchellingSegregation(data);
+      case CellularAutomata.SPREADING_OF_FIRE -> new SpreadingOfFire(data);
+      case CellularAutomata.WATOR -> new WaTor(data);
+      default -> throw new IllegalStateException("Unexpected value: " + data.simulationType());
+    };
+
 
   }
-
-  private boolean isGameOfLife() { return cells[0][0].getState() instanceof GameOfLifeState; }
-  private boolean isSpreadingOfFire() { return cells[0][0].getState() instanceof SpreadingOfFireState; }
-  private boolean isSchellingSegregationState() { return cells[0][0].getState() instanceof SchellingSegregationState; }
-  private boolean isWaTorState() { return cells[0][0].getState() instanceof WaTorState; }
-  private boolean isPercolationState() { return cells[0][0].getState() instanceof PercolationState; }
 
 
   public void update() {
