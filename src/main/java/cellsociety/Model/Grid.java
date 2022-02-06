@@ -30,8 +30,8 @@ public class Grid {
     this.data = data;
     initializeCells(numRows, numColumns, initialStates);
 
-    Neighborhood n = new Neighborhood(neighbors,wrap);
-    n.addNeighbors(cells);
+    Neighborhood n = new Neighborhood(CellularAutomata.SQUARE);
+    n.addNeighbors(cells,neighbors,wrap,null);
     simtype = getSimulationType();
     simtype.initializeResidents(this);
   }
