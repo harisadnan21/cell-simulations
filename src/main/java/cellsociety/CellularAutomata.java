@@ -31,6 +31,12 @@ public class CellularAutomata  {
   private Group root;
   private ResourceBundle myResources;
 
+  public static final int GAME_OF_LIFE = 0;
+  public static final int PERCOLATION = 1;
+  public static final int SCHELLING_SEGREGATION = 2;
+  public static final int SPREADING_OF_FIRE = 3;
+  public static final int WATOR = 4;
+
 //>>>>>>> master:src/main/java/cellsociety/Simulation.java
 
   private double GRIDSTARTINGX = 10;
@@ -68,11 +74,11 @@ public class CellularAutomata  {
 
     // Initialize simulation instance
     switch(simulationData.simulationType()) {
-      case CellularAutomataAlgorithm.GAME_OF_LIFE -> simulation = new GameOfLife(simulationData);
-      case CellularAutomataAlgorithm.PERCOLATION -> simulation = new Percolation(simulationData);
-      case CellularAutomataAlgorithm.SCHELLING_SEGREGATION -> simulation = new SchellingSegregation(simulationData);
-      case CellularAutomataAlgorithm.SPREADING_OF_FIRE -> simulation = new SpreadingOfFire(simulationData);
-      case CellularAutomataAlgorithm.WATOR -> simulation = new WaTor(simulationData);
+      case CellularAutomata.GAME_OF_LIFE -> simulation = new GameOfLife(simulationData);
+      case CellularAutomata.PERCOLATION -> simulation = new Percolation(simulationData);
+      case CellularAutomata.SCHELLING_SEGREGATION -> simulation = new SchellingSegregation(simulationData);
+      case CellularAutomata.SPREADING_OF_FIRE -> simulation = new SpreadingOfFire(simulationData);
+      case CellularAutomata.WATOR -> simulation = new WaTor(simulationData);
     }
 
     // Initialize Grid and GridView with starting config
@@ -82,7 +88,7 @@ public class CellularAutomata  {
 
     grid = new Grid(simulationData.numRows(), simulationData.numColumns(), initialStates, simulationData, neighbors, false);
     gridView = new GridView(width, height, simulationData.numRows(),
-        simulationData.numColumns(),GridView.SQUARE);
+        simulationData.numColumns(),GridView.SQUARE, simulationData.simulationType());
     gridView.updateCells(grid.getCells());
     gridView.setLayoutX(0);
     gridView.setLayoutY(0);

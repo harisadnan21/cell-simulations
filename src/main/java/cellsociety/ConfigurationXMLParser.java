@@ -102,11 +102,11 @@ public class ConfigurationXMLParser {
     List<String> keys = new ArrayList<>();
 
     switch (algorithmType) {
-      case CellularAutomataAlgorithm.GAME_OF_LIFE -> keys = GameOfLife.SPECIFIC_PARAMS;
-      case CellularAutomataAlgorithm.PERCOLATION -> keys = Percolation.SPECIFIC_PARAMS;
-      case CellularAutomataAlgorithm.SCHELLING_SEGREGATION -> keys = SchellingSegregation.SPECIFIC_PARAMS;
-      case CellularAutomataAlgorithm.SPREADING_OF_FIRE -> keys = SpreadingOfFire.SPECIFIC_PARAMS;
-      case CellularAutomataAlgorithm.WATOR -> keys = WaTor.SPECIFIC_PARAMS;
+      case CellularAutomata.GAME_OF_LIFE -> keys = GameOfLife.SPECIFIC_PARAMS;
+      case CellularAutomata.PERCOLATION -> keys = Percolation.SPECIFIC_PARAMS;
+      case CellularAutomata.SCHELLING_SEGREGATION -> keys = SchellingSegregation.SPECIFIC_PARAMS;
+      case CellularAutomata.SPREADING_OF_FIRE -> keys = SpreadingOfFire.SPECIFIC_PARAMS;
+      case CellularAutomata.WATOR -> keys = WaTor.SPECIFIC_PARAMS;
     }
 
     for (String key : keys) {
