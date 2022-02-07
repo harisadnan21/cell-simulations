@@ -11,8 +11,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 public class GUIController {
-    private final double frameDelay;
-    private final String local;
+    private static final double frameDelay;
+    private static final String local;
     private final Stage stage;
     public static final String RESOURCE_PATH = "cellsociety.recources.";
     private ResourceBundle languageResources;
@@ -83,10 +83,12 @@ public class GUIController {
 
 
     protected void showSimulation(CellularAutomata controllerClass) {
-        Selector sds =
+        Selector selector =
                 new Selector(this.controllerClass, WIDTH, HEIGHT, this.languageResources, this.theme);
-        this.stage.setScene(sds);
+        this.stage.setScene(selector);
     }
+
+
 
 
 
@@ -97,7 +99,7 @@ public class GUIController {
     }
 
 
-    protected void createNewControlledStage() {
+    protected static void createNewControlledStage() {
         Stage s = new Stage();
         new GUIController(s, frameDelay, local);
         s.show();
