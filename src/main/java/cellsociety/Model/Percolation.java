@@ -3,11 +3,13 @@ package cellsociety.Model;
 
 import cellsociety.Model.CellState.PercolationState;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Percolation extends CellularAutomataAlgorithm {
 
-  public static final List<String> SPECIFIC_PARAMS = new ArrayList<>();
+  public static final List<String> SPECIFIC_PARAMS = Collections.emptyList();
+  public static final String BUNDLE_NAME = "Percolation";
 
   /**
    * Class constructor.
