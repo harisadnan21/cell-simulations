@@ -9,9 +9,9 @@
     <NumberOfNeighborRows>3</NumberOfNeighborRows>
     <NumberOfNeighborColumns>3</NumberOfNeighborColumns>
     <NeighborConfig>
-        1 1 1
-        1 X 1
-        1 1 1
+        1 0 1
+        0 X 0
+        1 0 1
     </NeighborConfig>
     <StartingConfig>
         1 1 1 1 1
@@ -20,6 +20,7 @@
         1 1 1 1 1
         1 1 1 1 1
     </StartingConfig>
+    <ShouldWrap>false</ShouldWrap>
     <probCatch>1</probCatch>
     <probGeneration>0.5</probGeneration>
 </CellAutomata>

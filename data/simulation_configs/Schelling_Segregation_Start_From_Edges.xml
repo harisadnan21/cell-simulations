@@ -20,5 +20,6 @@
     2 0 0 0 2
     1 0 0 0 1
   </StartingConfig>
+  <ShouldWrap>false</ShouldWrap>
   <Satisfaction>0.25</Satisfaction>
 </CellAutomata>

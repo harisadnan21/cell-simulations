@@ -16,6 +16,7 @@
   <StartingConfig>
     Probability 0.9 0.05 0.05
   </StartingConfig>
+  <ShouldWrap>false</ShouldWrap>
   <probCatch>1</probCatch>
   <probGeneration>0.5</probGeneration>
 </CellAutomata>
