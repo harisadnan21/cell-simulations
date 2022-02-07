@@ -3,11 +3,13 @@ package cellsociety.View;
 import cellsociety.CellularAutomata;
 import cellsociety.Model.Cell;
 import cellsociety.Model.CellState;
+import cellsociety.Model.CellState.FallingSandState;
 import cellsociety.Model.CellState.GameOfLifeState;
 import cellsociety.Model.CellState.PercolationState;
 import cellsociety.Model.CellState.SchellingSegregationState;
 import cellsociety.Model.CellState.SpreadingOfFireState;
 import cellsociety.Model.CellState.WaTorState;
+import cellsociety.Model.FallingSand;
 import cellsociety.Model.GameOfLife;
 import cellsociety.Model.Percolation;
 import cellsociety.Model.SchellingSegregation;
@@ -53,6 +55,7 @@ public class GridView extends TilePane {
       case CellularAutomata.SCHELLING_SEGREGATION -> bundleName = SchellingSegregation.BUNDLE_NAME;
       case CellularAutomata.SPREADING_OF_FIRE -> bundleName = SpreadingOfFire.BUNDLE_NAME;
       case CellularAutomata.WATOR -> bundleName = WaTor.BUNDLE_NAME;
+      case CellularAutomata.FALLING_SAND -> bundleName = FallingSand.BUNDLE_NAME;
       default -> throw new IllegalArgumentException("Invalid simulation type number: " + simulationType);
     }
 
@@ -133,6 +136,13 @@ public class GridView extends TilePane {
           case Empty -> Color.valueOf(myResources.getString("FillColor_Empty"));
           case Fish -> Color.valueOf(myResources.getString("FillColor_Fish"));
           case Shark -> Color.valueOf(myResources.getString("FillColor_Shark"));
+        };
+      }
+      case CellularAutomata.FALLING_SAND -> {
+        FallingSandState s = (FallingSandState) initialState;
+        return switch (s) {
+          case Empty -> Color.valueOf(myResources.getString("FillColor_Empty"));
+          case Sand -> Color.valueOf(myResources.getString("FillColor_Sand"));
         };
       }
     }
