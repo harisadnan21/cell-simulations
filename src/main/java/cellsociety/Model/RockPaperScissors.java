@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class RockPaperScissors extends CellularAutomataAlgorithm{
 
-  public static final List<String> SPECIFIC_PARAMS = List.of("threshold");
+  public static final List<String> SPECIFIC_PARAMS = List.of("Threshold");
   private int threshold;
 
   /**
