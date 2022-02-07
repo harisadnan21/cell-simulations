@@ -125,10 +125,10 @@ public class CellularAutomata  {
     GUIController.exitSimulation();
 
   }
-  public void showVisualization() {
-    this.graph = new CountGraph(this.simulation, resources);
+  public void showChart() {
+    this.chart = new ChartMaker(this.simulation, resources);
     Stage s = new Stage();
-    s.setScene(new Scene(graph, GRAPH_DIM, GRAPH_DIM));
+    s.setScene(new Scene(chart, GRAPH_DIM, GRAPH_DIM));
     s.show();
   }
 
