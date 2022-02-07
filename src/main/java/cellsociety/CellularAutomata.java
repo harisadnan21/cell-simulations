@@ -3,6 +3,7 @@ package cellsociety;
 
 import cellsociety.Model.CellState;
 import cellsociety.Model.CellularAutomataAlgorithm;
+import cellsociety.Model.FallingSand;
 import cellsociety.Model.GameOfLife;
 import cellsociety.Model.Grid;
 import cellsociety.Model.Percolation;
@@ -38,6 +39,7 @@ public class CellularAutomata  {
   public static final int SPREADING_OF_FIRE = 3;
   public static final int WATOR = 4;
   public static final int RPS = 5;
+  public static final int FALLING_SAND = 6;
 
   public static final int SQUARE = 0;
   public static final int TRIANGLE = 1;
@@ -93,6 +95,7 @@ public class CellularAutomata  {
       case CellularAutomata.SCHELLING_SEGREGATION -> simulation = new SchellingSegregation(simulationData);
       case CellularAutomata.SPREADING_OF_FIRE -> simulation = new SpreadingOfFire(simulationData);
       case CellularAutomata.WATOR -> simulation = new WaTor(simulationData);
+      case CellularAutomata.FALLING_SAND -> simulation = new FallingSand(simulationData);
     }
 
     // Initialize Grid and GridView with starting config

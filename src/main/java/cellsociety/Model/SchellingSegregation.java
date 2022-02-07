@@ -4,10 +4,12 @@ package cellsociety.Model;
 import cellsociety.Model.CellState.SchellingSegregationState;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 public class SchellingSegregation extends CellularAutomataAlgorithm {
 
   public static final List<String> SPECIFIC_PARAMS = List.of("Satisfaction");
+  public static final String BUNDLE_NAME = "SchellingSegregation";
 
   private double satisfaction;
 

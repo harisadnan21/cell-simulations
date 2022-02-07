@@ -8,6 +8,7 @@ import java.util.Map;
 public class SpreadingOfFire extends CellularAutomataAlgorithm {
 
   public static final List<String> SPECIFIC_PARAMS = List.of("probCatch", "probGeneration");
+  public static final String BUNDLE_NAME = "SpreadingOfFire";
   // Probability of an empty cell becoming a new tree
   private double probGeneration;
   // Probability of a tree in a cell catching fire if a neighboring cell is on fire
