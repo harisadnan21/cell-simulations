@@ -22,10 +22,10 @@ public abstract class CellView extends Polygon {
   }
 
   // Updates visual properties of CellView according to its state
-  protected void updateFillAndStroke(CellState nextState, int simulationType) {
-    setFill(GridView.getFillColor(nextState,simulationType));
-    setStroke(GridView.getStrokeColor(nextState,simulationType));
-  }
+//  protected void updateFillAndStroke(CellState nextState, int simulationType) {
+//    setFill(GridView.getFillColor(nextState,simulationType));
+//    setStroke(GridView.getStrokeColor(nextState,simulationType));
+//  }
 
   public abstract void drawShape();
 }

@@ -14,6 +14,7 @@ import java.util.Set;
 public class WaTor extends CellularAutomataAlgorithm {
 
   public static final List<String> SPECIFIC_PARAMS = List.of("fishRefractoryPeriod", "sharkRefractoryPeriod", "energyInFood", "sharkInitialEnergy");
+  public static final String BUNDLE_NAME = "WaTor";
 
   private int fishRefractoryPeriod;
   private int sharkRefractoryPeriod;

@@ -8,6 +8,13 @@ import cellsociety.Model.CellState.PercolationState;
 import cellsociety.Model.CellState.SchellingSegregationState;
 import cellsociety.Model.CellState.SpreadingOfFireState;
 import cellsociety.Model.CellState.WaTorState;
+import cellsociety.Model.GameOfLife;
+import cellsociety.Model.Percolation;
+import cellsociety.Model.SchellingSegregation;
+import cellsociety.Model.SpreadingOfFire;
+import cellsociety.Model.WaTor;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import javafx.geometry.Pos;
 import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
@@ -16,6 +23,8 @@ import javafx.scene.paint.Paint;
 public class GridView extends TilePane {
   private CellView[][] cellViews;
   private int simulationType;
+
+  private ResourceBundle myResources;
 
   public static final int SQUARE = 0;
   public static final int TRIANGLE = 1;
@@ -31,8 +40,23 @@ public class GridView extends TilePane {
     setPrefColumns(numColumns);
     setTileAlignment(Pos.TOP_LEFT);
     this.simulationType = simulationType;
+    initializeResourceBundle();
     cellViews = new CellView[numRows][numColumns];
     addCellsToGrid(width, height, numRows, numColumns, typeOfGrid);
+  }
+
+  private void initializeResourceBundle() {
+    String bundleName = "";
+    switch (simulationType) {
+      case CellularAutomata.GAME_OF_LIFE -> bundleName = GameOfLife.BUNDLE_NAME;
+      case CellularAutomata.PERCOLATION -> bundleName = Percolation.BUNDLE_NAME;
+      case CellularAutomata.SCHELLING_SEGREGATION -> bundleName = SchellingSegregation.BUNDLE_NAME;
+      case CellularAutomata.SPREADING_OF_FIRE -> bundleName = SpreadingOfFire.BUNDLE_NAME;
+      case CellularAutomata.WATOR -> bundleName = WaTor.BUNDLE_NAME;
+      default -> throw new IllegalArgumentException("Invalid simulation type number: " + simulationType);
+    }
+
+    myResources = ResourceBundle.getBundle(CellularAutomata.VIEW_RESOURCE_PACKAGE + bundleName, Locale.getDefault());
   }
 
   private void addCellsToGrid(double width, double height, int numRows, int numColumns, int typeOfGrid) {
@@ -56,52 +80,59 @@ public class GridView extends TilePane {
 
     for (int i = 0; i < cells.length; i++) {
       for (int j = 0; j < cells[0].length; j++) {
-        cellViews[i][j].updateFillAndStroke(cells[i][j].getState(),simulationType);
+        updateFillAndStroke(cellViews[i][j], cells[i][j].getState());
+        //cellViews[i][j].updateFillAndStroke(cells[i][j].getState(),simulationType);
       }
     }
   }
 
+  // Updates fill and stroke of CellView based on Cell's state
+  private void updateFillAndStroke(CellView cellView, CellState state) {
+    cellView.setFill(getFillColor(state));
+    cellView.setStroke(getStrokeColor());
+  }
 
-  public static Paint getFillColor(CellState initialState, int simulationType) {
+  // Returns appropriate fill color from resource bundle for given state
+  private Paint getFillColor(CellState initialState) {
 
     switch(simulationType) {
       case CellularAutomata.GAME_OF_LIFE -> {
         GameOfLifeState s = (GameOfLifeState)initialState;
         return switch (s) {
-          case Live -> Color.BLACK;
-          case Dead -> Color.WHITE;
+          case Live -> Color.valueOf(myResources.getString("FillColor_Live"));
+          case Dead -> Color.valueOf(myResources.getString("FillColor_Dead"));
         };
       }
       case CellularAutomata.PERCOLATION -> {
         PercolationState s = (PercolationState)initialState;
         return switch (s) {
-          case Blocked -> Color.BLACK;
-          case Open -> Color.WHITE;
-          case Percolated -> Color.BLUE;
+          case Blocked -> Color.valueOf(myResources.getString("FillColor_Blocked"));
+          case Open -> Color.valueOf(myResources.getString("FillColor_Open"));
+          case Percolated -> Color.valueOf(myResources.getString("FillColor_Percolated"));
         };
       }
       case CellularAutomata.SCHELLING_SEGREGATION -> {
         SchellingSegregationState s = (SchellingSegregationState)initialState;
         return switch (s) {
-          case Empty -> Color.WHITE;
-          case AgentA -> Color.RED;
-          case AgentB -> Color.BLUE;
+          case Empty -> Color.valueOf(myResources.getString("FillColor_Empty"));
+          case AgentA -> Color.valueOf(myResources.getString("FillColor_AgentA"));
+          case AgentB -> Color.valueOf(myResources.getString("FillColor_AgentB"));
         };
       }
       case CellularAutomata.SPREADING_OF_FIRE -> {
         SpreadingOfFireState s = (SpreadingOfFireState)initialState;
         return switch (s) {
-          case Empty -> Color.YELLOW;
-          case Tree -> Color.GREEN;
-          case Burning -> Color.DARKRED;
+          case Empty -> Color.valueOf(myResources.getString("FillColor_Empty"));
+          case Tree -> Color.valueOf(myResources.getString("FillColor_Tree"));
+          case Burning -> Color.valueOf(myResources.getString("FillColor_Burning"));
         };
       }
       case CellularAutomata.WATOR -> {
         WaTorState s = (WaTorState)initialState;
         return switch (s) {
-          case Empty -> Color.WHITE;
-          case Fish -> Color.GREEN;
-          case Shark -> Color.BLUE;
+          case Empty -> Color.valueOf(myResources.getString("FillColor_Empty"));
+          case Fish -> Color.valueOf(myResources.getString("FillColor_Fish"));
+          case Shark -> Color.valueOf(myResources.getString("FillColor_Shark"));
         };
       }
     }
@@ -109,25 +140,8 @@ public class GridView extends TilePane {
     return Color.GRAY;
   }
 
-  public static Paint getStrokeColor(CellState initialState, int simulationType) {
-    switch (simulationType) {
-      case CellularAutomata.GAME_OF_LIFE -> {
-        return Color.BLUE;
-      }
-      case CellularAutomata.PERCOLATION -> {
-        return Color.BLACK;
-      }
-      case CellularAutomata.SCHELLING_SEGREGATION -> {
-        return Color.BLACK;
-      }
-      case CellularAutomata.SPREADING_OF_FIRE -> {
-        return Color.BLACK;
-      }
-      case CellularAutomata.WATOR -> {
-        return Color.BLACK;
-      }
-    }
-
-    return Color.TRANSPARENT;
+  // Returns appropriate stroke color from resource bundle for given state
+  private Paint getStrokeColor() {
+    return Color.valueOf(myResources.getString("StrokeColor"));
   }
 }
