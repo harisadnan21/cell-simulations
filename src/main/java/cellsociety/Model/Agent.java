@@ -1,7 +1,7 @@
 package cellsociety.Model;
 
 /**
- * This class represents an Agent entity in the schelling segregation simulation.
+ * A class that represents an Agent in the SchellingSegregation model.
  *
  * @author Matt Knox
  */

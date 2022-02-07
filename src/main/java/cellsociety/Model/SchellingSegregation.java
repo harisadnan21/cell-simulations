@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 /**
- * This class represents an instance of a Schelling Segregation simulation algorithm.
+ * This class implements the Schelling Segregation simulation.
  *
  * @author Matt Knox
  */
@@ -17,6 +17,7 @@ public class SchellingSegregation extends CellularAutomataAlgorithm {
   public static final String BUNDLE_NAME = "SchellingSegregation";
 
   private double satisfaction;
+
 
 
   /**

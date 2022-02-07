@@ -46,6 +46,7 @@ Assumptions or Simplifications:
 Interesting data files:
 
 Known Bugs:
+* The GridView does not fit perfectly into the given screen. 
 
 Noteworthy Features: 
 * Cell configurations can be generated from the XML using a given configuration,

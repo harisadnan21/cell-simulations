@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * This class represents an instance of a Spreading of Fire simulation algorithm.
+ * This class implements the Spreading of Fire simulation.
  *
  * @author Edison Ooi
  */
@@ -42,6 +42,10 @@ public class SpreadingOfFire extends CellularAutomataAlgorithm {
 
   }
 
+  /**
+   * Runs the Spreading of Fire simulation
+   * @param g Grid that contains the cells that must be updated
+   */
   @Override
   public void runAlgorithm(Grid g) {
     for(Cell[] cellArray: g.getCells()) {

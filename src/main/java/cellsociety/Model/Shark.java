@@ -1,7 +1,8 @@
 package cellsociety.Model;
 
 /**
- * This class represents a Shark that can move across Cells, eat fish, reproduce, and die in WaTor.
+ * This class represents a Fish in the simulation WaTor.
+ * A shark can age, eat, and reproduce.
  *
  * @author Matt Knox
  */
@@ -11,13 +12,6 @@ public class Shark extends CellObject {
   private final int energyInFood;
   private final int refractoryPeriod;
 
-  /**
-   * Class constructor.
-   *
-   * @param refractoryPeriod number of iterations between reproduction
-   * @param energyInFood
-   * @param initialEnergy
-   */
   public Shark(int refractoryPeriod, int energyInFood, int initialEnergy) {
     this.energyInFood = energyInFood;
     this.refractoryPeriod = refractoryPeriod;

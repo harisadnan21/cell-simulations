@@ -1,11 +1,9 @@
 package cellsociety.Model;
 
 import cellsociety.CellularAutomata;
-import java.util.Arrays;
-import java.util.HashSet;
 
 /**
- * This class represents an array of Cells belonging to a certain instance of CellularAutomataAlgorithm.
+ * This class represents the model of a grid.
  *
  * @author Matt Knox
  */
@@ -17,13 +15,13 @@ public class Grid {
 
 
   /**
-   * Class constructor. Sets up the main cell array with their initial states and neighborhood.
+   * A Grid constructor
    *
-   * @param numRows number of rows in grid
-   * @param numColumns number of columns in grid
-   * @param initialStates array of CellStates to be assigned upon Cell initialization
-   * @param data SimulationData containing all the metadata for this simulation
-   * @param neighbors neighborhood configuration around given reference cell
+   * @param numRows: the number of rows in a Grid
+   * @param numColumns: the number of columns in a Grid
+   * @param initialStates: the initial states of the Cells in a Grid
+   * @param data: the data from the XML file
+   * @param neighbors: the neighbors of each cell
    */
   public Grid(int numRows, int numColumns, CellState[][] initialStates, SimulationData data, int[][] neighbors) {
 
@@ -51,7 +49,7 @@ public class Grid {
   }
 
   /**
-   * Clears all CellObjects living inside any cell in the grid
+   * Clears the resident in each cell
    */
   public void clearAllResidents() {
     for(Cell[] cellArray: cells) {
@@ -61,7 +59,6 @@ public class Grid {
     }
   }
 
-  // Instantiates new Cell for every grid location
   private void initializeCells(int numRows, int numColumns, CellState[][] initialStates) {
     cells = new Cell[numRows][numColumns];
     for(int i = 0; i < numRows; i++) {
@@ -71,7 +68,6 @@ public class Grid {
     }
   }
 
-  // Checks if any states in initialStates are invalid
   private boolean hasBadStates(CellState[][] initialStates) {
 
     if(initialStates[0][0] == null) return true;
@@ -102,6 +98,9 @@ public class Grid {
   }
 
 
+  /**
+   * Updates each cell
+   */
   public void update() {
     for(Cell[] cellArray: cells) {
       for(Cell cell: cellArray) {
@@ -110,10 +109,17 @@ public class Grid {
     }
   }
 
+  /**
+   * Calculates the next states of each cell
+   */
   public void calculateNextStates() {
     simtype.runAlgorithm(this);
   }
 
+  /**
+   * Returns the cells
+   * @return: the cells
+   */
   public Cell[][] getCells() {
     return this.cells;
   }

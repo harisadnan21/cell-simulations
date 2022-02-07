@@ -7,9 +7,13 @@ import java.util.HashSet;
 import java.util.Set;
 import javafx.util.Pair;
 
+/**
+ * This class represents a Neighborhood, and contains methods for constructing a Neighborhood.
+ *
+ * @author Matt Knox
+ */
 public class Neighborhood {
 
-  // Characters corresponding to certain neighbor statuses from XML config file
   public static final String ignoreCellString = "0";
   public static final String neighborCellString = "1";
   public static final String refCellString = "X";
@@ -18,21 +22,18 @@ public class Neighborhood {
   public static final int neighborCell = 1;
   public static final int refCell = 2;
 
-  // Predefined config for Moore neighborhood
   private static final int[][] squareMoore = new int[][]{
       { neighborCell, neighborCell, neighborCell},
       { neighborCell, refCell, neighborCell},
       { neighborCell, neighborCell, neighborCell},
   };
 
-  // Predefined config for Von Neumann neighborhood
   private static final int[][] squareVonNeumann = new int[][]{
       { ignoreCell, neighborCell, ignoreCell},
       { neighborCell, refCell, neighborCell},
       { ignoreCell, neighborCell, ignoreCell},
   };
 
-  // Relative coordinates for possible neighbors of square cells
   private static final Set<Pair<Integer,Integer>> allowedSquareNeighbors = new HashSet<>(
       Arrays.asList(
           new Pair<>(-1,-1),
@@ -45,7 +46,6 @@ public class Neighborhood {
           new Pair<>(0,-1)
       ));
 
-  // Relative coordinates for possible neighbors of hexagon cells
   private static final Set<Pair<Integer,Integer>> allowedEvenRowHexagonNeighbors = new HashSet<>(
       Arrays.asList(
         new Pair<>(-2,0),
@@ -56,7 +56,6 @@ public class Neighborhood {
         new Pair<>(-1,-1)
   ));
 
-  // Relative coordinates for possible neighbors of hexagon cells
   private static final Set<Pair<Integer,Integer>> allowedOddRowHexagonNeighbors = new HashSet<>(
       Arrays.asList(
           new Pair<>(-2,0),
@@ -68,7 +67,6 @@ public class Neighborhood {
       )
   );
 
-  // Relative coordinates for possible neighbors of triangle cells
   private static final Set<Pair<Integer,Integer>> allowedUpMaxTriangleNeighbors = new HashSet<>(
       Arrays.asList(
           new Pair<>(-1,0),
@@ -86,7 +84,6 @@ public class Neighborhood {
       )
   );
 
-  // Relative coordinates for possible neighbors of triangle cells
   private static final Set<Pair<Integer,Integer>> allowedDownMaxTriangleNeighbors = new HashSet<>(
       Arrays.asList(
           new Pair<>(-1,0),
@@ -145,21 +142,24 @@ public class Neighborhood {
   };
 
 
+
   private int gridShape;
 
-
+  /**
+   * A Neighborhood constructor
+   * @param gridShape: an int corresponding to the shapes within the Grid
+   */
   public Neighborhood(int gridShape) {
     this.gridShape = gridShape;
   }
 
 
   /**
-   * Adds neighbors to every cell in cells using the provided neighborhood configuration.
    *
-   * @param cells Every cell on the current simulation's grid
-   * @param data Represents neighborhood configuration extracted from XML file
-   * @param wrap Indicates whether or not edges are toroidal or not
-   * @param customization Number representing the specific neighborhood style
+   * @param cells: the cells to create neighbors for
+   * @param data: neighborhood data
+   * @param wrap: whether cells should wrap or not
+   * @param customization: an int corresponding to the type of neighborhood
    */
   public void addNeighbors(Cell[][] cells, int[][] data, boolean wrap, int customization) {
     switch(gridShape) {

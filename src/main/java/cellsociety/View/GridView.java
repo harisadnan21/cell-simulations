@@ -26,7 +26,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
 /**
- * This class represents the view of the grid of cells of the current Cell Automata simulation.
+ * This class represents the JavaFX view of a Grid.
  *
  * @author Matt Knox
  */
@@ -50,17 +50,16 @@ public class GridView {
 
 
   /**
-   * Class constructor.
-   *
-   * @param x starting x value to draw grid from
-   * @param y starting y value to draw grid from
-   * @param width width of grid
-   * @param height height of grid
-   * @param numRows number of rows in grid
-   * @param numColumns number of columns in grid
-   * @param typeOfGrid indicates what shape each CellView will be
-   * @param simulationType indicates the type of Cell Automata simulation
-   * @param g Group that holds all child nodes created
+   * The constructor for a GridView
+   * @param x: starting x coordinate
+   * @param y: starting y coordinate
+   * @param width: width of the grid
+   * @param height: height of the grid
+   * @param numRows: number of rows of the grid
+   * @param numColumns: number of columns of the grid
+   * @param typeOfGrid: the type of grid: square, triangle, or hexagon
+   * @param simulationType: the type of simulation (e.g. Game of Life)
+   * @param g: the group to add cells to
    */
   public GridView(double x, double y, double width, double height, int numRows, int numColumns,
       int typeOfGrid, int simulationType, Group g) {
@@ -79,7 +78,6 @@ public class GridView {
     addCellsToGrid(width, height, numRows, numColumns, typeOfGrid);
   }
 
-  // Initializes resource bundle that contains visual specifications for CellViews in grid
   private void initializeResourceBundle() {
     String bundleName = "";
     switch (simulationType) {
@@ -97,7 +95,6 @@ public class GridView {
         Locale.getDefault());
   }
 
-  // Instantiates CellView objects to place into GridView
   private void addCellsToGrid(double width, double height, int numRows, int numColumns,
       int typeOfGrid) {
     for (int i = 0; i < cellViews.length; i++) {
@@ -113,11 +110,16 @@ public class GridView {
           case CellularAutomata.HEXAGON -> cellViews[i][j] = new HexagonCellView(width / numColumns,
               height / numRows, i, xLocation, yLocation);
         }
+        //cellViews[i][j] = new CellView((width / 1.2) / numRows, (height / 1.2) / numColumns);
         g.getChildren().add(cellViews[i][j]);
       }
     }
   }
 
+  /**
+   * Updates all the cells in the grid
+   * @param cells: the cells to update
+   */
   public void updateCells(Cell[][] cells) {
     if (cells.length != numRows || cells[0].length != numColumns) {
       throw new RuntimeException("CellStates are not the correct size");
@@ -126,6 +128,7 @@ public class GridView {
     for (int i = 0; i < cells.length; i++) {
       for (int j = 0; j < cells[0].length; j++) {
         updateFillAndStroke(cellViews[i][j], cells[i][j].getState());
+        //cellViews[i][j].updateFillAndStroke(cells[i][j].getState(),simulationType);
       }
     }
   }

@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * This class represents an instance of a WaTor simulation algorithm.
+ * This class implements the WaTor simulation.
  *
  * @author Matt Knox
  */
@@ -62,6 +62,10 @@ public class WaTor extends CellularAutomataAlgorithm {
     }
   }
 
+  /**
+   * Runs the WaTor update algorithm
+   * @param g Grid that contains the cells that must be updated
+   */
   @Override
   public void runAlgorithm(Grid g) {
     // find out where each resident will go

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * This class represents an instance of a Percolation simulation algorithm.
+ * This class implements the Rock Paper Scissors simulation.
  *
  * @author Matt Knox
  */
@@ -36,6 +36,10 @@ public class RockPaperScissors extends CellularAutomataAlgorithm{
 
   }
 
+  /**
+   * Runs the Rock Paper Scissors algorithm
+   * @param g Grid that contains the cells that must be updated
+   */
   @Override
   public void runAlgorithm(Grid g) {
     for(Cell[] cellArray: g.getCells()) {
@@ -45,7 +49,6 @@ public class RockPaperScissors extends CellularAutomataAlgorithm{
     }
   }
 
-  // Changes current cell into its defeator if it loses to enough neighbors
   private void updateCell(Cell c) {
     RPSState currentState = (RPSState) c.getState();
     RPSState defeatorState = getDefeatorState(currentState);
@@ -60,7 +63,6 @@ public class RockPaperScissors extends CellularAutomataAlgorithm{
       c.assignNextState(c.getState());
   }
 
-  // Gets the RPSState that beats this state
   private RPSState getDefeatorState(RPSState currentState) {
     return switch (currentState) {
       case Rock -> RPSState.Paper;
