@@ -17,10 +17,12 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -51,20 +53,9 @@ public class CellularAutomata  {
   public static final int tips = 3;
   public static final int sides = 4;
 
-  private double GRIDSTARTINGX = 10;
-  private double GRIDSTARTINGY = 10;
-  private double GRIDHEIGHT;
-  private double GRIDWIDTH;
-  private int GRIDCOLS;
-  private int GIDROWS;
-  private double GRIDSTROKEWIDTH;
-  private Button startButton;
-  private Button stopButton;
-  private Button speedUp;
-  private Button slowDown;
-  private Button loadButton;
-  private Button saveButton;
-  private static final double GRAPH_DIM = 600;
+
+  private static final int BUTTON_PANEL_WIDTH = 100;
+  public static final int BUTTON_OFFSET = 30;
   private boolean runVal;
   private CellularAutomataAlgorithm simulation;
   private Grid grid;
@@ -96,7 +87,7 @@ public class CellularAutomata  {
 
     runVal = true;
     root = new Group();
-
+    root.getChildren().add(makeButtons());
     // Initialize simulation instance
     switch(simulationData.simulationType()) {
       case CellularAutomata.GAME_OF_LIFE -> simulation = new GameOfLife(simulationData);
@@ -125,6 +116,26 @@ public class CellularAutomata  {
     animation.play();
 
     return scene;
+  }
+
+  /**
+   * Creates a vertical panel of control buttons
+   * @return VBox of Buttons
+   */
+  public VBox makeButtons(){
+    VBox row = new VBox(BUTTON_OFFSET);
+
+    Button playButton = new Button("Play");
+    Button speedUpButton = new Button("SpeedUp");
+    Button slowDownButton = new Button("SlowDown");
+    Button pauseButton = new Button("Pause");
+    playButton.setOnAction(e -> startSim());
+    speedUpButton.setOnAction(e -> speedUp());
+    slowDownButton.setOnAction(e ->slowDown());
+    pauseButton.setOnAction(e -> stopSim());
+    row.getChildren().addAll(playButton, speedUpButton, slowDownButton, pauseButton);
+    row.setAlignment(Pos.CENTER);
+    return row;
   }
 
   /**

@@ -24,11 +24,25 @@ multiple windows simultaneously, and styling using properties files.
 
 
 ### Resources Used
+* FallingSand.properties
+
+* GameOfLife.properties
+
+* Percolation.properties
+
+* SchellingSegregation.properties
+
+* SimulationValues.properties
+
+* SpreadingOfFire.properties
+
+* WaTor.properties
+
 
 
 ### Running the Program
 
-Main class:
+Main class: CellularAutomata
 
 Data files needed: 
 * Simulation configuration files located in data/simulation_configs
@@ -36,6 +50,17 @@ Data files needed:
 * One properties file per simulation type in src/main/resources/view
 
 Features implemented:
+
+The project can run 5 different types of simulations:
+
+* FallingSand
+* Gameoflife
+* Percolation
+* SchelingSegregatin
+* Spreading of Fire
+* WaTor
+
+The GUI contains buttons that allow the simulation to Stop, play, run faster, or slow down.
 
 
 
@@ -55,9 +80,13 @@ Known Bugs:
 Noteworthy Features: 
 * Cell configurations can be generated from the XML using a given configuration,
 randomly, or from given probabilities for each state.
+
 * Neighborhoods can be specified in the configuration file as any combination of
 neighbors and non-neighbors around a reference cell
 
 
 ### Impressions
 
+We were all very relieved to see the simulations finally work, especially WaTor. We lacked a bit on the visualization specs, but we ended up improvising. 
+However, we were able to generally have a steady progression from beginning to the end, though the way that work was distributed could have been done better.
+This assignment was very interesting and worth the hours spent to decipher the algorithms to make them work.
