@@ -71,17 +71,17 @@ public class CellularAutomata  {
   private CellularAutomataAlgorithm simulation;
   private Grid grid;
   private GridView gridView;
-  private double frameDelay = 1;
+  private double frameDelay = 0.5;
   private double newTime;
 
-  public CellularAutomata(GUIController guiController, ResourceBundle languageResources) {
+  public CellularAutomata() {
     myResources = ResourceBundle.getBundle(VIEW_RESOURCE_PACKAGE + "SimulationValues", Locale.getDefault());
   }
 
   protected Scene setUpSimulation(int width, int height, Paint background) {
 
     // Get SimulationData record from XML
-    File configFile = new File("./data/simulation_configs/Percolation_ZigZag_From_Edge.xml");
+    File configFile = new File("./data/simulation_configs/Falling_Sand_Two_Stack.xml");
     SimulationData simulationData = new ConfigurationXMLParser(
         SimulationData.DATA_TYPE).getSimulationData(configFile);
 
@@ -156,9 +156,9 @@ public class CellularAutomata  {
     runVal = false;
   }
 
-  public void openAdditionalSimulation() {
-    GUIController.createNewControlledStage();
-  }
+//  public void openAdditionalSimulation() {
+//    GUIController.createNewControlledStage();
+//  }
 
 //
 //  private void save() {

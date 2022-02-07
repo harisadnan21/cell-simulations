@@ -115,7 +115,7 @@ public class GridView {
   // Updates fill and stroke of CellView based on Cell's state
   private void updateFillAndStroke(CellView cellView, CellState state) {
     cellView.setFill(getFillColor(state));
-    cellView.setStroke(getStrokeColor(simulationType));
+    cellView.setStroke(getStrokeColor());
   }
 
   // Returns appropriate fill color from resource bundle for given state
@@ -179,19 +179,6 @@ public class GridView {
     }
 
     return Color.GRAY;
-  }
-
-
-  public static Paint getStrokeColor(int simulationType) {
-    return switch (simulationType) {
-      case CellularAutomata.GAME_OF_LIFE -> Color.BLUE;
-      case CellularAutomata.PERCOLATION -> Color.BLACK;
-      case CellularAutomata.SCHELLING_SEGREGATION -> Color.BLACK;
-      case CellularAutomata.SPREADING_OF_FIRE -> Color.BLACK;
-      case CellularAutomata.WATOR -> Color.BLACK;
-      case CellularAutomata.RPS -> Color.BLACK;
-      default -> Color.BLACK;
-    };
   }
 
 

@@ -46,6 +46,17 @@ public class FallingSand extends CellularAutomataAlgorithm {
         }
       }
     }
+
+    for (int i = 0; i < cells.length; i++) {
+      for (int j = 0; j < cells[0].length; j++) {
+        if(cells[i][j].getNextState() == null) {
+          cells[i][j].assignNextState(cells[i][j].getState());
+        }
+      }
+    }
+
+
+
   }
 
 
