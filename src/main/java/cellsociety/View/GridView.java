@@ -192,10 +192,12 @@ public class GridView {
       case CellularAutomata.RPS -> Color.BLACK;
       default -> Color.BLACK;
     };
-
-    // Returns appropriate stroke color from resource bundle for given state
-    private Paint getStrokeColor() {
-      return Color.valueOf(myResources.getString("StrokeColor"));
-    }
   }
+
+
+  // Returns appropriate stroke color from resource bundle for given state
+  private Paint getStrokeColor() {
+    return Color.valueOf(myResources.getString("StrokeColor"));
+  }
+
 }

@@ -78,6 +78,7 @@ public class Grid {
       case CellularAutomata.SCHELLING_SEGREGATION -> new SchellingSegregation(data);
       case CellularAutomata.SPREADING_OF_FIRE -> new SpreadingOfFire(data);
       case CellularAutomata.WATOR -> new WaTor(data);
+      case CellularAutomata.FALLING_SAND -> new FallingSand(data);
       default -> throw new IllegalStateException("Unexpected value: " + data.simulationType());
     };
   }

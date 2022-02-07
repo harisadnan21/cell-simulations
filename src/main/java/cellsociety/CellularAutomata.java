@@ -136,16 +136,16 @@ public class CellularAutomata  {
       step();
     }
   }
-  public void exitSimulation() {
-    GUIController.exitSimulation();
-
-  }
-  public void showChart() {
-    this.chart = new ChartMaker(this.simulation, resources);
-    Stage s = new Stage();
-    s.setScene(new Scene(chart, GRAPH_DIM, GRAPH_DIM));
-    s.show();
-  }
+//  public void exitSimulation() {
+//    GUIController.exitSimulation();
+//
+//  }
+//  public void showChart() {
+//    this.chart = new ChartMaker(this.simulation, resources);
+//    Stage s = new Stage();
+//    s.setScene(new Scene(chart, GRAPH_DIM, GRAPH_DIM));
+//    s.show();
+//  }
 
 
   public void startSim() {

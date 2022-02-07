@@ -2,6 +2,11 @@ package cellsociety.Model;
 
 import java.util.Collection;
 
+/**
+ * This class represents the data held by one cell in a cell automata simulation.
+ *
+ * @author Matt Knox
+ */
 public class Cell {
   private CellState currentState;
   private CellState nextState;
