@@ -1,6 +1,7 @@
 package cellsociety;
 
 import cellsociety.Model.CellularAutomataAlgorithm;
+import cellsociety.Model.FallingSand;
 import cellsociety.Model.GameOfLife;
 import cellsociety.Model.Percolation;
 import cellsociety.Model.SchellingSegregation;
@@ -26,6 +27,7 @@ import org.xml.sax.SAXException;
  *
  * @author Rhondu Smithwick
  * @author Robert C. Duvall
+ * @author Edison Ooi
  */
 public class ConfigurationXMLParser {
 
@@ -107,6 +109,7 @@ public class ConfigurationXMLParser {
       case CellularAutomata.SCHELLING_SEGREGATION -> keys = SchellingSegregation.SPECIFIC_PARAMS;
       case CellularAutomata.SPREADING_OF_FIRE -> keys = SpreadingOfFire.SPECIFIC_PARAMS;
       case CellularAutomata.WATOR -> keys = WaTor.SPECIFIC_PARAMS;
+      case CellularAutomata.FALLING_SAND -> keys = FallingSand.SPECIFIC_PARAMS;
     }
 
     for (String key : keys) {
