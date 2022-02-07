@@ -6,6 +6,7 @@ import cellsociety.Model.Cell;
 import cellsociety.Model.CellState;
 import cellsociety.Model.CellState.GameOfLifeState;
 import cellsociety.Model.CellState.PercolationState;
+import cellsociety.Model.CellState.RPSState;
 import cellsociety.Model.CellState.SchellingSegregationState;
 import cellsociety.Model.CellState.SpreadingOfFireState;
 import cellsociety.Model.CellState.WaTorState;
@@ -103,30 +104,28 @@ public class GridView extends TilePane {
           case Shark -> Color.BLUE;
         };
       }
+      case CellularAutomata.RPS -> {
+        RPSState s = (RPSState) initialState;
+        return switch (s) {
+          case Rock -> Color.RED;
+          case Paper -> Color.GREEN;
+          case Scissors -> Color.BLUE;
+        };
+      }
     }
 
     return Color.GRAY;
   }
 
   public static Paint getStrokeColor(CellState initialState, int simulationType) {
-    switch (simulationType) {
-      case CellularAutomata.GAME_OF_LIFE -> {
-        return Color.BLUE;
-      }
-      case CellularAutomata.PERCOLATION -> {
-        return Color.BLACK;
-      }
-      case CellularAutomata.SCHELLING_SEGREGATION -> {
-        return Color.BLACK;
-      }
-      case CellularAutomata.SPREADING_OF_FIRE -> {
-        return Color.BLACK;
-      }
-      case CellularAutomata.WATOR -> {
-        return Color.BLACK;
-      }
-    }
-
-    return Color.TRANSPARENT;
+    return switch (simulationType) {
+      case CellularAutomata.GAME_OF_LIFE -> Color.BLUE;
+      case CellularAutomata.PERCOLATION -> Color.BLACK;
+      case CellularAutomata.SCHELLING_SEGREGATION -> Color.BLACK;
+      case CellularAutomata.SPREADING_OF_FIRE -> Color.BLACK;
+      case CellularAutomata.WATOR -> Color.BLACK;
+      case CellularAutomata.RPS -> Color.BLACK;
+      default -> Color.BLACK;
+    };
   }
 }

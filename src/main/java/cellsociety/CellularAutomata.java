@@ -36,6 +36,7 @@ public class CellularAutomata  {
   public static final int SCHELLING_SEGREGATION = 2;
   public static final int SPREADING_OF_FIRE = 3;
   public static final int WATOR = 4;
+  public static final int RPS = 5;
 
   public static final int SQUARE = 0;
   public static final int TRIANGLE = 1;
