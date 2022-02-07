@@ -29,7 +29,6 @@ public class Grid {
 
     this.data = data;
     initializeCells(numRows, numColumns, initialStates);
-
     // TODO: Replace static constants with XML input
     Neighborhood n = new Neighborhood(CellularAutomata.SQUARE);
     n.addNeighbors(cells,neighbors,data.shouldWrap(),CellularAutomata.vonNeumann);

@@ -102,7 +102,6 @@ public class CellularAutomata  {
     CellState[][] initialStates = simulation.getInitialCellConfig();
     int[][] neighbors = simulation.getNeighborhoodConfig();
     //boolean wrap = simulation.getWrap();
-
     // TODO: Replace static constants with XML input
     grid = new Grid(simulationData.numRows(), simulationData.numColumns(), initialStates, simulationData, neighbors);
     gridView = new GridView(0.0,0.0,width, height, simulationData.numRows(),
