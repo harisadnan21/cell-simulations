@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<CellAutomata>
+  <NumberOfRows>7</NumberOfRows>
+  <NumberOfColumns>7</NumberOfColumns>
+  <SimulationType>6</SimulationType>
+  <Title>Falling Sand</Title>
+  <Author>Edison Ooi, Matt Knox, Haris Adnan</Author>
+  <Description>Simulation of Falling Sand in which two sand blocks stack on each other and flows over.</Description>
+  <NumberOfNeighborRows>3</NumberOfNeighborRows>
+  <NumberOfNeighborColumns>3</NumberOfNeighborColumns>
+  <NeighborConfig>
+    1 1 1
+    1 X 1
+    1 1 1
+  </NeighborConfig>
+  <StartingConfig>
+    0 0 0 1 0 0 0
+    0 0 0 0 0 0 0
+    0 0 0 1 0 0 0
+    0 0 0 0 0 0 0
+    0 0 0 0 0 0 0
+    0 0 0 0 0 0 0
+    0 0 0 0 0 0 0
+  </StartingConfig>
+  <ShouldWrap>false</ShouldWrap>
+</CellAutomata>
