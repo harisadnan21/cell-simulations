@@ -90,7 +90,7 @@ public class CellularAutomata  {
   protected Scene setUpSimulation(int width, int height, Paint background) {
 
     // Get SimulationData record from XML
-    File configFile = new File("./data/simulation_configs/Falling_Sand_Two_Stack.xml");
+    File configFile = new File("./data/simulation_configs/Spreading_Of_Fire_Random_Config.xml");
     SimulationData simulationData = new ConfigurationXMLParser(
         SimulationData.DATA_TYPE).getSimulationData(configFile);
 

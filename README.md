@@ -42,11 +42,15 @@ Features implemented:
 ### Notes/Assumptions
 
 Assumptions or Simplifications:
+* Config file must be specified in code, no solution for picking at runtime unfortunately
+* Falling sand ignores neighborhoods
+* Configuration files must include all tags asked for by simulation
 
 Interesting data files:
 
 Known Bugs:
 * The GridView does not fit perfectly into the given screen. 
+* Speed up and slow down buttons do not work
 
 Noteworthy Features: 
 * Cell configurations can be generated from the XML using a given configuration,
