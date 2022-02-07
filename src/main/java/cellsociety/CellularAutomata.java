@@ -110,14 +110,11 @@ public class CellularAutomata  {
     // Initialize Grid and GridView with starting config
     CellState[][] initialStates = simulation.getInitialCellConfig();
     int[][] neighbors = simulation.getNeighborhoodConfig();
-    //boolean wrap = simulation.getWrap();
-    // TODO: Replace static constants with XML input
+
     grid = new Grid(simulationData.numRows(), simulationData.numColumns(), initialStates, simulationData, neighbors);
-    gridView = new GridView(100.0,0.0,width - 100, height, simulationData.numRows(),
-        simulationData.numColumns(), SQUARE, simulationData.simulationType(), root);
+    gridView = new GridView(BUTTON_PANEL_WIDTH,0.0,width - BUTTON_PANEL_WIDTH, height, simulationData.numRows(),
+        simulationData.numColumns(), getCellShape(), simulationData.simulationType(), root);
     gridView.updateCells(grid.getCells());
-    //gridView.setLayoutX(0);
-    //gridView.setLayoutY(0);
     scene = new Scene(root, width, height, background);
 
     //setting up the animation
@@ -171,6 +168,15 @@ public class CellularAutomata  {
   // Speeds up animation
   private void speedUp() {
     frameDelay = frameDelay / 2;
+  }
+
+  private int getCellShape() {
+    return switch (myResources.getString("CellShape")) {
+      case "Rectangle" -> SQUARE;
+      case "Triangle" -> TRIANGLE;
+      case "Hexagon" -> HEXAGON;
+      default -> SQUARE;
+    };
   }
 
   // Slows down animation
