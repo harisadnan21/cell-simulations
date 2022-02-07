@@ -50,7 +50,7 @@ public class Displayer extends Scene {
             playButton.setOnAction(e -> controllerClass.startSim());
             speedUpButton.setOnAction(e -> controllerClass.speedUp());
             slowDownButton.setOnAction(e -> controllerClass.slowDown());
-            pauseButton.setOnAction(e -> controllerClass.stop());
+            pauseButton.setOnAction(e -> controllerClass.stopSim());
             stepButton.setOnAction(e -> controllerClass.step());
 
 
@@ -69,8 +69,8 @@ public class Displayer extends Scene {
             Button loadAdditionalButton = new Button(resources.getString("LoadAdditionalSimulation"));
 
             exitButton.setOnAction(e -> controllerClass.exitSimulation());
-            showGraphButton.setOnAction(e -> controllerClass.showVisualization());
-            saveButton.setOnAction(e -> controllerClass.saveSimulationToDisk());
+            //showGraphButton.setOnAction(e -> controllerClass.showChart());
+            //saveButton.setOnAction(e -> controllerClass.saveSimulationToDisk());
             loadAdditionalButton.setOnAction(e -> controllerClass.openAdditionalSimulation());
 
             row.getChildren().addAll(exitButton, showGraphButton, saveButton, loadAdditionalButton);

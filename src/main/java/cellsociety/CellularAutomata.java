@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Paint;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class CellularAutomata  {
@@ -63,11 +64,13 @@ public class CellularAutomata  {
   private Button slowDown;
   private Button loadButton;
   private Button saveButton;
+  private static final double GRAPH_DIM = 600;
   private boolean runVal;
   private CellularAutomataAlgorithm simulation;
   private Grid grid;
   private GridView gridView;
   private double frameDelay = 1;
+  private double newTime;
 
   public CellularAutomata(GUIController guiController, ResourceBundle languageResources) {
     myResources = ResourceBundle.getBundle(VIEW_RESOURCE_PACKAGE + "SimulationValues", Locale.getDefault());
@@ -109,19 +112,37 @@ public class CellularAutomata  {
     Timeline animation = new Timeline();
     animation.setCycleCount(Timeline.INDEFINITE);
     animation.getKeyFrames()
-        .add(new KeyFrame(Duration.seconds(frameDelay), e -> step(frameDelay)));
+        .add(new KeyFrame(Duration.seconds(frameDelay), e -> update(frameDelay)));
     animation.play();
 
     return scene;
   }
 
-  public void step(double elapsedTime) {
+  public void step() {
 
     grid.calculateNextStates();
     grid.update();
     gridView.updateCells(grid.getCells());
 
   }
+  public void update(double elapsedTime) {
+    newTime = newTime + elapsedTime;
+    if(newTime > frameDelay && runVal) {
+      newTime = 0;
+      step();
+    }
+  }
+  public void exitSimulation() {
+    GUIController.exitSimulation();
+
+  }
+  public void showChart() {
+    this.chart = new ChartMaker(this.simulation, resources);
+    Stage s = new Stage();
+    s.setScene(new Scene(chart, GRAPH_DIM, GRAPH_DIM));
+    s.show();
+  }
+
 
   public void startSim() {
     runVal = true;
@@ -130,6 +151,11 @@ public class CellularAutomata  {
   public void stopSim() {
     runVal = false;
   }
+
+  public void openAdditionalSimulation() {
+    GUIController.createNewControlledStage();
+  }
+
 //
 //  private void save() {
 //    stop();
