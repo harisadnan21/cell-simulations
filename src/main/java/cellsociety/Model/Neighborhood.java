@@ -146,7 +146,7 @@ public class Neighborhood {
   }
 
 
-  public void addNeighbors(Cell[][] cells, int[][] data, boolean wrap, String customization) {
+  public void addNeighbors(Cell[][] cells, int[][] data, boolean wrap, int customization) {
     switch(gridShape) {
       case CellularAutomata.SQUARE -> {
         switch (customization) {
