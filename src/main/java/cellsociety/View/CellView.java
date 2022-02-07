@@ -16,9 +16,8 @@ public abstract class CellView extends Polygon {
    * @param width
    * @param height
    */
-  public CellView(double width, double height) {
-    super(width, height);
-    drawShape();
+  public CellView(double width, double height, int counter, double x, double y) {
+    drawShape(width,height, counter, x, y);
   }
 
   // Updates visual properties of CellView according to its state
@@ -27,5 +26,5 @@ public abstract class CellView extends Polygon {
     setStroke(GridView.getStrokeColor(nextState,simulationType));
   }
 
-  public abstract void drawShape();
+  public abstract void drawShape(double width, double height, int counter, double x, double y);
 }

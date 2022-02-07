@@ -11,26 +11,36 @@ import cellsociety.Model.CellState.SchellingSegregationState;
 import cellsociety.Model.CellState.SpreadingOfFireState;
 import cellsociety.Model.CellState.WaTorState;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
-public class GridView extends TilePane {
+public class GridView  {
   private CellView[][] cellViews;
   private int simulationType;
 
+  private double startingX;
+  private double startingY;
+  private int numRows;
+  private int numColumns;
+  private double width;
+  private double height;
+  private Group g;
 
 
 
-
-  public GridView(double width, double height, int numRows, int numColumns, int typeOfGrid, int simulationType) {
+  public GridView(double x, double y, double width, double height, int numRows, int numColumns, int typeOfGrid, int simulationType, Group g) {
     super();
-    setWidth(width);
-    setHeight(height);
-    setPrefRows(numRows);
-    setPrefColumns(numColumns);
-    setTileAlignment(Pos.TOP_LEFT);
+    startingX = x;
+    startingY = y;
+    this.width = width;//setWidth(width);
+    this.height = height;//setHeight(height);
+    this.numRows = numRows;//setPrefRows(numRows);
+    this.numColumns = numColumns;//setPrefColumns(numColumns);
+    //setTileAlignment(Pos.TOP_LEFT);
     this.simulationType = simulationType;
+    this.g = g;
     cellViews = new CellView[numRows][numColumns];
     addCellsToGrid(width, height, numRows, numColumns, typeOfGrid);
   }
@@ -38,19 +48,21 @@ public class GridView extends TilePane {
   private void addCellsToGrid(double width, double height, int numRows, int numColumns, int typeOfGrid) {
     for (int i = 0; i < cellViews.length; i++) {
       for (int j = 0; j < cellViews[0].length; j++) {
+        double xLocation = startingX + (j * width/numColumns);
+        double yLocation = startingY + (i * height/numRows);
         switch(typeOfGrid) {
-          case CellularAutomata.SQUARE -> cellViews[i][j] = new SquareCellView((width / 1.2) / numRows, (height / 1.2) / numColumns);
-          case CellularAutomata.TRIANGLE -> cellViews[i][j] = new TriangleCellView((width / 1.2) / numRows, (height / 1.2) / numColumns,i+j);
-          case CellularAutomata.HEXAGON -> cellViews[i][j] = new HexagonCellView((width / 1.2) / numRows, (height / 1.2) / numColumns,i);
+          case CellularAutomata.SQUARE -> cellViews[i][j] = new SquareCellView(width / numColumns, height / numRows, xLocation, yLocation);
+          case CellularAutomata.TRIANGLE -> cellViews[i][j] = new TriangleCellView(width / (1 + numColumns/2.0), height / numRows,i+j, startingX + (j * width/(1 + numColumns/2.0)/2.0), yLocation);
+          case CellularAutomata.HEXAGON -> cellViews[i][j] = new HexagonCellView(width  / numColumns, height / numRows,i, xLocation, yLocation);
         }
         //cellViews[i][j] = new CellView((width / 1.2) / numRows, (height / 1.2) / numColumns);
-        this.getChildren().add(cellViews[i][j]);
+        g.getChildren().add(cellViews[i][j]);
       }
     }
   }
 
   public void updateCells(Cell[][] cells) {
-    if(cells.length != getPrefRows() || cells[0].length != getPrefColumns()) {
+    if(cells.length != numRows || cells[0].length != numColumns) {
       throw new RuntimeException("CellStates are not the correct size");
     }
 
