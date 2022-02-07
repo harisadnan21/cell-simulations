@@ -43,11 +43,11 @@ public class CellularAutomata  {
   public static final int TRIANGLE = 1;
   public static final int HEXAGON = 2;
 
-  public static final String moore = "Moore";
-  public static final String vonNeumann = "Von Neumann";
-  public static final String maximum = "max";
-  public static final String tips = "tips";
-  public static final String sides = "sides";
+  public static final int moore = 0;
+  public static final int vonNeumann = 1;
+  public static final int maximum = 2;
+  public static final int tips = 3;
+  public static final int sides = 4;
 
 //>>>>>>> master:src/main/java/cellsociety/Simulation.java
 
@@ -100,13 +100,14 @@ public class CellularAutomata  {
     int[][] neighbors = simulation.getNeighborhoodConfig();
     //boolean wrap = simulation.getWrap();
 
-    grid = new Grid(simulationData.numRows(), simulationData.numColumns(), initialStates, simulationData, neighbors, false);
-    gridView = new GridView(width, height, simulationData.numRows(),
-        simulationData.numColumns(),SQUARE, simulationData.simulationType());
+    // TODO: Replace static constants with XML input
+    grid = new Grid(simulationData.numRows(), simulationData.numColumns(), initialStates, simulationData, neighbors);
+    gridView = new GridView(0.0,0.0,width, height, simulationData.numRows(),
+        simulationData.numColumns(), SQUARE, simulationData.simulationType(), root);
     gridView.updateCells(grid.getCells());
-    gridView.setLayoutX(0);
-    gridView.setLayoutY(0);
-    scene = new Scene(new HBox(gridView), width, height, background);
+    //gridView.setLayoutX(0);
+    //gridView.setLayoutY(0);
+    scene = new Scene(root, width, height, background);
 
     //setting up the animation
     Timeline animation = new Timeline();
