@@ -10,6 +10,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/**
+ * This class represents an instance of a Game of Life simulation algorithm.
+ *
+ * @author Matt Knox
+ */
 public class GameOfLife extends CellularAutomataAlgorithm {
 
   public static final List<String> SPECIFIC_PARAMS = Collections.emptyList();
@@ -45,6 +50,7 @@ public class GameOfLife extends CellularAutomataAlgorithm {
     }
   }
 
+  // Determines if cell should be alive or dead based on if it has enough live neighbors
   private void updateCell(Cell c) {
     GameOfLifeState currentState = (GameOfLifeState) c.getState();
     Collection<Cell> neighbors = c.getNeighbors();

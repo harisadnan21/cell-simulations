@@ -4,6 +4,11 @@ import cellsociety.CellularAutomata;
 import java.util.Arrays;
 import java.util.HashSet;
 
+/**
+ * This class represents an array of Cells belonging to a certain instance of CellularAutomataAlgorithm.
+ *
+ * @author Matt Knox
+ */
 public class Grid {
 
   private Cell[][] cells;
@@ -11,6 +16,15 @@ public class Grid {
   private SimulationData data;
 
 
+  /**
+   * Class constructor. Sets up the main cell array with their initial states and neighborhood.
+   *
+   * @param numRows number of rows in grid
+   * @param numColumns number of columns in grid
+   * @param initialStates array of CellStates to be assigned upon Cell initialization
+   * @param data SimulationData containing all the metadata for this simulation
+   * @param neighbors neighborhood configuration around given reference cell
+   */
   public Grid(int numRows, int numColumns, CellState[][] initialStates, SimulationData data, int[][] neighbors) {
 
 
@@ -36,6 +50,9 @@ public class Grid {
     simtype.initializeResidents(this);
   }
 
+  /**
+   * Clears all CellObjects living inside any cell in the grid
+   */
   public void clearAllResidents() {
     for(Cell[] cellArray: cells) {
       for(Cell c: cellArray) {
@@ -44,6 +61,7 @@ public class Grid {
     }
   }
 
+  // Instantiates new Cell for every grid location
   private void initializeCells(int numRows, int numColumns, CellState[][] initialStates) {
     cells = new Cell[numRows][numColumns];
     for(int i = 0; i < numRows; i++) {
@@ -53,6 +71,7 @@ public class Grid {
     }
   }
 
+  // Checks if any states in initialStates are invalid
   private boolean hasBadStates(CellState[][] initialStates) {
 
     if(initialStates[0][0] == null) return true;

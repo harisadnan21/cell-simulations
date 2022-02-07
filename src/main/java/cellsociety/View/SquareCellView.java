@@ -1,5 +1,10 @@
 package cellsociety.View;
 
+/**
+ * This cell represents CellViews that are square.
+ *
+ * @author Matt Knox
+ */
 public class SquareCellView extends CellView{
 
 
@@ -25,18 +30,5 @@ public class SquareCellView extends CellView{
         0.0,0.0,
         0.0,height
     );
-
-
-
-    /*
-    getPoints().addAll(
-        0.0,100.0,
-        100.0,100.0,
-        100.0,0.0,
-        0.0,0.0,
-        0.0,100.0
-    );
-
-     */
   }
 }

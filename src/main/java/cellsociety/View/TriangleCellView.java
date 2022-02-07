@@ -1,6 +1,11 @@
 package cellsociety.View;
 
-public class TriangleCellView extends CellView{
+/**
+ * This cell represents CellViews that are triangular.
+ *
+ * @author Matt Knox
+ */
+public class TriangleCellView extends CellView {
 
   /**
    * Class constructor. Sets the width and height, in pixels, for this Rectangle.
@@ -23,16 +28,6 @@ public class TriangleCellView extends CellView{
   }
 
   private void drawDownTriangle(double width, double height) {
-    /*
-    getPoints().addAll(
-        -width/2,0.0,
-        width/2,0.0,
-        0.0,height,
-        -width/2,0.0
-    );
-
-     */
-
     getPoints().addAll(
         0.0,0.0,
         width,0.0,

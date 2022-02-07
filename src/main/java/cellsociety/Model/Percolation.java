@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * This class represents an instance of a Percolation simulation algorithm.
+ *
+ * @author Matt Knox
+ */
 public class Percolation extends CellularAutomataAlgorithm {
 
   public static final List<String> SPECIFIC_PARAMS = Collections.emptyList();
@@ -40,6 +45,7 @@ public class Percolation extends CellularAutomataAlgorithm {
     }
   }
 
+  // Percolates current cell if it has a percolated neighbor
   private void updateCell(Cell c) {
     PercolationState currentState = (PercolationState) c.getState();
 
@@ -63,6 +69,7 @@ public class Percolation extends CellularAutomataAlgorithm {
     //return null;
   }
 
+  // Checks whether a cell in a cell's neighborhood is percolated
   private boolean hasPercolatedNeighbor(Cell c) {
     for(Cell neighbor: c.getNeighbors()) {
       PercolationState neighborState = (PercolationState) neighbor.getState();

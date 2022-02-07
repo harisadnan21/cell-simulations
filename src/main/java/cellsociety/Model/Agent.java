@@ -1,5 +1,10 @@
 package cellsociety.Model;
 
+/**
+ * This class represents an Agent entity in the schelling segregation simulation.
+ *
+ * @author Matt Knox
+ */
 public class Agent extends CellObject {
 
   private boolean isAgentA;

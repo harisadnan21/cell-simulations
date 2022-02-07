@@ -4,6 +4,11 @@ import cellsociety.Model.CellState.RPSState;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class represents an instance of a Percolation simulation algorithm.
+ *
+ * @author Matt Knox
+ */
 public class RockPaperScissors extends CellularAutomataAlgorithm{
 
   public static final List<String> SPECIFIC_PARAMS = List.of("threshold");
@@ -40,6 +45,7 @@ public class RockPaperScissors extends CellularAutomataAlgorithm{
     }
   }
 
+  // Changes current cell into its defeator if it loses to enough neighbors
   private void updateCell(Cell c) {
     RPSState currentState = (RPSState) c.getState();
     RPSState defeatorState = getDefeatorState(currentState);
@@ -54,6 +60,7 @@ public class RockPaperScissors extends CellularAutomataAlgorithm{
       c.assignNextState(c.getState());
   }
 
+  // Gets the RPSState that beats this state
   private RPSState getDefeatorState(RPSState currentState) {
     return switch (currentState) {
       case Rock -> RPSState.Paper;

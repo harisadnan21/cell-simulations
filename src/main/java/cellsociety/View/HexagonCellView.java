@@ -1,5 +1,10 @@
 package cellsociety.View;
 
+/**
+ * This cell represents CellViews that are hexagonal.
+ *
+ * @author Matt Knox
+ */
 public class HexagonCellView extends CellView{
 
 
@@ -18,10 +23,8 @@ public class HexagonCellView extends CellView{
     switch(rowCounter % 2) {
       case 0 -> setLayoutX(x);
       case 1 -> setLayoutX(x + width/2);
-      //case 1 -> setLayoutX(0.0);
     }
     setLayoutY(y);
-    //System.out.println(getPoints());
     //points
     getPoints().addAll(
         0.0,0.0,

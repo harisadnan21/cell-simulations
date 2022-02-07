@@ -11,6 +11,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * This class represents an instance of a WaTor simulation algorithm.
+ *
+ * @author Matt Knox
+ */
 public class WaTor extends CellularAutomataAlgorithm {
 
   public static final List<String> SPECIFIC_PARAMS = List.of("fishRefractoryPeriod", "sharkRefractoryPeriod", "energyInFood", "sharkInitialEnergy");

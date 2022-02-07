@@ -6,7 +6,7 @@ import javafx.scene.shape.Polygon;
 /**
  * This class represents a rectangular visual depiction of one cell in a cell automata simulation.
  *
- * @author Edison Ooi
+ * @author Matt Knox
  */
 public abstract class CellView extends Polygon {
 
@@ -20,11 +20,13 @@ public abstract class CellView extends Polygon {
     drawShape(width,height, counter, x, y);
   }
 
-  // Updates visual properties of CellView according to its state
-//  protected void updateFillAndStroke(CellState nextState, int simulationType) {
-//    setFill(GridView.getFillColor(nextState,simulationType));
-//    setStroke(GridView.getStrokeColor(nextState,simulationType));
-//  }
-
+  /**
+   * Draws a Polygon that represents the bounds of this CellView
+   * @param width
+   * @param height
+   * @param counter indicates the column index of the current shape
+   * @param x starting x coordinate
+   * @param y starting y coordinate
+   */
   public abstract void drawShape(double width, double height, int counter, double x, double y);
 }

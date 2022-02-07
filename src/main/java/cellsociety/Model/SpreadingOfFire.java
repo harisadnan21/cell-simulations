@@ -5,6 +5,11 @@ import cellsociety.Model.CellState.SpreadingOfFireState;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class represents an instance of a Spreading of Fire simulation algorithm.
+ *
+ * @author Edison Ooi
+ */
 public class SpreadingOfFire extends CellularAutomataAlgorithm {
 
   public static final List<String> SPECIFIC_PARAMS = List.of("probCatch", "probGeneration");
