@@ -71,8 +71,8 @@ public class Selector extends Scene{
     private Pane createSettings() {
         HBox row = new HBox(20);
         row.setAlignment(Pos.CENTER);
-        Label langIcon = createIcon("IMAGELOCATION");
-        Label themeIcon = createIcon("IMAGELOCATION");
+        //Label langIcon = createIcon("IMAGELOCATION");
+        //Label themeIcon = createIcon("IMAGELOCATION");
         ComboBox<Language> language = new ComboBox<>();
         language.getItems().addAll(Language.values());
         language.setValue(Language.values()[0]);
@@ -82,8 +82,8 @@ public class Selector extends Scene{
         theme.getItems().addAll(Theme.values());
         theme.setValue(Theme.values()[0]);
         theme.setOnAction(e -> changeTheme(theme.getValue()));
-
-        row.getChildren().addAll(langIcon, language, themeIcon, theme);
+        row.getChildren().addAll( language, theme);
+        //row.getChildren().addAll(langIcon, language, themeIcon, theme);
 
         return row;
     }

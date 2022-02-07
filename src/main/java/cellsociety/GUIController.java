@@ -1,4 +1,5 @@
 package cellsociety;
+import javafx.scene.Scene;
 import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -15,7 +16,7 @@ import javafx.scene.control.Alert.AlertType;
  */
 public class GUIController {
     private final double frameDelay;
-    private final String local;
+    private final String locale;
     private final Stage stage;
     public static final String RESOURCE_PATH = "cellsociety.resources.";
     private ResourceBundle languageResources;
@@ -29,11 +30,11 @@ public class GUIController {
 
     public GUIController(Stage primaryStage, double frameDelay, String locale) {
         this.stage = primaryStage;
-        this.languageResources = ResourceBundle.getBundle(RESOURCE_PATH + Language.ENGLISH);
+        this.languageResources = ResourceBundle.getBundle(String.valueOf(Language.ENGLISH));
         this.controllerClass = new CellularAutomata(this, languageResources);
         this.stage.setResizable(false);
         this.frameDelay = frameDelay;
-        this.local = locale;
+        this.locale = locale;
         this.theme = Theme.DEFAULT;
         startUpdates();
         presentLoadSimScene();
@@ -83,16 +84,22 @@ public class GUIController {
                 languageResources));
     }
 
-    protected void loadNewSimulation() {
-        controllerClass.setUpSimulation(600, 600, Paint.valueOf("Black"));
+    protected Scene loadNewSimulation() {
+
+        Scene scene = controllerClass.setUpSimulation(600, 600, Paint.valueOf("Black"));
+        stage.setScene(scene);
+        //stage.setTitle(TITLE);
+        stage.show();
+        return scene;
+
     }
 
 
-//    protected void showSimulation(CellularAutomata controllerClass) {
-//        Selector selector =
-//                new Selector(this.controllerClass, WIDTH, HEIGHT, this.languageResources, this.theme);
-//        this.stage.setScene(selector);
-//    }
+    protected void showSimulation(CellularAutomata controllerClass) {
+        Selector selector =
+                new Selector(this, WIDTH, HEIGHT, this.languageResources);
+        this.stage.setScene(selector);
+    }
 
 
 
@@ -107,7 +114,7 @@ public class GUIController {
 
     protected void createNewControlledStage() {
         Stage s = new Stage();
-        new GUIController(s, frameDelay, local);
+        new GUIController(s, frameDelay, locale);
         s.show();
     }
 
