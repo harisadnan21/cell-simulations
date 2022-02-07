@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
 import cellsociety.GUIController.Theme;
 import javafx.scene.Node;
 /**
- *
+ * The Scene responsible for rendering the graphical component of a simulation.
  * @author Haris Adnan
  * @author Matthew Knox
  * @author Edison Ooi
@@ -67,12 +67,10 @@ public class Displayer extends Scene {
             Button showGraphButton = new Button(resources.getString("ShowGraph"));
             Button saveButton = new Button(resources.getString("SaveSim"));
             Button loadAdditionalButton = new Button(resources.getString("LoadAdditionalSimulation"));
-
             exitButton.setOnAction(e -> controllerClass.exitSimulation());
             //showGraphButton.setOnAction(e -> controllerClass.showChart());
             //saveButton.setOnAction(e -> controllerClass.saveSimulationToDisk());
-            loadAdditionalButton.setOnAction(e -> controllerClass.openAdditionalSimulation());
-
+            //loadAdditionalButton.setOnAction(e -> controllerClass.openAdditionalSimulation());
             row.getChildren().addAll(exitButton, showGraphButton, saveButton, loadAdditionalButton);
             row.setAlignment(Pos.CENTER);
             return row;
@@ -80,8 +78,8 @@ public class Displayer extends Scene {
 
         private void buildScene() {
             ObservableList<Node> rootChildren = this.root.getChildren();
-            // add graph
-            rootChildren.add(this.graph.getNode());
+
+            //rootChildren.add(this.graph.getNode());
 
             VBox rows = new VBox(10);
             HBox rowOne = firstButtonRow();
@@ -91,13 +89,10 @@ public class Displayer extends Scene {
             rows.setAlignment(Pos.CENTER);
             rows.setPrefWidth(this.WIDTH);
             rows.setTranslateY(this.HEIGHT - 80.0);
-
             rootChildren.add(rows);
         }
-
     }
 
 
 
 
-}

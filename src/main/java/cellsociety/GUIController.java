@@ -10,16 +10,22 @@ import javafx.animation.Timeline;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
+/**
+ * GUI Controller class
+ */
 public class GUIController {
-    private static final double frameDelay;
-    private static final String local;
+    private final double frameDelay;
+    private final String local;
     private final Stage stage;
-    public static final String RESOURCE_PATH = "cellsociety.recources.";
+    public static final String RESOURCE_PATH = "cellsociety.resources.";
     private ResourceBundle languageResources;
     private Theme theme;
     private final CellularAutomata controllerClass;
     private static final double WIDTH = 600;
     private static final double HEIGHT = 750;
+    /**
+     * constructor for GUIIController Called by Main
+      */
 
     public GUIController(Stage primaryStage, double frameDelay, String locale) {
         this.stage = primaryStage;
@@ -82,11 +88,11 @@ public class GUIController {
     }
 
 
-    protected void showSimulation(CellularAutomata controllerClass) {
-        Selector selector =
-                new Selector(this.controllerClass, WIDTH, HEIGHT, this.languageResources, this.theme);
-        this.stage.setScene(selector);
-    }
+//    protected void showSimulation(CellularAutomata controllerClass) {
+//        Selector selector =
+//                new Selector(this.controllerClass, WIDTH, HEIGHT, this.languageResources, this.theme);
+//        this.stage.setScene(selector);
+//    }
 
 
 
@@ -99,7 +105,7 @@ public class GUIController {
     }
 
 
-    protected static void createNewControlledStage() {
+    protected void createNewControlledStage() {
         Stage s = new Stage();
         new GUIController(s, frameDelay, local);
         s.show();

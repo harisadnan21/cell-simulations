@@ -57,11 +57,14 @@ public class CellularAutomata  {
   private boolean runVal;
   private CellularAutomataAlgorithm simulation;
   private Grid grid;
+  private ChartMaker chart;
   private GridView gridView;
   private double frameDelay = 1;
   private double newTime;
-
+  //private final ResourceBundle resources;
+  private GUIController guicontroller;
   public CellularAutomata(GUIController guiController, ResourceBundle languageResources) {
+    this.guicontroller = guiController;
     myResources = ResourceBundle.getBundle(VIEW_RESOURCE_PACKAGE + "SimulationValues", Locale.getDefault());
   }
 
@@ -122,14 +125,14 @@ public class CellularAutomata  {
     }
   }
   public void exitSimulation() {
-    GUIController.exitSimulation();
+    guicontroller.exitSimulation();
 
   }
   public void showChart() {
-    this.chart = new ChartMaker(this.simulation, resources);
-    Stage s = new Stage();
-    s.setScene(new Scene(chart, GRAPH_DIM, GRAPH_DIM));
-    s.show();
+    this.chart = new ChartMaker(this.grid, myResources);
+    Stage stage = new Stage();
+    stage.setScene(new Scene(chart, GRAPH_DIM, GRAPH_DIM));
+    stage.show();
   }
 
 
@@ -141,27 +144,22 @@ public class CellularAutomata  {
     runVal = false;
   }
 
-  public void openAdditionalSimulation() {
-    GUIController.createNewControlledStage();
-  }
+//  public void openAdditionalSimulation() {
+//    GUIController.createNewControlledStage();
+//  }
+  private void clearState() {
+    this.simulation = null;
+    this.frameDelay = 1.0;
+    this.grid = null;
+    this.gridView = null;
+    this.runVal = false;
 
-//
-//  private void save() {
-//    stop();
-//    //reverse of creating grid from parsed file
-//  }
-//
-//  private void load() {
-//    stop();
-//    setUpSimulation(Main.SIZE, Main.SIZE, Main.BACKGROUND);
-//
-//  }
-//
-  private void speedUp() {
+  }
+  public void speedUp() {
     frameDelay = frameDelay / 2;
   }
 //
-  private void slowDown() {
+  public void slowDown() {
     frameDelay = frameDelay * 2;
   }
 

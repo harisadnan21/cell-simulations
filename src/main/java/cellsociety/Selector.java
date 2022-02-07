@@ -16,7 +16,9 @@ import cellsociety.GUIController.Theme;
 import java.util.ResourceBundle;
 import javafx.geometry.Pos;
 import javafx.scene.layout.Pane;
-
+/**
+ * Selector is the initial scene inside the application, instantiated by the GUIController Class.
+ */
 
 public class Selector extends Scene{
     private ResourceBundle resources;

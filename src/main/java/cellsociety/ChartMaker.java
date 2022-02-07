@@ -24,10 +24,10 @@ public class ChartMaker extends LineChart<Number, Number>  {
         this.setTitle(resources.getString("CellCountsByTick"));
     }
     public void update() {
-        List<Cell> cells[][] = (List<Cell>[][]) myGrid.getCells();
+        Cell[][] cellArray =  myGrid.getCells();
         HashMap<CellState, Integer> stepCounts = new HashMap<>();
 
-        for (List<Cell>[] row : cells) {
+        for (Cell[] row : cellArray) {
             for (Cell cell: row){
                 CellState cellState = cell.getState();
                 stepCounts.putIfAbsent(cellState, 0);
