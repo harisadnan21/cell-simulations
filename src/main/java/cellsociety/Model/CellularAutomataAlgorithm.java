@@ -1,6 +1,7 @@
 package cellsociety.Model;
 
 import cellsociety.CellularAutomata;
+import cellsociety.Model.CellState.FallingSandState;
 import cellsociety.Model.CellState.GameOfLifeState;
 import cellsociety.Model.CellState.PercolationState;
 import cellsociety.Model.CellState.SchellingSegregationState;
@@ -111,6 +112,7 @@ public abstract class CellularAutomataAlgorithm {
       case CellularAutomata.SCHELLING_SEGREGATION -> possibleStates = SchellingSegregationState.values();
       case CellularAutomata.SPREADING_OF_FIRE -> possibleStates = SpreadingOfFireState.values();
       case CellularAutomata.WATOR -> possibleStates = WaTorState.values();
+      case CellularAutomata.FALLING_SAND -> possibleStates = FallingSandState.values();
     }
 
     initialCellConfig = new CellState[numRows][numColumns];
