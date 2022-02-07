@@ -8,6 +8,7 @@ import cellsociety.Model.CellState.SpreadingOfFireState;
 import cellsociety.Model.CellState.WaTorState;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 
 /**
@@ -16,12 +17,12 @@ import java.util.Map;
  * behavior and state.
  *
  * @author Edison Ooi
+ * @author Matt Knox
  */
 public abstract class CellularAutomataAlgorithm {
 
-
-
-  private final int simulationType; //TODO: Change this to an enum of some kind
+  // Represents the type of simulation algorithm that this instance represents
+  private final int simulationType;
 
   // Information for setting up grid of cells
   private int numRows;
@@ -75,7 +76,8 @@ public abstract class CellularAutomataAlgorithm {
    * an Exception.
    * <p>
    * This should always be called on the first line of setUpSimulationParameters.
-   * @param specificParams
+   *
+   * @param specificParams List of keys representing parameters specific to this algorithm type
    */
   protected void checkSimulationParameters(List<String> specificParams) {
     Map<String, String> params = getSimulationParams();
@@ -90,6 +92,12 @@ public abstract class CellularAutomataAlgorithm {
 
   protected abstract void initializeResidents(Grid g);
 
+  /**
+   * Sets the appropriate next state for every Cell in Grid g based on the Cell's neighbors and
+   * the Grid's information as a whole.
+   *
+   * @param g Grid that contains the cells that must be updated
+   */
   public abstract void runAlgorithm(Grid g);
 
   // Initializes an array representing the starting state of every cell in the simulation
@@ -200,7 +208,7 @@ public abstract class CellularAutomataAlgorithm {
               neighborhoodConfig[i][j] = Neighborhood.refCell;
               foundReferenceCell = true;
             } else {
-              throw new RuntimeException("Multiple reference cells found in neighborhood config.");
+              throw new IllegalArgumentException("Multiple reference cells found in neighborhood config.");
             }
           }
         }
@@ -218,6 +226,9 @@ public abstract class CellularAutomataAlgorithm {
     return trimmedConfig.split(" ");
   }
 
+  /**
+   * @return int representing type of simulation algorithm
+   */
   protected int getSimulationType() {
     return simulationType;
   }
@@ -230,10 +241,16 @@ public abstract class CellularAutomataAlgorithm {
     return numColumns;
   }
 
+  /**
+   * @return 2D array of CellState representing the initial states of all Cells defined in config file
+   */
   public CellState[][] getInitialCellConfig() {
     return initialCellConfig;
   }
 
+  /**
+   * @return 2D int array representing the desired neighborhood of a singular reference cell
+   */
   public int[][] getNeighborhoodConfig() {
     return neighborhoodConfig;
   }
@@ -250,6 +267,9 @@ public abstract class CellularAutomataAlgorithm {
     return author;
   }
 
+  /**
+   * @return Map of key-value pairs representing parameters specific to this simulation algorithm
+   */
   protected Map<String, String> getSimulationParams() {
     return simulationParams;
   }
