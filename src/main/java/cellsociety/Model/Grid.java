@@ -11,7 +11,7 @@ public class Grid {
   private SimulationData data;
 
 
-  public Grid(int numRows, int numColumns, CellState[][] initialStates, SimulationData data, int[][] neighbors, boolean wrap) {
+  public Grid(int numRows, int numColumns, CellState[][] initialStates, SimulationData data, int[][] neighbors) {
 
 
     System.out.println(initialStates[0].length);
@@ -30,8 +30,9 @@ public class Grid {
     this.data = data;
     initializeCells(numRows, numColumns, initialStates);
 
+    // TODO: Replace static constants with XML input
     Neighborhood n = new Neighborhood(CellularAutomata.SQUARE);
-    n.addNeighbors(cells,neighbors,data.shouldWrap(),null);
+    n.addNeighbors(cells,neighbors,data.shouldWrap(),CellularAutomata.vonNeumann);
     simtype = getSimulationType();
     simtype.initializeResidents(this);
   }
@@ -69,123 +70,8 @@ public class Grid {
     return false;
   }
 
-  /*
-  private void addNeighbors(int numRows, int numColumns) {
-    addCornerNeighbors(numRows, numColumns);
-    addEdgeNeighbors(numRows, numColumns);
-    addInnerNeighbors(numRows, numColumns);
-  }
-   */
-
-  private void addInnerNeighbors(int numRows, int numColumns) {
-    for(int i = 1; i < numRows - 1; i++) {
-      for(int j = 1; j < numColumns - 1; j++) {
-        cells[i][j].addNeighbors(new HashSet<>(Arrays.asList(
-            cells[i][j-1],
-            cells[i+1][j-1],
-            cells[i+1][j],
-            cells[i+1][j+1],
-            cells[i][j+1],
-            cells[i-1][j+1],
-            cells[i-1][j],
-            cells[i-1][j-1])));
-      }
-    }
-  }
-
-  private void addEdgeNeighbors(int numRows, int numColumns) {
-    addLeftColumnNeighbors(numRows);
-    addRightColumnNeighbors(numRows, numColumns);
-    addTopRowNeighbors(numColumns);
-    addBottomRowNeighbors(numRows, numColumns);
-  }
-
-  private void addBottomRowNeighbors(int numRows, int numColumns) {
-    for(int j = 1; j < numColumns -1; j++) {
-      int i = numRows - 1;
-      cells[i][j].addNeighbors(new HashSet<>(Arrays.asList(
-          cells[i][j-1],
-          cells[i][j+1],
-          cells[i-1][j-1],
-          cells[i-1][j],
-          cells[i-1][j+1])));
-    }
-  }
-
-  private void addTopRowNeighbors(int numColumns) {
-    for(int j = 1; j < numColumns -1; j++) {
-      int i = 0;
-      cells[i][j].addNeighbors(new HashSet<>(Arrays.asList(
-          cells[i][j-1],
-          cells[i][j+1],
-          cells[i+1][j-1],
-          cells[i+1][j],
-          cells[i+1][j+1])));
-    }
-  }
-
-  private void addRightColumnNeighbors(int numRows, int numColumns) {
-    for(int i = 1; i < numRows -1; i++) {
-      int j = numColumns - 1;
-      cells[i][j].addNeighbors(new HashSet<>(Arrays.asList(
-          cells[i-1][j],
-          cells[i+1][j],
-          cells[i-1][j-1],
-          cells[i][j-1],
-          cells[i+1][j-1])));
-    }
-  }
-
-  private void addLeftColumnNeighbors(int numRows) {
-    for(int i = 1; i < numRows -1; i++) {
-      int j = 0;
-      cells[i][j].addNeighbors(new HashSet<>(Arrays.asList(
-          cells[i-1][j],
-          cells[i+1][j],
-          cells[i-1][j+1],
-          cells[i][j+1],
-          cells[i+1][j+1])));
-    }
-  }
-
-  private void addCornerNeighbors(int numRows, int numColumns) {
-    addTopLeftCornerNeighbors();
-    addTopRightCornerNeighbors(numColumns);
-    addBottomLeftCornerNeighbors(numRows);
-    addBottomRightCornerNeighbors(numRows, numColumns);
-  }
-
-  private void addBottomRightCornerNeighbors(int numRows, int numColumns) {
-    cells[numRows -1][numColumns -1].addNeighbors(new HashSet<>(Arrays.asList(
-        cells[numRows -2][numColumns -2],
-        cells[numRows -2][numColumns -1],
-        cells[numRows -1][numColumns -2])));
-  }
-
-  private void addBottomLeftCornerNeighbors(int numRows) {
-    cells[numRows -1][0].addNeighbors(new HashSet<>(Arrays.asList(
-        cells[numRows -2][0],
-        cells[numRows -1][1],
-        cells[numRows -2][1])));
-  }
-
-  private void addTopRightCornerNeighbors(int numColumns) {
-    cells[0][numColumns -1].addNeighbors(new HashSet<>(Arrays.asList(
-        cells[0][numColumns -2],
-        cells[1][numColumns -1],
-        cells[1][numColumns -2])));
-  }
-
-  private void addTopLeftCornerNeighbors() {
-    cells[0][0].addNeighbors(new HashSet<>(Arrays.asList(
-        cells[0][1],
-        cells[1][0],
-        cells[1][1])));
-  }
 
   private CellularAutomataAlgorithm getSimulationType() {
-
-
     return switch(data.simulationType()) {
       case CellularAutomata.GAME_OF_LIFE -> new GameOfLife(data);
       case CellularAutomata.PERCOLATION -> new Percolation(data);
@@ -194,8 +80,6 @@ public class Grid {
       case CellularAutomata.WATOR -> new WaTor(data);
       default -> throw new IllegalStateException("Unexpected value: " + data.simulationType());
     };
-
-
   }
 
 
