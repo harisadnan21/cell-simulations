@@ -1,14 +1,19 @@
 package cellsociety.Model;
 
 
+import cellsociety.CellularAutomata;
 import cellsociety.Model.CellState.GameOfLifeState;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class GameOfLife extends CellularAutomataAlgorithm {
 
-  public static final List<String> SPECIFIC_PARAMS = new ArrayList<>();
+  public static final List<String> SPECIFIC_PARAMS = Collections.emptyList();
+  public static final String BUNDLE_NAME = "GameOfLife";
 
   /**
    * Class constructor.
