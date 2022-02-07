@@ -91,11 +91,6 @@ public abstract class CellularAutomataAlgorithm {
     }
   }
 
-  /**
-   * Initializes the CellObjects that live within certain cells in Grid g
-   *
-   * @param g Grid that contains some cells to be populated with CellObjects
-   */
   protected abstract void initializeResidents(Grid g);
 
   /**

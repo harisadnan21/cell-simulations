@@ -51,8 +51,6 @@ public class CellularAutomata  {
   public static final int tips = 3;
   public static final int sides = 4;
 
-//>>>>>>> master:src/main/java/cellsociety/Simulation.java
-
   private double GRIDSTARTINGX = 10;
   private double GRIDSTARTINGY = 10;
   private double GRIDHEIGHT;
@@ -74,10 +72,21 @@ public class CellularAutomata  {
   private double frameDelay = 0.5;
   private double newTime;
 
+  /**
+   * Class constructor. Initializes visual resources for this instance of the program.
+   */
   public CellularAutomata() {
     myResources = ResourceBundle.getBundle(VIEW_RESOURCE_PACKAGE + "SimulationValues", Locale.getDefault());
   }
 
+  /**
+   * Creates main scene object for simulation to be displayed on screen
+   *
+   * @param width width of scene
+   * @param height height of scene
+   * @param background background color of scene
+   * @return Scene to be displayed
+   */
   protected Scene setUpSimulation(int width, int height, Paint background) {
 
     // Get SimulationData record from XML
@@ -104,7 +113,7 @@ public class CellularAutomata  {
     //boolean wrap = simulation.getWrap();
     // TODO: Replace static constants with XML input
     grid = new Grid(simulationData.numRows(), simulationData.numColumns(), initialStates, simulationData, neighbors);
-    gridView = new GridView(0.0,0.0,width, height, simulationData.numRows(),
+    gridView = new GridView(100.0,0.0,width - 100, height, simulationData.numRows(),
         simulationData.numColumns(), SQUARE, simulationData.simulationType(), root);
     gridView.updateCells(grid.getCells());
     //gridView.setLayoutX(0);
@@ -121,6 +130,10 @@ public class CellularAutomata  {
     return scene;
   }
 
+  /**
+   * Performs calculations and updates cells for the next generation of the current cell automata
+   * simulation.
+   */
   public void step() {
 
     grid.calculateNextStates();
@@ -128,6 +141,11 @@ public class CellularAutomata  {
     gridView.updateCells(grid.getCells());
 
   }
+
+  /**
+   * Updates view of simulation
+   * @param elapsedTime time since last update
+   */
   public void update(double elapsedTime) {
     newTime = newTime + elapsedTime;
     if(newTime > frameDelay && runVal) {
@@ -135,49 +153,28 @@ public class CellularAutomata  {
       step();
     }
   }
-//  public void exitSimulation() {
-//    GUIController.exitSimulation();
-//
-//  }
-//  public void showChart() {
-//    this.chart = new ChartMaker(this.simulation, resources);
-//    Stage s = new Stage();
-//    s.setScene(new Scene(chart, GRAPH_DIM, GRAPH_DIM));
-//    s.show();
-//  }
 
-
+  /**
+   * Allows simulation to run.
+   */
   public void startSim() {
     runVal = true;
   }
 
+  /**
+   * Stops simulation from being updated.
+   */
   public void stopSim() {
     runVal = false;
   }
 
-//  public void openAdditionalSimulation() {
-//    GUIController.createNewControlledStage();
-//  }
-
-//
-//  private void save() {
-//    stop();
-//    //reverse of creating grid from parsed file
-//  }
-//
-//  private void load() {
-//    stop();
-//    setUpSimulation(Main.SIZE, Main.SIZE, Main.BACKGROUND);
-//
-//  }
-//
+  // Speeds up animation
   private void speedUp() {
     frameDelay = frameDelay / 2;
   }
-//
+
+  // Slows down animation
   private void slowDown() {
     frameDelay = frameDelay * 2;
   }
-
-
 }

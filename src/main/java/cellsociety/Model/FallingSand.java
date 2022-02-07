@@ -4,11 +4,6 @@ import cellsociety.Model.CellState.FallingSandState;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * This class represents an instance of a Falling Sand simulation algorithm.
- *
- * @author Edison Ooi
- */
 public class FallingSand extends CellularAutomataAlgorithm {
 
   public static final List<String> SPECIFIC_PARAMS = Collections.emptyList();

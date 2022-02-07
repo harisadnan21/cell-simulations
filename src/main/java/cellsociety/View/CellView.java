@@ -1,6 +1,5 @@
 package cellsociety.View;
 
-import cellsociety.Model.CellState;
 import javafx.scene.shape.Polygon;
 
 /**
@@ -19,12 +18,6 @@ public abstract class CellView extends Polygon {
   public CellView(double width, double height, int counter, double x, double y) {
     drawShape(width,height, counter, x, y);
   }
-
-  // Updates visual properties of CellView according to its state
-//  protected void updateFillAndStroke(CellState nextState, int simulationType) {
-//    setFill(GridView.getFillColor(nextState,simulationType));
-//    setStroke(GridView.getStrokeColor(nextState,simulationType));
-//  }
 
   /**
    * Draws the shape of the particular polygon
