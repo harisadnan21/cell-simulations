@@ -26,5 +26,14 @@ public abstract class CellView extends Polygon {
 //    setStroke(GridView.getStrokeColor(nextState,simulationType));
 //  }
 
+  /**
+   * Draws the shape of the particular polygon
+   *
+   * @param width: the width of each polygon
+   * @param height: the height of each polygon
+   * @param counter: a counter specific to each polygon
+   * @param x: the x location of the polygon
+   * @param y: the y location of the polygon
+   */
   public abstract void drawShape(double width, double height, int counter, double x, double y);
 }

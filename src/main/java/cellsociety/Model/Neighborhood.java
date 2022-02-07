@@ -7,6 +7,11 @@ import java.util.HashSet;
 import java.util.Set;
 import javafx.util.Pair;
 
+/**
+ * This class represents a Neighborhood, and contains methods for constructing a Neighborhood.
+ *
+ * @author Matt Knox
+ */
 public class Neighborhood {
 
   public static final String ignoreCellString = "0";
@@ -140,12 +145,22 @@ public class Neighborhood {
 
   private int gridShape;
 
-
+  /**
+   * A Neighborhood constructor
+   * @param gridShape: an int corresponding to the shapes within the Grid
+   */
   public Neighborhood(int gridShape) {
     this.gridShape = gridShape;
   }
 
 
+  /**
+   *
+   * @param cells: the cells to create neighbors for
+   * @param data: neighborhood data
+   * @param wrap: whether cells should wrap or not
+   * @param customization: an int corresponding to the type of neighborhood
+   */
   public void addNeighbors(Cell[][] cells, int[][] data, boolean wrap, int customization) {
     switch(gridShape) {
       case CellularAutomata.SQUARE -> {

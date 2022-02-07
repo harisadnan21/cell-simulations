@@ -1,5 +1,10 @@
 package cellsociety.Model;
 
+/**
+ * A class that represents an Agent in the SchellingSegregation model.
+ *
+ * @author Matt Knox
+ */
 public class Agent extends CellObject {
 
   private boolean isAgentA;

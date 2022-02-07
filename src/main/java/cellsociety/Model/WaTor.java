@@ -11,6 +11,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * This class implements the WaTor simulation.
+ *
+ * @author Matt Knox
+ */
 public class WaTor extends CellularAutomataAlgorithm {
 
   public static final List<String> SPECIFIC_PARAMS = List.of("fishRefractoryPeriod", "sharkRefractoryPeriod", "energyInFood", "sharkInitialEnergy");
@@ -57,6 +62,10 @@ public class WaTor extends CellularAutomataAlgorithm {
     }
   }
 
+  /**
+   * Runs the WaTor update algorithm
+   * @param g Grid that contains the cells that must be updated
+   */
   @Override
   public void runAlgorithm(Grid g) {
     // find out where each resident will go

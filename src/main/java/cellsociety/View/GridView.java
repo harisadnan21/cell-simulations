@@ -25,6 +25,11 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
+/**
+ * This class represents the JavaFX view of a Grid.
+ *
+ * @author Matt Knox
+ */
 public class GridView {
 
   private CellView[][] cellViews;
@@ -44,6 +49,18 @@ public class GridView {
   public static final int HEXAGON = 2;
 
 
+  /**
+   * The constructor for a GridView
+   * @param x: starting x coordinate
+   * @param y: starting y coordinate
+   * @param width: width of the grid
+   * @param height: height of the grid
+   * @param numRows: number of rows of the grid
+   * @param numColumns: number of columns of the grid
+   * @param typeOfGrid: the type of grid: square, triangle, or hexagon
+   * @param simulationType: the type of simulation (e.g. Game of Life)
+   * @param g: the group to add cells to
+   */
   public GridView(double x, double y, double width, double height, int numRows, int numColumns,
       int typeOfGrid, int simulationType, Group g) {
     super();
@@ -99,6 +116,10 @@ public class GridView {
     }
   }
 
+  /**
+   * Updates all the cells in the grid
+   * @param cells: the cells to update
+   */
   public void updateCells(Cell[][] cells) {
     if (cells.length != numRows || cells[0].length != numColumns) {
       throw new RuntimeException("CellStates are not the correct size");

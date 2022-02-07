@@ -1,15 +1,16 @@
 package cellsociety.Model;
 
 
-import cellsociety.CellularAutomata;
 import cellsociety.Model.CellState.GameOfLifeState;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
+/**
+ * This class implements the Game of Life simulation.
+ *
+ * @author Matt Knox
+ */
 public class GameOfLife extends CellularAutomataAlgorithm {
 
   public static final List<String> SPECIFIC_PARAMS = Collections.emptyList();
@@ -35,7 +36,10 @@ public class GameOfLife extends CellularAutomataAlgorithm {
 
   }
 
-
+  /**
+   * Runs the Game of Life simulation.
+   * @param g Grid that contains the cells that must be updated
+   */
   @Override
   public void runAlgorithm(Grid g) {
     for(Cell[] cellArray: g.getCells()) {

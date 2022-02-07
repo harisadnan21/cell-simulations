@@ -13,6 +13,15 @@ public class HexagonCellView extends CellView{
     super(width, height, rowCounter, x, y);
   }
 
+  /**
+   * Draws a hexagon
+   *
+   * @param width: the width of each polygon
+   * @param height: the height of each polygon
+   * @param rowCounter
+   * @param x: the x location of the polygon
+   * @param y: the y location of the polygon
+   */
   @Override
   public void drawShape(double width, double height, int rowCounter, double x, double y) {
     switch(rowCounter % 2) {

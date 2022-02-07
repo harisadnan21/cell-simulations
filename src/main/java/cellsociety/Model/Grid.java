@@ -1,9 +1,12 @@
 package cellsociety.Model;
 
 import cellsociety.CellularAutomata;
-import java.util.Arrays;
-import java.util.HashSet;
 
+/**
+ * This class represents the model of a grid.
+ *
+ * @author Matt Knox
+ */
 public class Grid {
 
   private Cell[][] cells;
@@ -11,6 +14,15 @@ public class Grid {
   private SimulationData data;
 
 
+  /**
+   * A Grid constructor
+   *
+   * @param numRows: the number of rows in a Grid
+   * @param numColumns: the number of columns in a Grid
+   * @param initialStates: the initial states of the Cells in a Grid
+   * @param data: the data from the XML file
+   * @param neighbors: the neighbors of each cell
+   */
   public Grid(int numRows, int numColumns, CellState[][] initialStates, SimulationData data, int[][] neighbors) {
 
 
@@ -36,6 +48,9 @@ public class Grid {
     simtype.initializeResidents(this);
   }
 
+  /**
+   * Clears the resident in each cell
+   */
   public void clearAllResidents() {
     for(Cell[] cellArray: cells) {
       for(Cell c: cellArray) {
@@ -83,6 +98,9 @@ public class Grid {
   }
 
 
+  /**
+   * Updates each cell
+   */
   public void update() {
     for(Cell[] cellArray: cells) {
       for(Cell cell: cellArray) {
@@ -91,10 +109,17 @@ public class Grid {
     }
   }
 
+  /**
+   * Calculates the next states of each cell
+   */
   public void calculateNextStates() {
     simtype.runAlgorithm(this);
   }
 
+  /**
+   * Returns the cells
+   * @return: the cells
+   */
   public Cell[][] getCells() {
     return this.cells;
   }

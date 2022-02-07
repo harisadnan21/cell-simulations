@@ -1,5 +1,11 @@
 package cellsociety.Model;
 
+/**
+ * This class represents a Fish in the simulation WaTor.
+ * A fish can age and reproduce.
+ *
+ * @author Matt Knox
+ */
 public class Fish extends CellObject {
   private int timeSinceSex;
   private final int refractoryPeriod;

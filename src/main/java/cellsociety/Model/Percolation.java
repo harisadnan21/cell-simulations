@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * This class implements the Percolation simulation.
+ *
+ * @author Matt Knox
+ */
 public class Percolation extends CellularAutomataAlgorithm {
 
   public static final List<String> SPECIFIC_PARAMS = Collections.emptyList();
@@ -31,6 +36,10 @@ public class Percolation extends CellularAutomataAlgorithm {
 
   }
 
+  /**
+   * Runs the percolation update algorithm
+   * @param g Grid that contains the cells that must be updated
+   */
   @Override
   public void runAlgorithm(Grid g) {
     for(Cell[] cellarray: g.getCells()) {

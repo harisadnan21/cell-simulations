@@ -12,6 +12,15 @@ public class TriangleCellView extends CellView{
     super(width, height, modCounter, x, y);
   }
 
+  /**
+   * Draws a triangle
+   *
+   * @param width: the width of each polygon
+   * @param height: the height of each polygon
+   * @param modCounter
+   * @param x: the x location of the polygon
+   * @param y: the y location of the polygon
+   */
   @Override
   public void drawShape(double width, double height, int modCounter, double x, double y) {
     setLayoutX(x);

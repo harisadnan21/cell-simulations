@@ -1,5 +1,11 @@
 package cellsociety.Model;
 
+/**
+ * This class represents a Fish in the simulation WaTor.
+ * A shark can age, eat, and reproduce.
+ *
+ * @author Matt Knox
+ */
 public class Shark extends CellObject {
   public int energy;
   private int timeSinceSex;

@@ -4,6 +4,11 @@ import cellsociety.Model.CellState.RPSState;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class implements the Rock Paper Scissors simulation.
+ *
+ * @author Matt Knox
+ */
 public class RockPaperScissors extends CellularAutomataAlgorithm{
 
   public static final List<String> SPECIFIC_PARAMS = List.of("threshold");
@@ -31,6 +36,10 @@ public class RockPaperScissors extends CellularAutomataAlgorithm{
 
   }
 
+  /**
+   * Runs the Rock Paper Scissors algorithm
+   * @param g Grid that contains the cells that must be updated
+   */
   @Override
   public void runAlgorithm(Grid g) {
     for(Cell[] cellArray: g.getCells()) {

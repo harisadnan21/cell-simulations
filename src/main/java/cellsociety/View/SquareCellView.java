@@ -13,6 +13,15 @@ public class SquareCellView extends CellView{
     super(width, height, 0, x, y);
   }
 
+  /**
+   * Draws a square
+   *
+   * @param width: the width of each polygon
+   * @param height: the height of each polygon
+   * @param counter: a counter specific to each polygon
+   * @param x: the x location of the polygon
+   * @param y: the y location of the polygon
+   */
   @Override
   public void drawShape(double width, double height, int counter, double x, double y) {
     setLayoutX(x);
