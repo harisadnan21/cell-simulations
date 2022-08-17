@@ -3,8 +3,6 @@ Cell Society
 
 This project implements a cellular automata simulator.
 
-Names: Edison Ooi, Haris Adnan, Matt Knox
-
 
 ### Timeline
 
@@ -12,16 +10,7 @@ Start Date: January 23, 2022
 
 Finish Date: February 6, 2022
 
-Hours Spent: 50
-
-### Primary Roles
-* Matt: Implementing specific simulation algorithms and tracking the state of
-the simulation, both on model and view side.
-* Edison: Designing and parsing configuration files, exception handling, writing 
-abstraction for simulation types, general UI architecture
-* Haris: Visualization components such as main GUI with user controls, displaying
-multiple windows simultaneously, and styling using properties files.
-
+Hours Spent: 70
 
 ### Resources Used
 * FallingSand.properties
@@ -84,9 +73,3 @@ randomly, or from given probabilities for each state.
 * Neighborhoods can be specified in the configuration file as any combination of
 neighbors and non-neighbors around a reference cell
 
-
-### Impressions
-
-We were all very relieved to see the simulations finally work, especially WaTor. We lacked a bit on the visualization specs, but we ended up improvising. 
-However, we were able to generally have a steady progression from beginning to the end, though the way that work was distributed could have been done better.
-This assignment was very interesting and worth the hours spent to decipher the algorithms to make them work.
