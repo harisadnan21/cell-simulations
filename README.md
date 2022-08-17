@@ -1,7 +1,7 @@
 Cell Society
 ====
 
-This project implements a cellular automata simulator.
+This project implements a cellular automata simulator
 
 
 ### Timeline
@@ -50,8 +50,6 @@ The project can run 5 different types of simulations:
 * WaTor
 
 The GUI contains buttons that allow the simulation to Stop, play, run faster, or slow down.
-
-
 
 ### Notes/Assumptions
 
