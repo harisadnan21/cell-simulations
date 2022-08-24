@@ -3,8 +3,6 @@ Cell Society
 
 This project implements a cellular automata simulator
 
-<img width="494" alt="Screen Shot 2022-08-17 at 6 03 32 PM" src="https://user-images.githubusercontent.com/91027112/185251591-d5f19b0b-4ce7-4a9b-bdcd-d472ecb685c2.png">
-
 ![Cell automata](https://user-images.githubusercontent.com/91027112/186397000-d1c18726-cac3-4f78-bdfa-2241635740bf.gif)
 
 
